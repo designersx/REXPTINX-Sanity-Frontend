@@ -11,22 +11,22 @@ export function BenefitsSection() {
 
   const benefits = [
     {
-      icon: <Clock className="h-6 w-6 text-purple-600" />,
+      icon: <Clock className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
       title: "24/7 Availability",
       description: "Never miss a call, even outside business hours. Our AI receptionist works around the clock.",
     },
     {
-      icon: <DollarSign className="h-6 w-6 text-purple-600" />,
+      icon: <DollarSign className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
       title: "Cost Effective",
       description: "Save up to 80% compared to traditional receptionist services with no compromise on quality.",
     },
     {
-      icon: <Smile className="h-6 w-6 text-purple-600" />,
+      icon: <Smile className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
       title: "Improved Customer Experience",
       description: "Provide instant responses and solutions to callers, enhancing satisfaction and loyalty.",
     },
     {
-      icon: <Shield className="h-6 w-6 text-purple-600" />,
+      icon: <Shield className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
       title: "Secure & Reliable",
       description: "Enterprise-grade security with 99.9% uptime guarantee for your peace of mind.",
     },
@@ -55,22 +55,22 @@ export function BenefitsSection() {
   }
 
   return (
-    <section id="benefits" className="py-20">
+    <section id="benefits" className="py-20 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
-            Why Choose <span className="text-purple-600">rexpt</span> AI Receptionist?
+            Why Choose <span className="text-purple-600 dark:text-purple-400">rexpt</span> AI Receptionist?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             Transform your business communications with our cutting-edge AI technology.
           </motion.p>
@@ -91,12 +91,12 @@ export function BenefitsSection() {
                 className="flex gap-4"
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}
               >
-                <div className="bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
                   {benefit.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{benefit.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
                 </div>
               </motion.div>
             ))}

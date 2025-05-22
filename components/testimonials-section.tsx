@@ -46,22 +46,22 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section id="testimonials" className="py-20 bg-gray-50">
+    <section id="testimonials" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
-            What Our <span className="text-purple-600">Clients Say</span>
+            What Our <span className="text-purple-600 dark:text-purple-400">Clients Say</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             Discover how businesses are transforming their communication with our AI receptionist.
           </motion.p>
@@ -73,7 +73,7 @@ export function TestimonialsSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12"
           >
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-shrink-0">
@@ -83,7 +83,7 @@ export function TestimonialsSection() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   src={testimonials[activeIndex].image}
                   alt={testimonials[activeIndex].name}
-                  className="w-20 h-20 rounded-full object-cover border-4 border-purple-100"
+                  className="w-20 h-20 rounded-full object-cover border-4 border-purple-100 dark:border-purple-800"
                 />
               </div>
               <div>
@@ -98,7 +98,7 @@ export function TestimonialsSection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="text-gray-700 text-lg italic mb-6"
+                  className="text-gray-700 dark:text-gray-200 text-lg italic mb-6"
                 >
                   "{testimonials[activeIndex].content}"
                 </motion.p>
@@ -108,8 +108,10 @@ export function TestimonialsSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.2 }}
                 >
-                  <h4 className="text-xl font-semibold text-gray-900">{testimonials[activeIndex].name}</h4>
-                  <p className="text-purple-600">{testimonials[activeIndex].position}</p>
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    {testimonials[activeIndex].name}
+                  </h4>
+                  <p className="text-purple-600 dark:text-purple-400">{testimonials[activeIndex].position}</p>
                 </motion.div>
               </div>
             </div>
@@ -120,9 +122,9 @@ export function TestimonialsSection() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevTestimonial}
-              className="bg-white rounded-full p-3 shadow-md hover:bg-purple-50 transition-colors"
+              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
             >
-              <ChevronLeft className="h-6 w-6 text-purple-600" />
+              <ChevronLeft className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             </motion.button>
             <div className="flex gap-2 items-center">
               {testimonials.map((_, index) => (
@@ -130,7 +132,7 @@ export function TestimonialsSection() {
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   className={`h-3 w-3 rounded-full transition-colors ${
-                    index === activeIndex ? "bg-purple-600" : "bg-purple-200"
+                    index === activeIndex ? "bg-purple-600 dark:bg-purple-400" : "bg-purple-200 dark:bg-purple-800"
                   }`}
                 />
               ))}
@@ -139,9 +141,9 @@ export function TestimonialsSection() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextTestimonial}
-              className="bg-white rounded-full p-3 shadow-md hover:bg-purple-50 transition-colors"
+              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
             >
-              <ChevronRight className="h-6 w-6 text-purple-600" />
+              <ChevronRight className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             </motion.button>
           </div>
         </div>

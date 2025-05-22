@@ -43,8 +43,9 @@ export function CtaSection() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="outline"
-                className="border-white text-white hover:bg-purple-700 text-lg px-8 py-6 w-full"
+                className="border-amber-100 bg-amber-100 text-black font-bold hover:bg-amber-200 hover:border-amber-200 text-lg px-8 py-6 w-full flex items-center justify-center gap-2"
               >
+                <Calendar className="h-5 w-5" />
                 Schedule Demo
               </Button>
             </motion.div>
