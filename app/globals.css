@@ -70,3 +70,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Prevent pinch zoom on mobile devices */
+html,
+body {
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+/* Additional touch handling for iOS devices */
+* {
+  -webkit-touch-callout: none;
+}
