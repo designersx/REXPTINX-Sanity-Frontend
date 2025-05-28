@@ -279,4 +279,9 @@ display: block;
     100% { transform: translate(0, 0); }
 }
 
+.relative.m-auto.mt-8 {
+  margin: auto;
+
+}
+
 

@@ -311,7 +311,7 @@ export default function Home() {
       <Header data={headerData} />
 
       <main>
-        <HeroSection2 />
+        {/* <HeroSection2 /> */}
         <HeroSection
           title={hero.title}
           subtitle={hero.subtitle}

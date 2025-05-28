@@ -57,14 +57,14 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
     <section id="benefits" className="py-20 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
            <PortableText value={title} components={serializers} />
-          </motion.h2>
+          </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
