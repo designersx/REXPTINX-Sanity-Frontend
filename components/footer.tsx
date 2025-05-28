@@ -106,12 +106,16 @@ export function Footer({ footerData }: FooterProps) {
             <ul className="space-y-3">
               {footerData?.resourcesLinks?.map((link, index) => (
                 <li key={`${link.label}-${link.url}-${index}`}>
-                  <Link
-                    href={link.url}
-                    className="text-gray-400 hover:text-purple-400 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.url ? (
+                    <Link
+                      href={link.url}
+                      className="text-gray-400 hover:text-purple-400 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span className="text-gray-400">{link.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
