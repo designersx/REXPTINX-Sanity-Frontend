@@ -61,7 +61,7 @@ export function Footer({ footerData }: FooterProps) {
                     key={`${socialLink.platform}-${socialLink.url}-${index}`}
                     href={socialLink.url}
                     target="_blank"
-                    scroll="false"
+                    scroll={false}
                     className="text-gray-400 hover:text-purple-400 transition-colors"
                   >
                     <div
