@@ -29,7 +29,7 @@ export type PricingSectionData = {
   toggleLabels: { left: string; right: string };
   toggleSubtext: string;
   plans: Plan[];
-  bottomCallout: BottomCallout;
+  bottomCallout: BottomCallout
 }
 export function PricingSection({
   sectionTitle,
