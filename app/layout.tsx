@@ -28,7 +28,7 @@ const client = sanityClient({
   projectId: "erxyk65j",
   dataset: "production",
   apiVersion: "2025-05-26",
-  useCdn: true,
+  useCdn: false,
 });
 
 // Fetch site metadata from Sanity
