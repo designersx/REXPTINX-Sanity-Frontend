@@ -33,7 +33,6 @@ export function HeroSection({
   secondaryCta,
   svgIcon,
 }: HeroSectionProps) {
-  console.log(title, "title");
   
 const serializers = {
   marks: {
