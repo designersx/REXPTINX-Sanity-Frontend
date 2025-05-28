@@ -1,83 +1,128 @@
-"use client"
+"use client";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
 
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+export type NavLink = { label: string; href: string | null };
+export type HeaderData = {
+  logoUrl: string;
+  logoAlt: string;
+  tagline: string | null;
+  navLinks: NavLink[];
+  showThemeToggle: boolean;
+  ctaLabel: string | null;
+  ctaUrl: string | null;
+};
+
+export function Header({ data }: { data: HeaderData }) {
+  const {
+    logoUrl,
+    logoAlt,
+    tagline,
+    navLinks,
+    showThemeToggle,
+    ctaLabel,
+    ctaUrl,
+  } = data;
+
+  // fallback anchors for when href is null
+  const staticRoutes: Record<string, string> = {
+    Features: "#features",
+    Benefits: "#benefits",
+    Testimonials: "#testimonials",
+    Pricing: "#pricing",
+  };
+
+  // build list with guaranteed href string and unique key
+  const navList = navLinks?.map((item, idx) => {
+    const href = item.href ?? staticRoutes[item.label] ?? "/";
+    return {
+      label: item.label,
+      href,
+      key: `${href}-${idx}`,
+    };
+  });
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Close mobile menu when clicking on a link
-  const handleLinkClick = () => {
-    setIsMobileMenuOpen(false)
-  }
-
-  const navItems = [
-    { name: "Features", href: "#features" },
-    { name: "Benefits", href: "#benefits" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Pricing", href: "#pricing" },
-  ]
+  const handleLinkClick = () => setIsMobileMenuOpen(false);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        isScrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm py-2"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo.png"
-            alt="rexpt - The AI Receptionist Service"
-            width={150}
-            height={50}
-            className="h-10 w-auto dark:brightness-0 dark:invert"
-          />
+        {/* Logo + optional tagline */}
+        <Link href="/">
+          <div className="flex items-center cursor-pointer">
+            <Image
+              src={logoUrl}
+              alt={logoAlt}
+              width={150}
+              height={50}
+              className="h-10 w-auto dark:brightness-0 dark:invert"
+            />
+            {tagline && (
+              <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                {tagline}
+              </span>
+            )}
+          </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-4">
-          {navItems.map((item) => (
+          {navList?.map((link) => (
             <motion.div
-              key={item.name}
+              key={link.key}
               whileHover={{ y: -2, scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <Link
-                href={item.href}
-                className="text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors px-2"
+              <a
+                href={link.href}
+                className="font-medium px-2 text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
               >
-                {item.name}
-              </Link>
+                {link.label}
+              </a>
             </motion.div>
           ))}
-          <ThemeToggle />
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white ml-2">Get Started</Button>
-          </motion.div>
+
+          {showThemeToggle && <ThemeToggle />}
+
+          {ctaLabel && (
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link href={ctaUrl || "#"} className="ml-2 inline-block" target="blank">
+                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                  {ctaLabel}
+                </Button>
+              </Link>
+            </motion.div>
+          )}
         </nav>
 
-        {/* Mobile Menu Button and Theme Toggle */}
+        {/* Mobile Controls */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
+          {showThemeToggle && <ThemeToggle />}
+
           <motion.button
             className="text-gray-700 dark:text-gray-200"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen((o) => !o)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -88,7 +133,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation with AnimatePresence for smooth transitions */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -99,23 +144,32 @@ export function Header() {
             className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800 shadow-lg"
           >
             <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-              {navItems.map((item) => (
+              {navList?.map((link) => (
                 <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium py-2 transition-colors"
+                  key={link.key}
+                  href={link.href}
+                  className="font-medium py-2 text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                   onClick={handleLinkClick}
                 >
-                  {item.name}
+                  {link.label}
                 </Link>
               ))}
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full" onClick={handleLinkClick}>
-                Get Started
-              </Button>
+
+              {ctaLabel && (
+                <Link
+                  href={ctaUrl || "/"}
+                  className="w-full inline-block"
+                  onClick={handleLinkClick}
+                >
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full">
+                    {ctaLabel}
+                  </Button>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }

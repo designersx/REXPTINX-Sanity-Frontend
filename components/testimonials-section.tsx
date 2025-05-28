@@ -1,73 +1,70 @@
-"use client"
+"use client";
+import React, { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Image from "next/image";
+import { TestimonialData } from "@/app/page";
+import { PortableText } from "@portabletext/react";
+type Props = {
+  sectionTitle: string;
+  sectionSubtitle: string;
+  testimonials: TestimonialData[];
+};
+const serializers = {
+  marks: {
+    purple: ({ children }) => (
+      <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
+        {children}
+      </span>
+    ),
+    strong: ({ children }) => <strong>{children}</strong>,
+    break: ({ children }) => (
+      <>
+        {children}
+        <br />
+      </>
+    ),
+  },
+};
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+export function TestimonialsSection({
+  sectionTitle,
+  sectionSubtitle,
+  testimonials,
+}: Props) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [activeIndex, setActiveIndex] = useState(0);
 
-export function TestimonialsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      position: "CEO, TechStart Inc.",
-      content:
-        "Implementing rexpt's AI receptionist has been a game-changer for our business. Our calls are handled professionally 24/7, and the AI's ability to understand context is remarkable. It's like having a full-time receptionist at a fraction of the cost.",
-      rating: 5,
-      image: "/professional-woman-short-hair.png",
-    },
-    {
-      name: "Michael Chen",
-      position: "Founder, Innovate Solutions",
-      content:
-        "We were skeptical about an AI handling our important client calls, but rexpt has exceeded our expectations. The voice sounds completely natural, and clients often don't realize they're speaking with an AI. It's saved us countless hours and improved our response time.",
-      rating: 5,
-      image: "/asian-professional-glasses.png",
-    },
-    {
-      name: "Emily Rodriguez",
-      position: "Office Manager, Legal Partners",
-      content:
-        "As a law firm, we need to ensure every call is handled with care and confidentiality. The rexpt AI receptionist has been perfect for our needs, accurately routing calls and capturing important information. I can't imagine going back to our old system.",
-      rating: 5,
-      image: "/latina-professional-woman.png",
-    },
-  ]
-
-  const nextTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-  }
-
-  const prevTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
-  }
+  const next = () => setActiveIndex((i) => (i + 1) % testimonials.length);
+  const prev = () =>
+    setActiveIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
     <section id="testimonials" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.div
+            ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
-            What Our <span className="text-purple-600 dark:text-purple-400">Clients Say</span>
-          </motion.h2>
+            <PortableText value={sectionTitle} components={serializers} />
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Discover how businesses are transforming their communication with our AI receptionist.
+            {sectionSubtitle}
           </motion.p>
         </div>
 
-        <div ref={ref} className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -76,24 +73,37 @@ export function TestimonialsSection() {
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12"
           >
             <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-shrink-0">
+              {/* Avatar */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex-shrink-0"
+              >
                 <motion.img
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  src={testimonials[activeIndex].image}
-                  alt={testimonials[activeIndex].name}
+                  src={testimonials[activeIndex].authorImageUrl}
+                  alt={testimonials[activeIndex].name || ""}
                   className="w-20 h-20 rounded-full object-cover border-4 border-purple-100 dark:border-purple-800"
                 />
-              </div>
+              </motion.div>
+
+              {/* Text */}
               <div>
+                {/* Stars */}
                 <div className="flex mb-4">
-                  {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                  {Array.from({
+                    length: testimonials[activeIndex].rating,
+                  })?.map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-5 w-5 text-yellow-400 fill-current"
+                    />
                   ))}
                 </div>
+
+                {/* Quote */}
                 <motion.p
-                  key={activeIndex}
+                  key={`quote-${activeIndex}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -102,8 +112,10 @@ export function TestimonialsSection() {
                 >
                   "{testimonials[activeIndex].content}"
                 </motion.p>
+
+                {/* Name & role */}
                 <motion.div
-                  key={`name-${activeIndex}`}
+                  key={`author-${activeIndex}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.2 }}
@@ -111,36 +123,43 @@ export function TestimonialsSection() {
                   <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {testimonials[activeIndex].name}
                   </h4>
-                  <p className="text-purple-600 dark:text-purple-400">{testimonials[activeIndex].position}</p>
+                  <p className="text-purple-600 dark:text-purple-400">
+                    {testimonials[activeIndex].position}
+                  </p>
                 </motion.div>
               </div>
             </div>
           </motion.div>
 
+          {/* Controls */}
           <div className="flex justify-center mt-8 gap-4">
             <motion.button
+              onClick={prev}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={prevTestimonial}
               className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
             >
               <ChevronLeft className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             </motion.button>
+
             <div className="flex gap-2 items-center">
-              {testimonials.map((_, index) => (
+              {testimonials?.map((_, idx) => (
                 <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
                   className={`h-3 w-3 rounded-full transition-colors ${
-                    index === activeIndex ? "bg-purple-600 dark:bg-purple-400" : "bg-purple-200 dark:bg-purple-800"
+                    idx === activeIndex
+                      ? "bg-purple-600 dark:bg-purple-400"
+                      : "bg-purple-200 dark:bg-purple-800"
                   }`}
                 />
               ))}
             </div>
+
             <motion.button
+              onClick={next}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={nextTestimonial}
               className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
             >
               <ChevronRight className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -149,5 +168,5 @@ export function TestimonialsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
