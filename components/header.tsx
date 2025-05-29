@@ -108,7 +108,7 @@ export function Header({ data }: { data: HeaderData }) {
           {ctaLabel && (
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href={ctaUrl || "#"} className="ml-2 inline-block" target="blank">
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white">
                   {ctaLabel}
                 </Button>
               </Link>

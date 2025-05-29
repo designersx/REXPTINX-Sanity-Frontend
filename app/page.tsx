@@ -28,9 +28,13 @@ type HeroData2 = {
   primaryCta: { label: string; url: string };
   secondaryCta: {
     label: string;
+    phoneNumber?: string;
     rexAgentImage?: { asset: { url: string } };
   };
   video?: string;
+  videoThumbnail?: {
+    asset: { url: string };
+  };
 };
 
 type Feature = {
@@ -142,28 +146,34 @@ export default function Home() {
     client
       .fetch<HeroData2>(
         `
-      *[_type=='heroSection1'][0] {
-        enabled,
-        title,
-        subtitle,
-        primaryCta {
-          label,
-          url
-        },
-        secondaryCta {
-          label,
-          rexAgentImage {
-            asset -> {
-              url
-            }
+    *[_type=='heroSection1'][0] {
+      enabled,
+      title,
+      subtitle,
+      primaryCta {
+        label,
+        url
+      },
+      secondaryCta {
+        label,
+        phoneNumber,  
+        rexAgentImage {
+          asset -> {
+            url
           }
-        },
-        video {
-    asset-> {
-      url
-    }
-  }
+        }
+      },
+      video {
+        asset-> {
+          url
+        }
+      },   
+      videoThumbnail {
+        asset -> {
+          url
+        }
       }
+    }
     `
       )
       .then(setHero2)
@@ -373,6 +383,7 @@ export default function Home() {
             primaryCta={hero2.primaryCta}
             secondaryCta={hero2.secondaryCta}
             video={hero2.video}
+            videoThumbnail={hero2.videoThumbnail}
           />
         )}
         {hero?.enabled && (

@@ -50,9 +50,7 @@ export function FeaturesSection({
   const serializers = {
     marks: {
       purple: ({ children }) => (
-        <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
-          {children}
-        </span>
+        <span style={{ color: "#6524EB" }}>{children}</span>
       ),
       strong: ({ children }) => <strong>{children}</strong>,
       break: ({ children }) => (
@@ -65,7 +63,10 @@ export function FeaturesSection({
   };
 
   return (
-    <section id="features" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section
+      id="features"
+      className="py-20 bg-gray-50 dark:bg-gray-900 relative z-1"
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -102,13 +103,10 @@ export function FeaturesSection({
               whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
             >
               <div
-                className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center mb-4"
+                className="bg-[#6524EB] dark:bg-[#6524EB]900/30 rounded-full w-12 h-12 flex items-center justify-center mb-4"
                 dangerouslySetInnerHTML={{ __html: feat.svgIcon }}
-                style={{ color: "rgb(147 51 234/var(--tw-text-opacity,1))" }}
+                style={{ color: "white" }}
               ></div>
-              {/* <div className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-                {icons[idx]}
-              </div> */}
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 {feat.title}
               </h3>

@@ -39,7 +39,7 @@ export function HeroSection({
   const serializers = {
     marks: {
       purple: ({ children }) => (
-        <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
+        <span style={{ color: "#6524EB" }}>
           {children}
         </span>
       ),

@@ -62,7 +62,7 @@ export function Footer({ footerData }: FooterProps) {
                     href={socialLink.url}
                     target="_blank"
                     scroll={false}
-                    className="text-gray-400 hover:text-purple-400 transition-colors"
+                    className="text-gray-400 hover:text-[#6524EB] transition-colors"
                   >
                     <div
                       dangerouslySetInnerHTML={{ __html: socialLink.icon }}
@@ -91,7 +91,7 @@ export function Footer({ footerData }: FooterProps) {
                 <li key={`${link.label}-${link.url}-${index}`}>
                   <Link
                     href={link.url}
-                    className="text-gray-400 hover:text-purple-400 transition-colors"
+                    className="text-gray-400 hover:text-[#6524EB] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -109,7 +109,7 @@ export function Footer({ footerData }: FooterProps) {
                   {link.url ? (
                     <Link
                       href={link.url}
-                      className="text-gray-400 hover:text-purple-400 transition-colors"
+                      className="text-gray-400 hover:text-[#6524EB] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -127,7 +127,7 @@ export function Footer({ footerData }: FooterProps) {
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <div
-                  className="text-purple-400"
+                  className="text-[#6524EB]"
                   dangerouslySetInnerHTML={{
                     __html: footerData?.contactInfo?.emailSvgIcon,
                   }}
@@ -138,7 +138,7 @@ export function Footer({ footerData }: FooterProps) {
               </li>
               <li className="flex items-center gap-3">
                 <div
-                  className="text-purple-400"
+                  className="text-[#6524EB]"
                   dangerouslySetInnerHTML={{
                     __html: footerData?.contactInfo?.phoneSvgIcon,
                   }}
@@ -160,19 +160,19 @@ export function Footer({ footerData }: FooterProps) {
             <div className="flex space-x-6">
               <Link
                 href={footerData?.privacyPolicy ?? "#"}
-                className="text-gray-500 hover:text-purple-400 text-sm transition-colors"
+                className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 href={footerData?.termsOfService ?? "#"}
-                className="text-gray-500 hover:text-purple-400 text-sm transition-colors"
+                className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
                 href={footerData?.cookiePolicy ?? "#"}
-                className="text-gray-500 hover:text-purple-400 text-sm transition-colors"
+                className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
                 Cookie Policy
               </Link>

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, Check, X } from "lucide-react";
+import { PortableText } from "@portabletext/react";
 import "../app/globals.css";
 export type Plan = {
   title: string;
@@ -67,80 +68,122 @@ export function PricingSection({
     );
   }
 
+  const serializers = {
+    marks: {
+      purple: ({ children }) => (
+        <span style={{ color: "#6524EB" }}>{children}</span>
+      ),
+      strong: ({ children }) => <strong>{children}</strong>,
+      break: ({ children }) => (
+        <>
+          {children}
+          <br />
+        </>
+      ),
+    },
+  };
+
   return (
     <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
-          >
-            {sectionTitle}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
-          >
-            {sectionSubtitle}
-          </motion.p>
+        <div className="flex">
+          <div className="text-center mb-8">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
+            >
+              <PortableText value={sectionTitle} components={serializers} />
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
+            >
+              {sectionSubtitle}
+            </motion.p>
 
-          {/* Billing Toggle */}
-          <div className="flex flex-wrap justify-center items-center gap-4">
-            <span
-              className={`font-medium ${
-                !isYearly
-                  ? "text-purple-600 dark:text-purple-400"
-                  : "text-gray-600 dark:text-gray-400"
-              }`}
-            >
-              {toggleLabels.left}
-            </span>
-            <button
-              aria-label="Toggle billing"
-              onClick={() => setIsYearly((y) => !y)}
-              className="relative w-14 h-7"
-            >
-              <div
-                className={`absolute inset-0 rounded-full transition-colors ${
-                  isYearly
-                    ? "bg-purple-600 dark:bg-purple-500"
-                    : "bg-gray-300 dark:bg-gray-700"
+            {/* Billing Toggle */}
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              <span
+                className={`font-medium ${
+                  !isYearly
+                    ? "text-[#6524EB] dark:text-[#6524EB]"
+                    : "text-gray-600 dark:text-gray-400"
                 }`}
-              />
-              <motion.div
-                className="absolute w-5 h-5 bg-white rounded-full top-1 left-1 shadow"
-                animate={{ x: isYearly ? 28 : 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
-            </button>
-            <span
-              className={`font-medium ${
-                isYearly
-                  ? "text-purple-600 dark:text-purple-400"
-                  : "text-gray-600 dark:text-gray-400"
-              }`}
-            >
-              {toggleLabels.right}
-            </span>
-            {toggleSubtext && (
-              <span className="ml-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-medium px-2.5 py-0.5 rounded">
-                {toggleSubtext}
+              >
+                {toggleLabels.left}
               </span>
-            )}
-            <button className=" text-sm  font-bold text-center py-2 rounded signBtn transition-colors bg-purple-600 text-white hover:bg-purple-700 freeSignUp ">
-              <div className="SigContro">
-                <h5>Sign Up</h5>
-                <p className="text-sm ">
-                  {" "}
-                  10 min on us with all starter<br></br> package features
-                </p>
+              <button
+                aria-label="Toggle billing"
+                onClick={() => setIsYearly((y) => !y)}
+                className="relative w-14 h-7"
+              >
+                <div
+                  className={`absolute inset-0 rounded-full transition-colors ${
+                    isYearly
+                      ? "bg-[#6524EB] dark:bg-[#6524EB]"
+                      : "bg-gray-300 dark:bg-gray-700"
+                  }`}
+                />
+                <motion.div
+                  className="absolute w-5 h-5 bg-white rounded-full top-1 left-1 shadow"
+                  animate={{ x: isYearly ? 28 : 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              </button>
+              <span
+                className={`font-medium ${
+                  isYearly
+                    ? "text-[#6524EB] dark:text-[#6524EB]"
+                    : "text-gray-600 dark:text-gray-400"
+                }`}
+              >
+                {toggleLabels.right}
+              </span>
+              {toggleSubtext && (
+                <span className="ml-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-medium px-2.5 py-0.5 rounded">
+                  {toggleSubtext}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="text-center mb-8">
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              <div className="inline-flex items-center bg-[#792ef0] text-white rounded-[16px] px-6 py-4 border border-dashed border-white">
+                <div className="flex flex-col text-left">
+                  <span className="text-xl font-bold">Sign up for FREE</span>
+                  <span className="text-sm mt-1">
+                    Includes FREE 10 min + AGENT
+                    <br />+ Starter Package features
+                  </span>
+                </div>
+                <div className="ml-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-12 h-12"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 16.2a6 6 0 1112 0c0 1.13-.31 2.18-.84 3.08a1.5 1.5 0 01-2.32.4L16.5 18h-3.5l-1.36 1.68a1.5 1.5 0 01-2.32-.4A5.978 5.978 0 019 16.2z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 7h.01M15 7h.01M12 7h.01"
+                    />
+                  </svg>
+                </div>
               </div>
-              <span className="SignFree">Free</span>
-            </button>
+            </div>
           </div>
         </div>
 
@@ -164,8 +207,8 @@ export function PricingSection({
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className={`rounded-xl overflow-hidden h-full flex flex-col ${
                   plan.togglePurplePricing
-                    ? "bg-purple-600 text-white shadow-xl transform md:-translate-y-4"
-                    : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+                    ? "bg-[#6524EB] text-white shadow-xl transform md:-translate-y-4"
+                    : "bg-white dark:bg-white-800 border border-white-200 dark:border-white-700 text-white-900 dark:text-white-100"
                 }`}
               >
                 {/* Mobile view */}
@@ -173,7 +216,7 @@ export function PricingSection({
                   className="md:hidden p-6 cursor-pointer"
                   onClick={() => toggleTier(index)}
                 >
-                    {plan.togglePurplePricing && (
+                  {plan.togglePurplePricing && (
                     <div className="ribbon ribbon-top-right">
                       <span>Most Popular</span>
                     </div>
@@ -197,7 +240,7 @@ export function PricingSection({
                       className={
                         plan.togglePurplePricing
                           ? "text-white"
-                          : "text-purple-600 dark:text-purple-400"
+                          : "text-[#6524EB] dark:text-[#6524EB]"
                       }
                     >
                       {expandedTier === index ? (
@@ -212,7 +255,7 @@ export function PricingSection({
                     <p
                       className={`mt-3 ${
                         plan.togglePurplePricing
-                          ? "text-purple-100 opacity-80"
+                          ? "text-[#6524EB] opacity-80"
                           : "text-gray-600 dark:text-gray-300"
                       }`}
                     >
@@ -225,7 +268,7 @@ export function PricingSection({
                       <p
                         className={`mb-4 ${
                           plan.togglePurplePricing
-                            ? "text-purple-100 opacity-80"
+                            ? "text-[#6524EB] opacity-80"
                             : "text-gray-600 dark:text-gray-300"
                         }`}
                       >
@@ -246,8 +289,8 @@ export function PricingSection({
                               <div
                                 className={`rounded-full p-1 mt-0.5 flex-shrink-0 ${
                                   plan.togglePurplePricing
-                                    ? "bg-purple-500/30 text-white"
-                                    : "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
+                                    ? "bg-[#6524EB] text-white"
+                                    : "bg-[#6524EB] dark:bg-[#6524EB] text-white dark:text-purple-400"
                                 }`}
                               >
                                 <Check className="h-3 w-3" />
@@ -282,8 +325,8 @@ export function PricingSection({
                                   <div
                                     className={`rounded-full p-1 mt-0.5 flex-shrink-0 ${
                                       plan.togglePurplePricing
-                                        ? "bg-purple-500/20 text-white/70"
-                                        : "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                                        ? "bg-[#6524EB] text-white/70"
+                                        : "bg-[#6524EB] dark:bg-gray-700 text-white dark:text-white"
                                     }`}
                                   >
                                     <X className="h-3 w-3" />
@@ -307,8 +350,8 @@ export function PricingSection({
                       <button
                         className={`w-full mt-6 py-3 rounded ${
                           plan.togglePurplePricing
-                            ? "bg-white text-purple-600 hover:bg-gray-100"
-                            : "bg-purple-600 dark:bg-purple-500 text-white hover:bg-purple-700 dark:hover:bg-purple-600"
+                            ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
+                            : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-[#6524EB] dark:bg-[#6524EB] text-white hover:bg-[#6524EB] dark:hover:bg-[#6524EB]"
                         }`}
                       >
                         {plan.ctaLabel}
@@ -338,7 +381,7 @@ export function PricingSection({
                     <p
                       className={`mb-6 ${
                         plan.togglePurplePricing
-                          ? "text-purple-100 opacity-80"
+                          ? "text-[#6524EB]-100 opacity-80"
                           : "text-gray-600 dark:text-gray-300"
                       }`}
                     >
@@ -347,8 +390,8 @@ export function PricingSection({
                     <button
                       className={`w-full py-6 rounded ${
                         plan.togglePurplePricing
-                          ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                          : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-purple-600 dark:bg-purple-500 text-white hover:bg-purple-700 dark:hover:bg-purple-600"
+                          ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
+                          : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-[#6524EB] dark:bg-[#6524EB] text-white hover:bg-[#6524EB] dark:hover:bg-[#6524EB]"
                       }`}
                     >
                       {plan.ctaLabel}
@@ -357,8 +400,8 @@ export function PricingSection({
                   <div
                     className={`p-6 flex-grow ${
                       plan.togglePurplePricing
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-50 dark:bg-gray-900/50 text-gray-900 dark:text-gray-100"
+                        ? "bg-[#5a1fc0] text-white"
+                        : "bg-white dark:bg-gray-900/50 text-gray-900 dark:text-gray-100"
                     }`}
                   >
                     <p
@@ -376,8 +419,8 @@ export function PricingSection({
                           <div
                             className={`rounded-full p-1 mt-0.5 ${
                               plan.togglePurplePricing
-                                ? "bg-purple-500/30 text-white"
-                                : "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
+                                ? "bg-[#6524EB] text-white"
+                                : "bg-[#6524EB] dark:bg-purple-900/30 text-white dark:text-white"
                             }`}
                           >
                             <Check className="h-4 w-4" />
@@ -385,7 +428,7 @@ export function PricingSection({
                           <span
                             className={
                               plan.togglePurplePricing
-                                ? "text-purple-100"
+                                ? "text-white"
                                 : "text-gray-600 dark:text-gray-300"
                             }
                           >
@@ -412,8 +455,8 @@ export function PricingSection({
                               <div
                                 className={`rounded-full p-1 mt-0.5 ${
                                   plan.togglePurplePricing
-                                    ? "bg-purple-500/20 text-white/70"
-                                    : "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                                    ? "bg-[#6524EB] text-white/70"
+                                    : "bg-[#6524EB] dark:bg-gray-700 text-white dark:text-white"
                                 }`}
                               >
                                 <X className="h-4 w-4" />
@@ -449,7 +492,7 @@ export function PricingSection({
             {bottomCallout.prefix}{" "}
             <a
               href={bottomCallout.linkUrl}
-              className="text-purple-600 dark:text-purple-400 font-medium hover:underline"
+              className="text-[#6524EB] dark:text-purple-400 font-medium hover:underline"
             >
               {bottomCallout.linkLabel}
             </a>{" "}

@@ -13,9 +13,7 @@ type Props = {
 const serializers = {
   marks: {
     purple: ({ children }) => (
-      <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
-        {children}
-      </span>
+      <span style={{ color: "#6524EB" }}>{children}</span>
     ),
     strong: ({ children }) => <strong>{children}</strong>,
     break: ({ children }) => (
@@ -123,7 +121,7 @@ export function TestimonialsSection({
                   <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {testimonials[activeIndex].name}
                   </h4>
-                  <p className="text-purple-600 dark:text-purple-400">
+                  <p className="text-[#6524EB] dark:text-[#6524EB]">
                     {testimonials[activeIndex].position}
                   </p>
                 </motion.div>
@@ -137,9 +135,9 @@ export function TestimonialsSection({
               onClick={prev}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
+              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-[#6524EB] dark:hover:bg-white transition-colors"
             >
-              <ChevronLeft className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+              <ChevronLeft className="h-6 w-6 text-[#6524EB] dark:text-[#6524EB] hover:text-white transition-colors" />
             </motion.button>
 
             <div className="flex gap-2 items-center">
@@ -149,8 +147,8 @@ export function TestimonialsSection({
                   onClick={() => setActiveIndex(idx)}
                   className={`h-3 w-3 rounded-full transition-colors ${
                     idx === activeIndex
-                      ? "bg-purple-600 dark:bg-purple-400"
-                      : "bg-purple-200 dark:bg-purple-800"
+                      ? "bg-[#6524EB] dark:bg-[#6524EB]"
+                      : "bg-[#6524EB] dark:bg-[#6524EB]"
                   }`}
                 />
               ))}
@@ -160,9 +158,9 @@ export function TestimonialsSection({
               onClick={next}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors"
+              className="bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-[#6524EB] dark:hover:bg-white transition-colors"
             >
-              <ChevronRight className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+              <ChevronRight className="h-6 w-6 text-[#6524EB] dark:text-[#6524EB] hover:text-white transition-colors" />
             </motion.button>
           </div>
         </div>

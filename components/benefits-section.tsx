@@ -49,7 +49,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
   const serializers = {
     marks: {
       purple: ({ children }: { children: React.ReactNode }) => (
-        <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
+        <span style={{ color: "#6524EB" }}>
           {children}
         </span>
       ),
@@ -101,13 +101,13 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
                 className="flex gap-4"
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}
               >
-                <div className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 custom-div">
+                <div className="bg-[#6524EB] dark:bg-[#6524EB] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 custom-div">
                   {/* Render SVG icon dynamically */}
                   <div
                     dangerouslySetInnerHTML={{
                       __html: feature.svgIcon,
                     }}
-                    className="h-6 w-6 text-purple-600 dark:text-purple-400"
+                    className="h-6 w-6 text-white dark:text-[#6524EB]"
                   />
                 </div>
                 <div>
@@ -128,7 +128,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="relative bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl p-8 shadow-xl overflow-hidden">
+            <div className="relative bg-gradient-to-br from-[#6524EB] to-[#6524EB] rounded-2xl p-8 shadow-xl overflow-hidden">
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white mb-4">
                   {seeTheDifference.heading}

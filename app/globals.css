@@ -104,6 +104,12 @@ body {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+.play-video {
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  display: flex;
+}
 .StartMain img:nth-child(1) {
   top: 10%;
   left: 20%;
@@ -255,7 +261,7 @@ body {
   right: -30px;
   text-align: center;
   line-height: 30px;
-  color: #7c3aed;
+  color: #6524eb;
   font-weight: 700;
   font-size: 14px;
   transform: rotate(45deg);
@@ -286,7 +292,7 @@ section.pt-28.md\:pt-32.pb-16.md\:pb-15.mb-5.md\:mb-5.overflow-hidden.bg-transpa
 .rexAgent {
   width: 70px;
   height: 70px;
-  border: 1px solid #7c3aed;
+  border: 1px solid #6524eb;
   border-radius: 70px;
   position: absolute;
   right: 0px;
@@ -320,7 +326,7 @@ section.pt-28.md\:pt-32.pb-16.md\:pb-15.mb-5.md\:mb-5.overflow-hidden.bg-transpa
 .RexButton {
   background-color: #f8efe9;
   border: none;
-  color: #7c3aed;
+  color: #6524eb;
   height: 48px;
   padding-right: 0px;
 }
@@ -361,9 +367,9 @@ section.pt-28.md\:pt-32.pb-16.md\:pb-15.mb-5.md\:mb-5.overflow-hidden.bg-transpa
 }
 
 .freeSignUp span {
-  border: 1px solid #7c3aed;
+  border: 1px solid #6524eb;
   background-color: #fff;
-  color: #7c3aed;
+  color: #6524eb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -382,6 +388,51 @@ section.pt-28.md\:pt-32.pb-16.md\:pb-15.mb-5.md\:mb-5.overflow-hidden.bg-transpa
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Add css 29-05-25 */
+.call-rex-button {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #f9f0e9;
+  color: #000;
+  border: 1.5px solid #f9f0e9;
+  border-radius: 40px;
+  padding: 7px 2px 7px 20px;
+  font-family: sans-serif;
+  transition: box-shadow 0.3s ease;
+  max-width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.call-rex-button:hover {
+  /* box-shadow: 0 4px 12px rgba(0, 170, 255, 0.3); */
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: left;
+  font-family: var(--font-lato);
+}
+
+.highlight {
+  /* font-weight: bold; */
+  color: #000;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: contain;
 }
 
 @media (max-width: 640px) {

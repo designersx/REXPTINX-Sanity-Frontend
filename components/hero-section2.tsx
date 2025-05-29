@@ -1,5 +1,5 @@
 "use client";
-
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PortableText } from "@portabletext/react";
@@ -10,13 +10,40 @@ type HeroSection2Props = {
   primaryCta: { label: string; url: string };
   secondaryCta: {
     label: string;
+    phoneNumber?: string;
     rexAgentImage?: { asset: { url: string } };
   };
   video?: string;
+  videoThumbnail?: {
+    asset: { url: string };
+  };
 };
 
 export function HeroSection2(props: HeroSection2Props) {
-  const { enabled, title, subtitle, primaryCta, secondaryCta, video } = props;
+  const {
+    enabled,
+    title,
+    subtitle,
+    primaryCta,
+    secondaryCta,
+    video,
+    videoThumbnail,
+  } = props;
+  console.log(secondaryCta, "secondaryCta");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayPause = () => {
+    if (!videoRef.current) return;
+
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   if (!enabled) return null;
 
@@ -55,9 +82,7 @@ export function HeroSection2(props: HeroSection2Props) {
   const serializers = {
     marks: {
       purple: ({ children }) => (
-        <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
-          {children}
-        </span>
+        <span style={{ color: "#6524EB" }}>{children}</span>
       ),
       strong: ({ children }) => <strong>{children}</strong>,
       break: ({ children }) => (
@@ -110,61 +135,61 @@ export function HeroSection2(props: HeroSection2Props) {
               </motion.p>
               <motion.div
                 variants={itemVariants}
-                className="flex flex-col sm:flex-row gap-4"
+                className="flex flex-col sm:flex-row gap-4 items-center"
               >
                 <Button
-                  className="bg-purple-600 hover:bg-purple-700 text-white text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
+                  className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
                   onClick={() => {
                     if (primaryCta.url) window.open(primaryCta.url, "_blank");
                   }}
                 >
                   {primaryCta.label}
                 </Button>
-                <Button
-                  variant="outline"
-                  className="RexButton"
-                  onClick={runScript}
-                >
-                  <div className="rexControl">
-                    <h5>{secondaryCta.label}</h5>
-                    <div className="rexAgent">
-                      <img
-                        src={
-                          secondaryCta.rexAgentImage?.asset.url ||
-                          "/images/Rex-Agent.png"
-                        }
-                        alt="REX"
-                      />
+  
+                <div className="call-rex-button">
+                  <div className="button-content">
+                    <div className="text">
+                      <span className="highlight">
+                        <PortableText
+                          value={secondaryCta.label}
+                          components={serializers}
+                        />
+                      </span>
+                      <strong>{secondaryCta.phoneNumber}</strong>
                     </div>
+                    <img
+                      src={
+                        secondaryCta.rexAgentImage?.asset.url ||
+                        "/images/Rex-Agent.png"
+                      }
+                      alt="REX"
+                      className="avatar"
+                    />
                   </div>
-                </Button>
+                </div>
               </motion.div>
             </div>
-
-            <motion.div
-              className="relative m-auto mt-8 lg:mt-0"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.5,
-                y: {
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                },
-              }}
-              whileInView={{ y: [0, -10, 0] }}
-              viewport={{ once: false }}
-            >
-              <div className="iframe-container relative">
-                <video width="660" height="362" controls>
-                  <source
-                    src={video?.asset?.url || "/images/videoplayback.mp4"}
-                    type="video/mp4"
-                  />
-                </video>
+            <motion.div className="relative m-auto mt-8 lg:mt-0">
+              <div className="iframe-container relative w-[660px] h-[362px]">
+                <video
+                  ref={videoRef}
+                  width="660"
+                  height="362"
+                  src={video?.asset?.url || "/images/videoplayback.mp4"}
+                  poster={videoThumbnail?.asset?.url || "/images/thumbnail.png"}
+                  onClick={handlePlayPause}
+                  className="w-full h-full cursor-pointer"
+                  style={{ borderRadius: "5px" }}
+                />
+                {!isPlaying && (
+                  <button
+                    onClick={handlePlayPause}
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#6524EB] hover:bg-[#5a1fc0] text-white rounded-full p-5 focus:outline-none play-video"
+                    aria-label="Play video"
+                  >
+                    ▶
+                  </button>
+                )}
               </div>
             </motion.div>
           </motion.div>

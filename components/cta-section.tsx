@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneCall, MessageSquare, Calendar } from "lucide-react";
 import Link from "next/link";
 type CtaFeature = {
-  icon: React.ElementType; // Use React component type for icons
+  icon: React.ElementType;
   title: string;
   description: string;
 };
@@ -24,9 +24,8 @@ export function CtaSection({
   secondaryCta,
   features,
 }: CtaProps) {
-  console.log(features, "ffgvnedfj");
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-600 to-purple-800 text-white">
+    <section className="py-20 bg-gradient-to-br from-[#6524EB] to-[#6524EB] text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
@@ -61,7 +60,7 @@ export function CtaSection({
                 target={primaryCta.url ? "_blank" : "_self"}
                 scroll={false}
               >
-                <Button className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-6 w-full">
+                <Button className="bg-white text-[#6524EB] hover:bg-gray-100 text-lg px-8 py-6 w-full">
                   {primaryCta.label}
                 </Button>
               </Link>
@@ -95,11 +94,11 @@ export function CtaSection({
               <div key={feature.title} className="flex flex-col items-center">
                 {" "}
                 <div
-                  className="bg-purple-500/30 rounded-full p-4 mb-4"
+                  className="bg-[#5a1fc0] rounded-full p-4 mb-4"
                   dangerouslySetInnerHTML={{ __html: feature.icon }}
                 />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-purple-100 text-center">
+                <p className="text-white text-center">
                   {feature.description}
                 </p>
               </div>
