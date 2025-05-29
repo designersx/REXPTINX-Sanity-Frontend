@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 type Feature = {
+  enabled: boolean;
   title: string;
   description: string;
   svgIcon: string;
@@ -24,11 +25,12 @@ type Props = {
 };
 
 export function FeaturesSection({
+  enabled,
   sectionTitle,
   sectionSubtitle,
   features,
 }: Props) {
-  console.log(sectionTitle, "sectionTitle");
+  if (!enabled) return null;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 

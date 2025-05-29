@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -24,9 +23,9 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 262 83% 58%;
-    --radius: 0.5rem;
+    --radius: 10rem;
     --font-sans: var(--font-plus-jakarta-sans);
-    --font-lato:(var(--font-lato))
+    --font-lato: (var(--font-lato));
   }
 
   .dark {
@@ -83,6 +82,310 @@ body {
 }
 
 /* Additional touch handling for iOS devices */
-* {
+ {
   -webkit-touch-callout: none;
+}
+
+.StartMain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.StartMain div {
+  width: 100%;
+  height: 100%;
+}
+
+.StartMain img {
+  position: absolute;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.StartMain img:nth-child(1) {
+  top: 10%;
+  left: 20%;
+  animation: floatTopRight 6s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(2) {
+  top: 40%;
+  left: 70%;
+  animation: floatBottomLeft 7s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(3) {
+  top: 60%;
+  left: 10%;
+  animation: floatBottomRight 5s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(4) {
+  top: 20%;
+  left: 50%;
+  animation: floatTopLeft 6.5s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(5) {
+  top: 80%;
+  left: 30%;
+  animation: floatDiagonal 5.5s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(6) {
+  top: 25%;
+  left: 80%;
+  animation: floatBottomLeft 7.5s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(7) {
+  top: 70%;
+  left: 60%;
+  animation: floatTopLeft 6s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(8) {
+  top: 35%;
+  left: 40%;
+  animation: floatTopRight 7s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(9) {
+  top: 55%;
+  left: 15%;
+  animation: floatBottomRight 6.5s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(10) {
+  top: 5%;
+  left: 90%;
+  animation: floatDiagonal 5.2s infinite ease-in-out;
+}
+
+.StartMain img:nth-child(11) {
+  top: 85%;
+  left: 5%;
+  animation: floatTopLeft 7s infinite ease-in-out;
+}
+
+/* Keyframes for different directions */
+
+@keyframes floatTopRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(150px, -150px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatBottomLeft {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-150px, 150px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatBottomRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(150px, 150px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatTopLeft {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-150px, -150px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes floatDiagonal {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100px, -100px);
+  }
+  50% {
+    transform: translate(-100px, 100px);
+  }
+  75% {
+    transform: translate(80px, 120px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.relative.m-auto.mt-8 {
+  margin: auto;
+}
+
+.ribbon {
+  position: relative;
+}
+
+.ribbon span {
+  width: 130px;
+  height: 30px;
+  background: #fff;
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  text-align: center;
+  line-height: 30px;
+  color: #7c3aed;
+  font-weight: 700;
+  font-size: 14px;
+  transform: rotate(45deg);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  pointer-events: none;
+  transition: none; /* make sure no hover transition */
+}
+
+.ribbon-top-right {
+  /* Just to clarify that it’s positioned top right */
+}
+
+.signBtn {
+  width: inline-block;
+  padding: 10px 20px;
+}
+
+.iframe-container {
+  width: 100%;
+}
+
+section.pt-28.md\:pt-32.pb-16.md\:pb-15.mb-5.md\:mb-5.overflow-hidden.bg-transparent.dark\:bg-gray-950 {
+  position: relative;
+  z-index: 10;
+}
+
+.rexAgent {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #7c3aed;
+  border-radius: 70px;
+  position: absolute;
+  right: 0px;
+}
+
+.rexAgent img {
+  width: 100%;
+}
+
+.rexControl {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  border-radius: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.rexControl h5 {
+  width: 214px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  left: -29px;
+}
+
+.RexButton {
+  background-color: #f8efe9;
+  border: none;
+  color: #7c3aed;
+  height: 48px;
+  padding-right: 0px;
+}
+
+.freeSignUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  padding: 15px;
+  justify-content: center;
+  height: 80px;
+  width: 320px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: start;
+}
+
+.SigContro {
+  display: grid;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+  width: 100%;
+}
+
+.freeSignUp p {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.freeSignUp h5 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.freeSignUp span {
+  border: 1px solid #7c3aed;
+  background-color: #fff;
+  color: #7c3aed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px;
+  height: 40px;
+  font-size: 25px;
+  font-weight: 600;
+}
+.custom-div {
+  transform: translateX(0.741419px) translateY(-0.741419px) scale(1.01483);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .rexControl h5 {
+    position: unset;
+  }
 }

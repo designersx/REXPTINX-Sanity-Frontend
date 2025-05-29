@@ -5,6 +5,7 @@ import { Clock, DollarSign, Smile, Shield } from "lucide-react";
 import { PortableText } from "@portabletext/react";
 type BenefitSectionProps = {
   data: {
+    enabled:boolean,
     title: string;
     introText: string;
     features: {
@@ -20,6 +21,7 @@ type BenefitSectionProps = {
 };
 
 export function BenefitsSection({ data }: BenefitSectionProps) {
+    if (!data.enabled) return null;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const { title, introText, features, seeTheDifference } = data;
@@ -44,16 +46,17 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
       },
     },
   };
-
   const serializers = {
     marks: {
-      purple: ({ children }) => (
+      purple: ({ children }: { children: React.ReactNode }) => (
         <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
           {children}
         </span>
       ),
-      strong: ({ children }) => <strong>{children}</strong>,
-      break: ({ children }) => (
+      strong: ({ children }: { children: React.ReactNode }) => (
+        <strong>{children}</strong>
+      ),
+      break: ({ children }: { children: React.ReactNode }) => (
         <>
           {children}
           <br />
@@ -93,12 +96,12 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
           >
             {features?.map((feature, index) => (
               <motion.div
-                key={feature.title}
+                key={feature.title || index}
                 variants={itemVariants}
                 className="flex gap-4"
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}
               >
-                <div className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="bg-purple-100 dark:bg-purple-900/30 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 custom-div">
                   {/* Render SVG icon dynamically */}
                   <div
                     dangerouslySetInnerHTML={{
@@ -133,7 +136,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
                 <ul className="space-y-3 text-white">
                   {seeTheDifference.bulletPoints?.map((point, index) => (
                     <li key={index} className="flex items-center gap-2">
-                      <div className="bg-white/20 rounded-full p-1">
+                      <div className="bg-white/20 rounded-full p-1 custom-div">
                         <svg
                           className="h-4 w-4 text-white"
                           fill="none"
@@ -153,6 +156,28 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
                   ))}
                 </ul>
               </div>
+              <motion.div
+                className="absolute bottom-0 left-0 w-40 h-40 bg-purple-400 rounded-full opacity-20 z-0 "
+                animate={{
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "reverse",
+                }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 w-64 h-64 bg-purple-500 rounded-full opacity-30 z-0"
+                animate={{
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "reverse",
+                }}
+              />
             </div>
           </motion.div>
         </div>

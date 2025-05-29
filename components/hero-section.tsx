@@ -18,6 +18,7 @@ export interface Cta {
 }
 
 export interface HeroSectionProps {
+  enabled: boolean;
   title: string;
   subtitle: string;
   chatPreview: ChatMessage[];
@@ -26,6 +27,7 @@ export interface HeroSectionProps {
   svgIcon: string;
 }
 export function HeroSection({
+  enabled,
   title,
   subtitle,
   chatPreview,
@@ -33,24 +35,23 @@ export function HeroSection({
   secondaryCta,
   svgIcon,
 }: HeroSectionProps) {
-  
-const serializers = {
-  marks: {
-    purple: ({ children }) => (
-      <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
-        {children}
-      </span>
-    ),
-    strong: ({ children }) => <strong>{children}</strong>,
-    break: ({ children }) => (
-      <>
-        {children}
-        <br />
-      </>
-    ),
-  },
-};
-
+  if (!enabled) return null;
+  const serializers = {
+    marks: {
+      purple: ({ children }) => (
+        <span style={{ color: "rgb(147 51 234 / var(--tw-text-opacity, 1))" }}>
+          {children}
+        </span>
+      ),
+      strong: ({ children }) => <strong>{children}</strong>,
+      break: ({ children }) => (
+        <>
+          {children}
+          <br />
+        </>
+      ),
+    },
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },

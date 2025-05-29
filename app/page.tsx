@@ -9,14 +9,28 @@ import { PricingSection } from "@/components/pricing-section";
 import { CtaSection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { client } from "@/lib/sanityClient";
-
+import { HeroSection2 } from "@/components/hero-section2";
+import { Feather } from "lucide-react";
 type HeroData = {
+  enabled: boolean;
   title: string;
   subtitle: string;
   chatPreview: { sender: string; text: string }[];
   primaryCta: { label: string; url: string };
   secondaryCta: { label: string; url: string };
   svgIcon: string;
+};
+
+type HeroData2 = {
+  enabled: boolean;
+  title: string;
+  subtitle: string;
+  primaryCta: { label: string; url: string };
+  secondaryCta: {
+    label: string;
+    rexAgentImage?: { asset: { url: string } };
+  };
+  video?: string;
 };
 
 type Feature = {
@@ -26,11 +40,13 @@ type Feature = {
 };
 
 type FeaturesData = {
+  enabled: boolean;
   sectionTitle: string;
   sectionSubtitle: string;
   features: Feature[];
 };
 type TestimonialsData = {
+  enabled: boolean;
   sectionTitle: string;
   sectionSubtitle: string;
   testimonials: TestimonialData[];
@@ -44,6 +60,7 @@ type BottomCallout = {
 };
 
 type CtaData = {
+  enabled: boolean;
   title: string;
   subtitle: string;
   primaryCta: { label: string; url: string };
@@ -74,6 +91,7 @@ type FooterData = {
 };
 
 type BenefitSectionData = {
+  enabled: boolean;
   title: string;
   introText: string;
   features: {
@@ -86,7 +104,6 @@ type BenefitSectionData = {
     bulletPoints: string[];
   };
 };
-
 export default function Home() {
   const [hero, setHero] = useState<HeroData | null>(null);
   const [featuresData, setFeaturesData] = useState<FeaturesData | null>(null);
@@ -100,13 +117,15 @@ export default function Home() {
   const [footerData, setFooterData] = useState<FooterData | null>(null);
   const [benefitSectionData, setBenefitSectionData] =
     useState<BenefitSectionData | null>(null);
-  console.log(hero, "hero");
+  const [hero2, setHero2] = useState<HeroData2 | null>(null);
+
   useEffect(() => {
     // 1. Fetch Hero
     client
       .fetch<HeroData>(
         `
         *[_type=='heroSection'][0]{
+         enabled,
           title,
           subtitle,
           svgIcon,
@@ -119,17 +138,49 @@ export default function Home() {
       .then(setHero)
       .catch(console.error);
 
+    // Fetch heroSection2 data
+    client
+      .fetch<HeroData2>(
+        `
+      *[_type=='heroSection1'][0] {
+        enabled,
+        title,
+        subtitle,
+        primaryCta {
+          label,
+          url
+        },
+        secondaryCta {
+          label,
+          rexAgentImage {
+            asset -> {
+              url
+            }
+          }
+        },
+        video {
+    asset-> {
+      url
+    }
+  }
+      }
+    `
+      )
+      .then(setHero2)
+      .catch(console.error);
+
     // 2. Fetch Features
     client
       .fetch<FeaturesData>(
         `
     *[_type=='featuresSection'][0]{
+     enabled,
       sectionTitle,
       sectionSubtitle,
       features[] {
         title,
         description,
-        svgIcon // Make sure you're fetching the svgIcon field from Sanity
+        svgIcon 
       }
     }
   `
@@ -160,6 +211,7 @@ export default function Home() {
       .fetch<TestimonialsData>(
         `
   *[_type=='testimonialsSection'][0]{
+  enabled,
     sectionTitle,
     sectionSubtitle,
     testimonials[]{
@@ -178,6 +230,7 @@ export default function Home() {
       .fetch<PricingSectionData & { bottomCallout: BottomCallout }>(
         `
     *[_type=='pricingSection'][0]{
+    enabled,
       sectionTitle,
       sectionSubtitle,
       toggleLabels{left, right},
@@ -212,6 +265,7 @@ export default function Home() {
       .fetch<CtaData>(
         `
         *[_type=='ctaSection'][0]{
+        enabled,
           title,
           subtitle,
           primaryCta{label, url},
@@ -232,6 +286,7 @@ export default function Home() {
       .fetch<BenefitSectionData>(
         `
     *[_type=='BenefitSection'][0]{
+    enabled,
       title,
       introText,
       features[] {
@@ -296,7 +351,8 @@ export default function Home() {
     !testimonialsData ||
     !benefitSectionData ||
     !pricingData ||
-    !ctaData
+    !ctaData ||
+    !hero2
   ) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -309,37 +365,58 @@ export default function Home() {
     <div className="min-h-screen bg-white dark:bg-gray-950">
       <Header data={headerData} />
       <main>
-        <HeroSection
-          title={hero.title}
-          subtitle={hero.subtitle}
-          chatPreview={hero.chatPreview}
-          primaryCta={hero.primaryCta}
-          secondaryCta={hero.secondaryCta}
-          svgIcon={hero.svgIcon}
-        />
+        {hero2?.enabled && (
+          <HeroSection2
+            enabled={hero2.enabled}
+            title={hero2.title}
+            subtitle={hero2.subtitle}
+            primaryCta={hero2.primaryCta}
+            secondaryCta={hero2.secondaryCta}
+            video={hero2.video}
+          />
+        )}
+        {hero?.enabled && (
+          <HeroSection
+            enabled={hero.enabled}
+            title={hero.title}
+            subtitle={hero.subtitle}
+            chatPreview={hero.chatPreview}
+            primaryCta={hero.primaryCta}
+            secondaryCta={hero.secondaryCta}
+            svgIcon={hero.svgIcon}
+          />
+        )}
 
         {/* pass your fetched CMS data as props */}
-        <FeaturesSection
-          sectionTitle={featuresData.sectionTitle}
-          sectionSubtitle={featuresData.sectionSubtitle}
-          features={featuresData.features}
-        />
-
-        <BenefitsSection data={benefitSectionData} />
-        <TestimonialsSection
-          sectionTitle={testimonialsData.sectionTitle}
-          sectionSubtitle={testimonialsData.sectionSubtitle}
-          testimonials={testimonialsData.testimonials}
-        />
-        <PricingSection
-          sectionTitle={pricingData.sectionTitle}
-          sectionSubtitle={pricingData.sectionSubtitle}
-          toggleLabels={pricingData.toggleLabels}
-          toggleSubtext={pricingData.toggleSubtext}
-          plans={pricingData.plans}
-          bottomCallout={pricingData.bottomCallout}
-        />
-        {ctaData && (
+        {featuresData?.enabled && (
+          <FeaturesSection
+            enabled={featuresData.enabled}
+            sectionTitle={featuresData.sectionTitle}
+            sectionSubtitle={featuresData.sectionSubtitle}
+            features={featuresData.features}
+          />
+        )}
+        {benefitSectionData?.enabled && (
+          <BenefitsSection data={benefitSectionData} />
+        )}
+        {testimonialsData?.enabled && (
+          <TestimonialsSection
+            sectionTitle={testimonialsData.sectionTitle}
+            sectionSubtitle={testimonialsData.sectionSubtitle}
+            testimonials={testimonialsData.testimonials}
+          />
+        )}
+        {pricingData?.enabled && (
+          <PricingSection
+            sectionTitle={pricingData.sectionTitle}
+            sectionSubtitle={pricingData.sectionSubtitle}
+            toggleLabels={pricingData.toggleLabels}
+            toggleSubtext={pricingData.toggleSubtext}
+            plans={pricingData.plans}
+            bottomCallout={pricingData.bottomCallout}
+          />
+        )}
+        {ctaData.enabled && (
           <CtaSection
             title={ctaData.title}
             subtitle={ctaData.subtitle}

@@ -2,8 +2,8 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
-
+import { ChevronDown, ChevronUp, Check, X } from "lucide-react";
+import "../app/globals.css";
 export type Plan = {
   title: string;
   monthlyPrice: number | null;
@@ -29,8 +29,8 @@ export type PricingSectionData = {
   toggleLabels: { left: string; right: string };
   toggleSubtext: string;
   plans: Plan[];
-  bottomCallout: BottomCallout
-}
+  bottomCallout: BottomCallout;
+};
 export function PricingSection({
   sectionTitle,
   sectionSubtitle,
@@ -46,9 +46,9 @@ export function PricingSection({
 
   const toggleTier = (index) => {
     if (expandedTier === index) {
-      setExpandedTier(null); 
+      setExpandedTier(null);
     } else {
-      setExpandedTier(index); 
+      setExpandedTier(index);
     }
   };
 
@@ -68,7 +68,6 @@ export function PricingSection({
   }
 
   return (
-
     <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
@@ -81,7 +80,7 @@ export function PricingSection({
             {sectionTitle}
           </motion.h2>
           <motion.p
-          initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
@@ -90,7 +89,7 @@ export function PricingSection({
           </motion.p>
 
           {/* Billing Toggle */}
-          <div className="inline-flex items-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             <span
               className={`font-medium ${
                 !isYearly
@@ -132,6 +131,16 @@ export function PricingSection({
                 {toggleSubtext}
               </span>
             )}
+            <button className=" text-sm  font-bold text-center py-2 rounded signBtn transition-colors bg-purple-600 text-white hover:bg-purple-700 freeSignUp ">
+              <div className="SigContro">
+                <h5>Sign Up</h5>
+                <p className="text-sm ">
+                  {" "}
+                  10 min on us with all starter<br></br> package features
+                </p>
+              </div>
+              <span className="SignFree">Free</span>
+            </button>
           </div>
         </div>
 
@@ -164,6 +173,11 @@ export function PricingSection({
                   className="md:hidden p-6 cursor-pointer"
                   onClick={() => toggleTier(index)}
                 >
+                    {plan.togglePurplePricing && (
+                    <div className="ribbon ribbon-top-right">
+                      <span>Most Popular</span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center">
                     <div>
                       <h3 className="text-2xl font-bold mb-1">{plan.title}</h3>
@@ -305,6 +319,11 @@ export function PricingSection({
 
                 {/* Desktop view */}
                 <div className="hidden md:flex md:flex-col">
+                  {plan.togglePurplePricing && (
+                    <div className="ribbon ribbon-top-right">
+                      <span>Most Popular</span>
+                    </div>
+                  )}
                   <div className="p-6 flex-grow">
                     <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
                     <div className="flex items-baseline mb-2">
@@ -440,7 +459,7 @@ export function PricingSection({
       </div>
     </section>
 
-        // <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
+    // <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
     //   <div className="container mx-auto px-4">
     //     {/* — Heading & Toggle — */}
     //     <div className="text-center mb-12">
