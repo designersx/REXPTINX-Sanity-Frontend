@@ -215,7 +215,6 @@ export default function Home() {
       .then(setHero2)
       .catch(console.error);
 
-    // 2. Fetch Features
     client
       .fetch<FeaturesData>(
         `*[_type=='featuresSection']{
