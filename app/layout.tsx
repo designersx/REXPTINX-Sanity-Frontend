@@ -94,7 +94,6 @@ export default function RootLayout({
               content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
             />
             <link rel="icon" href={metadata.icons.icon} sizes="any" />
-            {/* <link rel="apple-touch-icon" href={metadata.icons.apple} /> */}
             <meta name="description" content={metadata.description} />
             <meta name="generator" content={metadata.generator} />
             <title>{metadata.title}</title>
