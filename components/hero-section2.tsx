@@ -195,7 +195,7 @@ const serializers = {
                 <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">
-                      <span className="highlight">
+                      <span>
                         <PortableText
                           value={secondaryCta.label}
                           components={serializers}
