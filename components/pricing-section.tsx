@@ -17,13 +17,24 @@ export type Plan = {
   excludedFeatures: string[] | null;
   togglePurplePricing: boolean;
 };
+export type RichTextBlock = {
+  _type: "block";
+  children: Array<{ _type: "span"; text: string; marks: string[] }>;
+  markDefs: any[];
+  style: string;
+};
+export type SignupButton = {
+  label: RichTextBlock[];
+  description: RichTextBlock[];
+  icon?: { asset: { url: string } };
+  url?: string;
+};
 export type BottomCallout = {
   prefix: string;
   linkLabel: string;
   linkUrl: string;
   suffix: string;
 };
-
 export type PricingSectionData = {
   sectionTitle: string;
   sectionSubtitle: string;
@@ -31,6 +42,7 @@ export type PricingSectionData = {
   toggleSubtext: string;
   plans: Plan[];
   bottomCallout: BottomCallout;
+  signupButton?: SignupButton;
 };
 export function PricingSection({
   sectionTitle,
@@ -39,7 +51,9 @@ export function PricingSection({
   toggleSubtext,
   plans,
   bottomCallout,
+  signupButton,
 }: PricingSectionData) {
+  console.log(signupButton, "  signupButton, ");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0 });
   const [isYearly, setIsYearly] = useState(false);
@@ -86,13 +100,13 @@ export function PricingSection({
   return (
     <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4">
-        <div className="flex">
-          <div className="text-center mb-8">
+        <div className="block md:flex">
+          <div className="text-center mb-8 w-full md-1/2 text-right">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
+              className="text-xl md:text-4xl font-bold  dark:text-white mb-4 leading-tight"
             >
               <PortableText value={sectionTitle} components={serializers} />
             </motion.h2>
@@ -106,7 +120,7 @@ export function PricingSection({
             </motion.p>
 
             {/* Billing Toggle */}
-            <div className="flex flex-wrap justify-center items-center gap-4">
+            <div className="flex flex-wrap justify-end items-center gap-4">
               <span
                 className={`font-medium ${
                   !isYearly
@@ -150,37 +164,45 @@ export function PricingSection({
               )}
             </div>
           </div>
-          <div className="text-center mb-8">
-            <div className="flex flex-wrap justify-center items-center gap-4">
-              <div className="inline-flex items-center bg-[#792ef0] text-white rounded-[16px] px-6 py-4 border border-dashed border-white">
-                <div className="flex flex-col text-left">
-                  <span className="text-xl font-bold">Sign up for FREE</span>
+          <div className="text-center mb-8 w-full md-1/2 Leftline">
+            <div
+              className="flex flex-wrap justify-center items-center gap-4"
+              style={{
+                background: "#792ef0",
+                padding: "8px",
+                borderRadius: "18px",
+                display: "inline-block",
+              }}
+            >
+              <div className="inline-flex items-center bg-[#792ef0] text-white rounded-[16px] px-3 py-2 border border-dashed border-white">
+                <div className="flex flex-col text-right">
+                  <span className="text-3xl font-bold">
+                    <PortableText
+                      value={signupButton.label}
+                      components={serializers}
+                    />
+                  </span>
                   <span className="text-sm mt-1">
-                    Includes FREE 10 min + AGENT
-                    <br />+ Starter Package features
+                    <PortableText
+                      value={signupButton.description}
+                      components={serializers}
+                    />
                   </span>
                 </div>
                 <div className="ml-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-12 h-12"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="white"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 16.2a6 6 0 1112 0c0 1.13-.31 2.18-.84 3.08a1.5 1.5 0 01-2.32.4L16.5 18h-3.5l-1.36 1.68a1.5 1.5 0 01-2.32-.4A5.978 5.978 0 019 16.2z"
+                  {signupButton.icon?.asset?.url ? (
+                    <img
+                      style={{ width: "90%" }}
+                      src={signupButton.icon.asset.url}
+                      alt="free-plan"
                     />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 7h.01M15 7h.01M12 7h.01"
+                  ) : (
+                    <img
+                      style={{ width: "90%" }}
+                      src="images/Free-plan.svg"
+                      alt="free-plan"
                     />
-                  </svg>
+                  )}
                 </div>
               </div>
             </div>
@@ -255,7 +277,7 @@ export function PricingSection({
                     <p
                       className={`mt-3 ${
                         plan.togglePurplePricing
-                          ? "text-[#6524EB] opacity-80"
+                          ? "text-white opacity-80"
                           : "text-gray-600 dark:text-gray-300"
                       }`}
                     >
@@ -268,7 +290,7 @@ export function PricingSection({
                       <p
                         className={`mb-4 ${
                           plan.togglePurplePricing
-                            ? "text-[#6524EB] opacity-80"
+                            ? "text-white opacity-80"
                             : "text-gray-600 dark:text-gray-300"
                         }`}
                       >
@@ -501,211 +523,5 @@ export function PricingSection({
         </motion.div>
       </div>
     </section>
-
-    // <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
-    //   <div className="container mx-auto px-4">
-    //     {/* — Heading & Toggle — */}
-    //     <div className="text-center mb-12">
-    //       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-    //         {sectionTitle}
-    //       </h2>
-    //       <p className="text-gray-600 dark:text-gray-300 mb-6">
-    //         {sectionSubtitle}
-    //       </p>
-
-    //       <div className="inline-flex items-center gap-4">
-    //         <span
-    //           className={`font-medium ${
-    //             !isYearly
-    //               ? "text-purple-600 dark:text-purple-400"
-    //               : "text-gray-600 dark:text-gray-400"
-    //           }`}
-    //         >
-    //           {toggleLabels.left}
-    //         </span>
-    //         <button
-    //           aria-label="Toggle billing"
-    //           onClick={() => setIsYearly((y) => !y)}
-    //           className="relative w-14 h-7"
-    //         >
-    //           <div
-    //             className={`absolute inset-0 rounded-full transition-colors ${
-    //               isYearly
-    //                 ? "bg-purple-600 dark:bg-purple-500"
-    //                 : "bg-gray-300 dark:bg-gray-700"
-    //             }`}
-    //           />
-    //           <motion.div
-    //             className="absolute w-5 h-5 bg-white rounded-full top-1 left-1 shadow"
-    //             animate={{ x: isYearly ? 28 : 0 }}
-    //             transition={{ type: "spring", stiffness: 500, damping: 30 }}
-    //           />
-    //         </button>
-    //         <span
-    //           className={`font-medium ${
-    //             isYearly
-    //               ? "text-purple-600 dark:text-purple-400"
-    //               : "text-gray-600 dark:text-gray-400"
-    //           }`}
-    //         >
-    //           {toggleLabels.right}
-    //         </span>
-    //         {toggleSubtext && (
-    //           <span className="ml-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-medium px-2.5 py-0.5 rounded">
-    //             {toggleSubtext}
-    //           </span>
-    //         )}
-    //       </div>
-    //     </div>
-
-    //     {/* — Plans Grid — */}
-    //     <motion.div
-    //       ref={ref}
-    //       initial={{ opacity: 0, y: 30 }}
-    //       animate={isInView ? { opacity: 1, y: 0 } : {}}
-    //       transition={{ duration: 0.6 }}
-    //       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-    //     >
-    //       {plans?.map((plan, idx) => {
-    //         const priceLabel = formatPrice(plan);
-    //         const savings = calcSavings(plan);
-
-    //         const pricingStyle = plan.togglePurplePricing
-    //           ? { backgroundColor: "" }
-    //           : {};
-
-    //         const featureStyle = plan.togglePurplePricing
-    //           ? { backgroundColor: "#8028cd" }
-    //           : {};
-
-    //         return (
-    //           <motion.div
-    //             key={idx}
-    //             whileHover={{ y: -5 }}
-    //             className={`flex flex-col h-full rounded-xl overflow-hidden shadow ${
-    //               plan.togglePurplePricing
-    //                 ? "bg-purple-600 text-white"
-    //                 : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
-    //             }`}
-    //             style={pricingStyle}
-    //           >
-    //             {/* — Card Header — */}
-    //             <div className="p-6">
-    //               <h3 className="text-2xl font-bold mb-1">{plan.title}</h3>
-    //               <div className="flex items-baseline mb-1">
-    //                 <span className="text-4xl font-bold">{priceLabel}</span>
-    //                 <span className="ml-2 opacity-80">{plan.unitLabel}</span>
-    //               </div>
-    //               {isYearly && savings > 0 && (
-    //                 <div className="text-sm font-medium mb-3 text-yellow-500">
-    //                   Save {savings}% compared to monthly
-    //                 </div>
-    //               )}
-    //               <p
-    //                 className={`mb-6 ${
-    //                   plan.togglePurplePricing
-    //                     ? "opacity-80 text-purple-100"
-    //                     : "text-gray-600 dark:text-gray-300"
-    //                 }`}
-    //               >
-    //                 {plan.description}
-    //               </p>
-
-    //               <a
-    //                 href={plan.ctaUrl || "#"}
-    //                 className={`block w-full text-center py-2 rounded transition-colors ${
-    //                   plan.togglePurplePricing
-    //                     ? "bg-white text-purple-600 hover:bg-gray-100"
-    //                     : "bg-purple-600 text-white hover:bg-purple-700"
-    //                 }`}
-    //               >
-    //                 {plan.ctaLabel}
-    //               </a>
-    //             </div>
-
-    //             {/* — Feature Lists — */}
-    //             <div
-    //               className={`p-6 flex-grow ${
-    //                 plan.togglePurplePricing
-    //                   ? "bg-purple-600 text-white"
-    //                   : "bg-gray-50 dark:bg-gray-900/50 text-gray-900 dark:text-gray-100"
-    //               }`}
-    //               style={featureStyle}
-    //             >
-    //               <p className="font-medium mb-2">What’s included:</p>
-    //               <ul className="space-y-2 mb-4">
-    //                 {plan.includedFeatures?.map((feat, i) => (
-    //                   <li
-    //                     key={i}
-    //                     className={`flex items-center gap-2 ${
-    //                       plan.togglePurplePricing
-    //                         ? "text-white"
-    //                         : "text-gray-600 dark:text-gray-300"
-    //                     }`}
-    //                   >
-    //                     <Check
-    //                       className={`h-5 w-5 ${
-    //                         plan.togglePurplePricing
-    //                           ? "text-white"
-    //                           : "text-purple-600 dark:text-purple-400"
-    //                       }`}
-    //                     />
-    //                     <span>{feat}</span>
-    //                   </li>
-    //                 ))}
-    //               </ul>
-
-    //               {!!plan.excludedFeatures?.length && (
-    //                 <>
-    //                   <p className="font-medium mb-2">Not included:</p>
-    //                   <ul className="space-y-2">
-    //                     {plan.excludedFeatures?.map((feat, i) => (
-    //                       <li
-    //                         key={i}
-    //                         className={`flex items-center gap-2 opacity-60 ${
-    //                           plan.togglePurplePricing
-    //                             ? "text-white"
-    //                             : "text-gray-600 dark:text-gray-300"
-    //                         }`}
-    //                       >
-    //                         <X
-    //                           className={`h-5 w-5 ${
-    //                             plan.togglePurplePricing
-    //                               ? "text-white/80"
-    //                               : "text-gray-500 dark:text-gray-400"
-    //                           }`}
-    //                         />
-    //                         <span>{feat}</span>
-    //                       </li>
-    //                     ))}
-    //                   </ul>
-    //                 </>
-    //               )}
-    //             </div>
-    //           </motion.div>
-    //         );
-    //       })}
-    //     </motion.div>
-
-    //     {/* — Bottom Callout — */}
-    //     <motion.div
-    //       initial={{ opacity: 0, y: 20 }}
-    //       animate={isInView ? { opacity: 1, y: 0 } : {}}
-    //       transition={{ duration: 0.5, delay: 0.6 }}
-    //       className="mt-12 text-center"
-    //     >
-    //       <p className="text-gray-600 dark:text-gray-300">
-    //         {bottomCallout.prefix}{" "}
-    //         <a
-    //           href={bottomCallout.linkUrl}
-    //           className="text-purple-600 dark:text-purple-400 font-medium hover:underline"
-    //         >
-    //           {bottomCallout.linkLabel}
-    //         </a>{" "}
-    //         {bottomCallout.suffix}
-    //       </p>
-    //     </motion.div>
-    //   </div>
-    // </section>
   );
 }

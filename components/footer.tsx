@@ -47,7 +47,7 @@ export function Footer({ footerData }: FooterProps) {
                   alt="rexpt - The AI Receptionist Service"
                   width={150}
                   height={50}
-                  className="h-10 w-auto brightness-0 invert"
+                  className="h-10 w-auto"
                 />
               </Link>
             )}

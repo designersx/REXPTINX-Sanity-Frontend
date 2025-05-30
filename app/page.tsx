@@ -10,7 +10,7 @@ import { CtaSection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { client } from "@/lib/sanityClient";
 import { HeroSection2 } from "@/components/hero-section2";
-import { Feather } from "lucide-react";
+import CustomSection from "@/components/Custom-section";
 type HeroData = {
   enabled: boolean;
   title: string;
@@ -25,6 +25,7 @@ type HeroData2 = {
   enabled: boolean;
   title: string;
   subtitle: string;
+  backgroundColor?: "#ffffff" | "#f9fafb";
   primaryCta: { label: string; url: string };
   secondaryCta: {
     label: string;
@@ -54,6 +55,31 @@ type TestimonialsData = {
   sectionTitle: string;
   sectionSubtitle: string;
   testimonials: TestimonialData[];
+};
+
+type RichTextBlock = {
+  _type: "block";
+  children: Array<{ _type: "span"; text: string; marks: string[] }>;
+  markDefs: any[];
+  style: string;
+};
+
+type SignupButton = {
+  label: RichTextBlock[];
+  description: RichTextBlock[];
+  icon?: { asset: { url: string } };
+  url?: string;
+};
+
+type PricingSectionData = {
+  enabled: boolean;
+  sectionTitle: string;
+  sectionSubtitle: string;
+  toggleLabels: { left: string; right: string };
+  toggleSubtext: string;
+  plans: any[]; // your existing planItem type here
+  bottomCallout: BottomCallout;
+  signupButton?: SignupButton;
 };
 
 type BottomCallout = {
@@ -150,6 +176,7 @@ export default function Home() {
       enabled,
       title,
       subtitle,
+       backgroundColor,
       primaryCta {
         label,
         url
@@ -262,7 +289,13 @@ export default function Home() {
         linkLabel,
         linkUrl,
         suffix
-      }
+      },
+       signupButton {
+       label[]{ ..., markDefs[] }, 
+       description[]{ ..., markDefs[] },
+       icon{ asset->{url} },
+       url
+     }
     }
     `
       )
@@ -384,6 +417,7 @@ export default function Home() {
             secondaryCta={hero2.secondaryCta}
             video={hero2.video}
             videoThumbnail={hero2.videoThumbnail}
+            backgroundColor={hero2.backgroundColor}
           />
         )}
         {hero?.enabled && (
@@ -425,8 +459,10 @@ export default function Home() {
             toggleSubtext={pricingData.toggleSubtext}
             plans={pricingData.plans}
             bottomCallout={pricingData.bottomCallout}
+            signupButton={pricingData.signupButton}
           />
         )}
+        <CustomSection />
         {ctaData.enabled && (
           <CtaSection
             title={ctaData.title}
