@@ -177,7 +177,7 @@ export default function Home() {
       .then(setHero)
       .catch(console.error);
 
-    // Fetch heroSection2
+    // Fetch heroSection2 data
     client
       .fetch<HeroData2>(
         `
@@ -215,6 +215,7 @@ export default function Home() {
       .then(setHero2)
       .catch(console.error);
 
+    // 2. Fetch Features
     client
       .fetch<FeaturesData>(
         `*[_type=='featuresSection']{
@@ -257,7 +258,7 @@ export default function Home() {
     client
       .fetch<TestimonialsData>(
         `
-  *[_type=='testimonialsSection' && enabled==true][0]{
+  *[_type=='testimonialsSection'][0]{
   enabled,
   backgroundColor,
     sectionTitle,
@@ -469,7 +470,6 @@ export default function Home() {
           {/* {featuresData?.map((section, index) => ( */}
           {featuresData?.enabled && (
             <FeaturesSection
-              key={index}
               enabled={section.enabled}
               sectionTitle={section.sectionTitle}
               sectionSubtitle={section.sectionSubtitle}
