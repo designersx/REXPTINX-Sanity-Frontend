@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Clock, DollarSign, Smile, Shield } from "lucide-react";
 import { PortableText } from "@portabletext/react";
 type BenefitSectionProps = {
   data: {
