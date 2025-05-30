@@ -7,7 +7,7 @@ type HeroSection2Props = {
   enabled: boolean;
   title: string;
   subtitle: string;
-  backgroundColor?: "#ffffff" | "#f9fafb";
+  backgroundColor?: string;
   primaryCta: { label: string; url: string };
   secondaryCta: {
     label: string;
@@ -29,9 +29,8 @@ export function HeroSection2(props: HeroSection2Props) {
     secondaryCta,
     video,
     videoThumbnail,
-    backgroundColor,
+    // backgroundColor = "#ffffff00",
   } = props;
-  console.log(backgroundColor, "backgroundColor");
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -73,13 +72,26 @@ export function HeroSection2(props: HeroSection2Props) {
     },
   };
 
-  const runScript = () => {
-    console.log("hello");
-    const script = document.createElement("script");
-    script.src = "https://cheery-concha-c34d2b.netlify.app";
-    script.async = true;
-    document.body.appendChild(script);
+const runScript = () => {
+  const script = document.createElement("script");
+  script.src = "https://cheery-concha-c34d2b.netlify.app/index.html";  // change to actual JS file URL
+  script.async = true;
+
+  script.onload = () => {
+    console.log("Script loaded successfully");
   };
+
+  script.onerror = (error) => {
+    console.error("Error loading script:", error);
+  };
+
+  document.body.appendChild(script);
+
+  return () => {
+    document.body.removeChild(script);
+  };
+};
+
 
   const serializers = {
     marks: {
@@ -109,7 +121,9 @@ export function HeroSection2(props: HeroSection2Props) {
           <img src="images/Ellipse 11.png" alt="Ellipse 11" />
         </div>
       </div>
-      <section className="pt-28 md:pt-32 pb-16 md:pb-15 mb-5 md:mb-5 overflow-hidden bg-transparent dark:bg-gray-950">
+      <section
+        className="pt-28 md:pt-32 pb-16 md:pb-15  overflow-hidden bg-transparent dark:bg-gray-950"
+      >
         <div className="container mx-auto px-4">
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center"
@@ -134,7 +148,7 @@ export function HeroSection2(props: HeroSection2Props) {
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row gap-4 items-center"
               >
-                <Button
+                {/* <Button
                   className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white text-base md:text-lg px-6 md:px-8 py-5 md:py-6 items-center text-start"
                   style={{ height: "77px", lineHeight: "normal" }}
                   onClick={() => {
@@ -150,9 +164,29 @@ export function HeroSection2(props: HeroSection2Props) {
                       />
                     </p>
                   </div>
-                </Button>
+                </Button> */}
+                <div className=" HeroSectionButton">
+                  <div
+                    className="flex flex-wrap justify-center items-center gap-4 inline-block p-2 rounded-[80px]"
+                    style={{ background: "#6524eb" }}
+                  >
+                    <div className="inline-flex items-center bg-[#6524eb] text-white rounded-[80px] px-6 py-0.5 border border-dashed border-white">
+                      <div className="flex flex-col text-start">
+                        <span className="text FreeTrial">
+                          <PortableText
+                            value={primaryCta.label}
+                            components={serializers}
+                          />
+                        </span>
+                        {/* <span className="text-sm ">
+                          Get Your AI Receptionist
+                        </span> */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <div className="call-rex-button">
+                <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">
                       <span className="highlight">
@@ -184,16 +218,23 @@ export function HeroSection2(props: HeroSection2Props) {
                   src={video?.asset?.url || "/images/videoplayback.mp4"}
                   poster={videoThumbnail?.asset?.url || "/images/thumbnail.png"}
                   onClick={handlePlayPause}
-                  className="w-full h-full cursor-pointer"
-                  style={{ borderRadius: "5px" }}
+                  className="w-full h-full cursor-pointer rounded"
                 />
                 {!isPlaying && (
                   <button
                     onClick={handlePlayPause}
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#6524EB] hover:bg-[#5a1fc0] text-white rounded-full p-5 focus:outline-none play-video"
-                    aria-label="Play video"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
                   >
-                    ▶
+                    <div className="play-video">
+                      <svg
+                        width="24"
+                        height="24"
+                        fill="white"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
                   </button>
                 )}
               </div>

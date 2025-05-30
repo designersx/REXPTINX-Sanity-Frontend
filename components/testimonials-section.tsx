@@ -9,6 +9,7 @@ type Props = {
   sectionTitle: string;
   sectionSubtitle: string;
   testimonials: TestimonialData[];
+  backgroundColor?: string;
 };
 const serializers = {
   marks: {
@@ -29,6 +30,7 @@ export function TestimonialsSection({
   sectionTitle,
   sectionSubtitle,
   testimonials,
+  backgroundColor = "#f9fafb",
 }: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -39,7 +41,11 @@ export function TestimonialsSection({
     setActiveIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section
+      id="testimonials"
+      className="py-20 bg-gray-50 dark:bg-gray-900"
+      style={{ backgroundColor: backgroundColor }}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div

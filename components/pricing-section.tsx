@@ -37,6 +37,7 @@ export type BottomCallout = {
 };
 export type PricingSectionData = {
   sectionTitle: string;
+  backgroundColor?: string;
   sectionSubtitle: string;
   toggleLabels: { left: string; right: string };
   toggleSubtext: string;
@@ -52,8 +53,8 @@ export function PricingSection({
   plans,
   bottomCallout,
   signupButton,
+  backgroundColor = "#ffffff",
 }: PricingSectionData) {
-  console.log(signupButton, "  signupButton, ");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0 });
   const [isYearly, setIsYearly] = useState(false);
@@ -98,7 +99,11 @@ export function PricingSection({
   };
 
   return (
-    <section id="pricing" className="py-20 bg-white dark:bg-gray-950">
+    <section
+      id="pricing"
+      className="py-20 bg-white dark:bg-gray-950"
+      style={{ backgroundColor: backgroundColor }}
+    >
       <div className="container mx-auto px-4">
         <div className="block md:flex">
           <div className="text-center mb-8 w-full md-1/2 text-right">
@@ -229,7 +234,7 @@ export function PricingSection({
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className={`rounded-xl overflow-hidden h-full flex flex-col ${
                   plan.togglePurplePricing
-                    ? "bg-[#6524EB] text-white shadow-xl transform md:-translate-y-4"
+                    ? "bg-[#5a1fc0] text-white shadow-xl transform md:-translate-y-4 "
                     : "bg-white dark:bg-white-800 border border-white-200 dark:border-white-700 text-white-900 dark:text-white-100"
                 }`}
               >

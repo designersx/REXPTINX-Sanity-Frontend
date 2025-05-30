@@ -13,7 +13,7 @@ import { Lato } from "next/font/google";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
+  display: "swap"
 });
 
 // Load Lato font with specific weights (400 and 700 in this case)
@@ -21,7 +21,7 @@ const lato = Lato({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-lato",
-  display: "swap",
+  display: "swap"
 });
 // Initialize Sanity Client
 const client = sanityClient({
@@ -29,6 +29,7 @@ const client = sanityClient({
   dataset: "production",
   apiVersion: "2025-05-26",
   useCdn: false,
+  
 });
 
 // Fetch site metadata from Sanity

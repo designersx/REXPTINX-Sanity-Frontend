@@ -6,6 +6,7 @@ import { PortableText } from "@portabletext/react";
 type BenefitSectionProps = {
   data: {
     enabled:boolean,
+    backgroundColor?: string;
     title: string;
     introText: string;
     features: {
@@ -24,7 +25,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
     if (!data.enabled) return null;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const { title, introText, features, seeTheDifference } = data;
+  const { title, introText, features, seeTheDifference ,backgroundColor = '#ffffff'} = data;
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -65,7 +66,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
     },
   };
   return (
-    <section id="benefits" className="py-20 bg-white dark:bg-gray-950">
+    <section id="benefits" className="py-20 bg-white dark:bg-gray-950"       style={{ backgroundColor: backgroundColor }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -123,9 +124,9 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 10 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="relative"
           >
             <div className="relative bg-gradient-to-br from-[#6524EB] to-[#6524EB] rounded-2xl p-8 shadow-xl overflow-hidden">

@@ -13,6 +13,7 @@ import { HeroSection2 } from "@/components/hero-section2";
 import CustomSection from "@/components/Custom-section";
 type HeroData = {
   enabled: boolean;
+  backgroundColor?: string;
   title: string;
   subtitle: string;
   chatPreview: { sender: string; text: string }[];
@@ -25,7 +26,6 @@ type HeroData2 = {
   enabled: boolean;
   title: string;
   subtitle: string;
-  backgroundColor?: "#ffffff" | "#f9fafb";
   primaryCta: { label: string; url: string };
   secondaryCta: {
     label: string;
@@ -48,10 +48,12 @@ type FeaturesData = {
   enabled: boolean;
   sectionTitle: string;
   sectionSubtitle: string;
+  backgroundColor?: string;
   features: Feature[];
 };
 type TestimonialsData = {
   enabled: boolean;
+  backgroundColor?: string;
   sectionTitle: string;
   sectionSubtitle: string;
   testimonials: TestimonialData[];
@@ -73,6 +75,7 @@ type SignupButton = {
 
 type PricingSectionData = {
   enabled: boolean;
+  backgroundColor?: string;
   sectionTitle: string;
   sectionSubtitle: string;
   toggleLabels: { left: string; right: string };
@@ -103,6 +106,7 @@ type CtaData = {
 };
 
 type FooterData = {
+  enabled: boolean;
   footerLogo: { asset: { url: string } } | null;
   sectionTitle: string;
   socialLinks: { platform: string; url: string; icon: string }[];
@@ -122,6 +126,7 @@ type FooterData = {
 
 type BenefitSectionData = {
   enabled: boolean;
+  backgroundColor?: string;
   title: string;
   introText: string;
   features: {
@@ -134,7 +139,10 @@ type BenefitSectionData = {
     bulletPoints: string[];
   };
 };
+
 export default function Home() {
+  const [customSectionData, setCustomSectionData] = useState(null);
+
   const [hero, setHero] = useState<HeroData | null>(null);
   const [featuresData, setFeaturesData] = useState<FeaturesData | null>(null);
   const [headerData, setHeaderData] = useState<HeaderData | null>(null);
@@ -156,6 +164,7 @@ export default function Home() {
         `
         *[_type=='heroSection'][0]{
          enabled,
+        backgroundColor,
           title,
           subtitle,
           svgIcon,
@@ -209,9 +218,9 @@ export default function Home() {
     // 2. Fetch Features
     client
       .fetch<FeaturesData>(
-        `
-    *[_type=='featuresSection'][0]{
+        `*[_type=='featuresSection' && enabled == true]{
      enabled,
+       backgroundColor,
       sectionTitle,
       sectionSubtitle,
       features[] {
@@ -231,7 +240,9 @@ export default function Home() {
       .fetch<HeaderData>(
         `
         *[_type=='header'][0]{
+
           "logoUrl": logo.asset->url,
+          enabled,
           logoAlt,
           tagline,
           navLinks[]{label, href},
@@ -247,8 +258,9 @@ export default function Home() {
     client
       .fetch<TestimonialsData>(
         `
-  *[_type=='testimonialsSection'][0]{
+  *[_type=='testimonialsSection' && enabled==true][0]{
   enabled,
+  backgroundColor,
     sectionTitle,
     sectionSubtitle,
     testimonials[]{
@@ -268,6 +280,7 @@ export default function Home() {
         `
     *[_type=='pricingSection'][0]{
     enabled,
+     backgroundColor,
       sectionTitle,
       sectionSubtitle,
       toggleLabels{left, right},
@@ -328,8 +341,9 @@ export default function Home() {
     client
       .fetch<BenefitSectionData>(
         `
-    *[_type=='BenefitSection'][0]{
+      *[_type=='BenefitSection' && enabled == true]{
     enabled,
+    backgroundColor,
       title,
       introText,
       features[] {
@@ -348,9 +362,29 @@ export default function Home() {
       .catch(console.error);
 
     client
+      .fetch(
+        `
+  *[_type == "customIntegrationSection"][0]{
+    enabled,
+    backgroundColor,
+    title,
+    subtitle,
+    lottieUrl,
+    features[]{
+      text,
+      svgIcon
+    }
+  }
+`
+      )
+      .then(setCustomSectionData)
+      .catch(console.error);
+
+    client
       .fetch<FooterData>(
         `
       *[_type=='footerSection'][0]{
+      enabled,
         footerLogo {
           asset->{
             url
@@ -406,7 +440,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
-      <Header data={headerData} />
+      {headerData?.enabled && <Header data={headerData} />}
       <main>
         {hero2?.enabled && (
           <HeroSection2
@@ -417,7 +451,6 @@ export default function Home() {
             secondaryCta={hero2.secondaryCta}
             video={hero2.video}
             videoThumbnail={hero2.videoThumbnail}
-            backgroundColor={hero2.backgroundColor}
           />
         )}
         {hero?.enabled && (
@@ -429,26 +462,39 @@ export default function Home() {
             primaryCta={hero.primaryCta}
             secondaryCta={hero.secondaryCta}
             svgIcon={hero.svgIcon}
+            backgroundColor={hero.backgroundColor}
           />
         )}
 
-        {/* pass your fetched CMS data as props */}
-        {featuresData?.enabled && (
+        {featuresData?.map((section, index) => (
           <FeaturesSection
-            enabled={featuresData.enabled}
-            sectionTitle={featuresData.sectionTitle}
-            sectionSubtitle={featuresData.sectionSubtitle}
-            features={featuresData.features}
+            key={index}
+            enabled={section.enabled}
+            sectionTitle={section.sectionTitle}
+            sectionSubtitle={section.sectionSubtitle}
+            features={section.features}
+            backgroundColor={section.backgroundColor}
+          />
+        ))}
+        {customSectionData?.enabled && (
+          <CustomSection
+            enabled={customSectionData.enabled}
+            backgroundColor={customSectionData.backgroundColor}
+            title={customSectionData.title}
+            subtitle={customSectionData.subtitle}
+            lottieUrl={customSectionData.lottieUrl}
+            features={customSectionData.features}
           />
         )}
-        {benefitSectionData?.enabled && (
-          <BenefitsSection data={benefitSectionData} />
-        )}
+        {benefitSectionData.map((section, idx) => (
+          <BenefitsSection key={idx} data={section} />
+        ))}
         {testimonialsData?.enabled && (
           <TestimonialsSection
             sectionTitle={testimonialsData.sectionTitle}
             sectionSubtitle={testimonialsData.sectionSubtitle}
             testimonials={testimonialsData.testimonials}
+            backgroundColor={testimonialsData.backgroundColor}
           />
         )}
         {pricingData?.enabled && (
@@ -460,9 +506,10 @@ export default function Home() {
             plans={pricingData.plans}
             bottomCallout={pricingData.bottomCallout}
             signupButton={pricingData.signupButton}
+            backgroundColor={pricingData.backgroundColor}
           />
         )}
-        <CustomSection />
+
         {ctaData.enabled && (
           <CtaSection
             title={ctaData.title}
@@ -473,7 +520,7 @@ export default function Home() {
           />
         )}
       </main>
-      <Footer footerData={footerData} />
+      {footerData.enabled && <Footer footerData={footerData} />}
     </div>
   );
 }

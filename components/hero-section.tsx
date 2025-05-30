@@ -9,7 +9,7 @@ import { PortableText } from "@portabletext/react";
 export interface ChatMessage {
   sender: "bot" | "user";
   text: string;
-  svgIcon: string; // SVG Icon for each message
+  svgIcon: string;
 }
 
 export interface Cta {
@@ -19,6 +19,7 @@ export interface Cta {
 
 export interface HeroSectionProps {
   enabled: boolean;
+  backgroundColor?: string;
   title: string;
   subtitle: string;
   chatPreview: ChatMessage[];
@@ -34,14 +35,14 @@ export function HeroSection({
   primaryCta,
   secondaryCta,
   svgIcon,
+  backgroundColor = "#ffffff",
 }: HeroSectionProps) {
+  console.log(backgroundColor, "backgroundColor aarti");
   if (!enabled) return null;
   const serializers = {
     marks: {
       purple: ({ children }) => (
-        <span style={{ color: "#6524EB" }}>
-          {children}
-        </span>
+        <span style={{ color: "#6524EB" }}>{children}</span>
       ),
       strong: ({ children }) => <strong>{children}</strong>,
       break: ({ children }) => (
@@ -78,7 +79,10 @@ export function HeroSection({
   };
 
   return (
-    <section className="pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden bg-white dark:bg-gray-950">
+    <section
+      className="pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden bg-white dark:bg-gray-950"
+      style={{ backgroundColor: backgroundColor }}
+    >
       <div className="container mx-auto px-4">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center"

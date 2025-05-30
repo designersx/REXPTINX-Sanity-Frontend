@@ -22,6 +22,7 @@ type Props = {
   sectionTitle: string;
   sectionSubtitle: string;
   features: Feature[];
+  backgroundColor?: string;
 };
 
 export function FeaturesSection({
@@ -29,6 +30,7 @@ export function FeaturesSection({
   sectionTitle,
   sectionSubtitle,
   features,
+  backgroundColor = "#F9FAFB",
 }: Props) {
   if (!enabled) return null;
   const ref = useRef(null);
@@ -66,6 +68,7 @@ export function FeaturesSection({
     <section
       id="features"
       className="py-20 bg-gray-50 dark:bg-gray-900 relative z-1"
+      style={{ backgroundColor: backgroundColor }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
