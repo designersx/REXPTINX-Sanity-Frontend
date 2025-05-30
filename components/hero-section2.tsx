@@ -93,15 +93,21 @@ const runScript = () => {
 };
 
 
-  const serializers = {
+const serializers = {
     marks: {
       purple: ({ children }) => (
         <span style={{ color: "#6524EB" }}>{children}</span>
       ),
       strong: ({ children }) => <strong>{children}</strong>,
-      break: ({ children }) => <br />,
+      break: ({ children }) => (
+        <>
+          {children}
+          <br />
+        </>
+      ),
     },
   };
+
 
   return (
     <div>

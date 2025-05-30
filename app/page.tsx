@@ -10,7 +10,8 @@ import { CtaSection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { client } from "@/lib/sanityClient";
 import { HeroSection2 } from "@/components/hero-section2";
-import CustomSection from "@/components/Custom-section";
+import dynamic from "next/dynamic";
+const CustomSection = dynamic(() => import("@/components/Custom-section"), { ssr: false });
 type HeroData = {
   enabled: boolean;
   backgroundColor?: string;
@@ -218,7 +219,7 @@ export default function Home() {
     // 2. Fetch Features
     client
       .fetch<FeaturesData>(
-        `*[_type=='featuresSection']{
+        `*[_type=='featuresSection' && enabled==true]{
      enabled,
        backgroundColor,
       sectionTitle,
@@ -341,7 +342,7 @@ export default function Home() {
     client
       .fetch<BenefitSectionData>(
         `
-      *[_type=='BenefitSection']{
+      *[_type=='BenefitSection' && enabled==true]{
     enabled,
     backgroundColor,
       title,
@@ -467,8 +468,7 @@ export default function Home() {
             />
           )}
 
-          {/* {featuresData?.map((section, index) => ( */}
-          {featuresData?.enabled && (
+          {featuresData?.map((section, index) => (
             <FeaturesSection
               enabled={section.enabled}
               sectionTitle={section.sectionTitle}
@@ -476,7 +476,7 @@ export default function Home() {
               features={section.features}
               backgroundColor={section.backgroundColor}
             />
-          )}
+          ))}
           {customSectionData?.enabled && (
             <CustomSection
               enabled={customSectionData.enabled}
@@ -487,8 +487,9 @@ export default function Home() {
               features={customSectionData.features}
             />
           )}
-          {/* {benefitSectionData.map((section, idx) => ( */}
-          {benefitSectionData.enabled && <BenefitsSection data={section} />}
+          {benefitSectionData.map((section, idx) => (
+             <BenefitsSection  key={idx} data={section} />
+            ))}
           {testimonialsData?.enabled && (
             <TestimonialsSection
               sectionTitle={testimonialsData.sectionTitle}
