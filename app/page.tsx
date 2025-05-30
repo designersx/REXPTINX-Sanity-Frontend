@@ -177,7 +177,7 @@ export default function Home() {
       .then(setHero)
       .catch(console.error);
 
-    // Fetch heroSection2 data
+    // Fetch heroSection2
     client
       .fetch<HeroData2>(
         `
