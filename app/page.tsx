@@ -218,7 +218,7 @@ export default function Home() {
     // 2. Fetch Features
     client
       .fetch<FeaturesData>(
-        `*[_type=='featuresSection' && enabled == true]{
+        `*[_type=='featuresSection']{
      enabled,
        backgroundColor,
       sectionTitle,
@@ -341,7 +341,7 @@ export default function Home() {
     client
       .fetch<BenefitSectionData>(
         `
-      *[_type=='BenefitSection' && enabled == true]{
+      *[_type=='BenefitSection']{
     enabled,
     backgroundColor,
       title,
@@ -439,88 +439,90 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      {headerData?.enabled && <Header data={headerData} />}
-      <main>
-        {hero2?.enabled && (
-          <HeroSection2
-            enabled={hero2.enabled}
-            title={hero2.title}
-            subtitle={hero2.subtitle}
-            primaryCta={hero2.primaryCta}
-            secondaryCta={hero2.secondaryCta}
-            video={hero2.video}
-            videoThumbnail={hero2.videoThumbnail}
-          />
-        )}
-        {hero?.enabled && (
-          <HeroSection
-            enabled={hero.enabled}
-            title={hero.title}
-            subtitle={hero.subtitle}
-            chatPreview={hero.chatPreview}
-            primaryCta={hero.primaryCta}
-            secondaryCta={hero.secondaryCta}
-            svgIcon={hero.svgIcon}
-            backgroundColor={hero.backgroundColor}
-          />
-        )}
+    <>
+      <div className="min-h-screen bg-white dark:bg-gray-950">
+        {headerData?.enabled && <Header data={headerData} />}
+        <main>
+          {hero2?.enabled && (
+            <HeroSection2
+              enabled={hero2.enabled}
+              title={hero2.title}
+              subtitle={hero2.subtitle}
+              primaryCta={hero2.primaryCta}
+              secondaryCta={hero2.secondaryCta}
+              video={hero2.video}
+              videoThumbnail={hero2.videoThumbnail}
+            />
+          )}
+          {hero?.enabled && (
+            <HeroSection
+              enabled={hero.enabled}
+              title={hero.title}
+              subtitle={hero.subtitle}
+              chatPreview={hero.chatPreview}
+              primaryCta={hero.primaryCta}
+              secondaryCta={hero.secondaryCta}
+              svgIcon={hero.svgIcon}
+              backgroundColor={hero.backgroundColor}
+            />
+          )}
 
-        {featuresData?.map((section, index) => (
-          <FeaturesSection
-            key={index}
-            enabled={section.enabled}
-            sectionTitle={section.sectionTitle}
-            sectionSubtitle={section.sectionSubtitle}
-            features={section.features}
-            backgroundColor={section.backgroundColor}
-          />
-        ))}
-        {customSectionData?.enabled && (
-          <CustomSection
-            enabled={customSectionData.enabled}
-            backgroundColor={customSectionData.backgroundColor}
-            title={customSectionData.title}
-            subtitle={customSectionData.subtitle}
-            lottieUrl={customSectionData.lottieUrl}
-            features={customSectionData.features}
-          />
-        )}
-        {benefitSectionData.map((section, idx) => (
-          <BenefitsSection key={idx} data={section} />
-        ))}
-        {testimonialsData?.enabled && (
-          <TestimonialsSection
-            sectionTitle={testimonialsData.sectionTitle}
-            sectionSubtitle={testimonialsData.sectionSubtitle}
-            testimonials={testimonialsData.testimonials}
-            backgroundColor={testimonialsData.backgroundColor}
-          />
-        )}
-        {pricingData?.enabled && (
-          <PricingSection
-            sectionTitle={pricingData.sectionTitle}
-            sectionSubtitle={pricingData.sectionSubtitle}
-            toggleLabels={pricingData.toggleLabels}
-            toggleSubtext={pricingData.toggleSubtext}
-            plans={pricingData.plans}
-            bottomCallout={pricingData.bottomCallout}
-            signupButton={pricingData.signupButton}
-            backgroundColor={pricingData.backgroundColor}
-          />
-        )}
+          {/* {featuresData?.map((section, index) => ( */}
+          {featuresData?.enabled && (
+            <FeaturesSection
+              key={index}
+              enabled={section.enabled}
+              sectionTitle={section.sectionTitle}
+              sectionSubtitle={section.sectionSubtitle}
+              features={section.features}
+              backgroundColor={section.backgroundColor}
+            />
+          )}
+          {customSectionData?.enabled && (
+            <CustomSection
+              enabled={customSectionData.enabled}
+              backgroundColor={customSectionData.backgroundColor}
+              title={customSectionData.title}
+              subtitle={customSectionData.subtitle}
+              lottieUrl={customSectionData.lottieUrl}
+              features={customSectionData.features}
+            />
+          )}
+          {/* {benefitSectionData.map((section, idx) => ( */}
+          {benefitSectionData.enabled && <BenefitsSection data={section} />}
+          {testimonialsData?.enabled && (
+            <TestimonialsSection
+              sectionTitle={testimonialsData.sectionTitle}
+              sectionSubtitle={testimonialsData.sectionSubtitle}
+              testimonials={testimonialsData.testimonials}
+              backgroundColor={testimonialsData.backgroundColor}
+            />
+          )}
+          {pricingData?.enabled && (
+            <PricingSection
+              sectionTitle={pricingData.sectionTitle}
+              sectionSubtitle={pricingData.sectionSubtitle}
+              toggleLabels={pricingData.toggleLabels}
+              toggleSubtext={pricingData.toggleSubtext}
+              plans={pricingData.plans}
+              bottomCallout={pricingData.bottomCallout}
+              signupButton={pricingData.signupButton}
+              backgroundColor={pricingData.backgroundColor}
+            />
+          )}
 
-        {ctaData.enabled && (
-          <CtaSection
-            title={ctaData.title}
-            subtitle={ctaData.subtitle}
-            primaryCta={ctaData.primaryCta}
-            secondaryCta={ctaData.secondaryCta}
-            features={ctaData.features}
-          />
-        )}
-      </main>
-      {footerData.enabled && <Footer footerData={footerData} />}
-    </div>
+          {ctaData.enabled && (
+            <CtaSection
+              title={ctaData.title}
+              subtitle={ctaData.subtitle}
+              primaryCta={ctaData.primaryCta}
+              secondaryCta={ctaData.secondaryCta}
+              features={ctaData.features}
+            />
+          )}
+        </main>
+        {footerData.enabled && <Footer footerData={footerData} />}
+      </div>
+    </>
   );
 }
