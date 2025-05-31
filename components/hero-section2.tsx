@@ -33,6 +33,8 @@ export function HeroSection2(props: HeroSection2Props) {
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+    const [hasLoadedScript, setHasLoadedScript] = useState(false);
+
 
   const handlePlayPause = () => {
     if (!videoRef.current) return;
@@ -91,6 +93,9 @@ const runScript = () => {
     document.body.removeChild(script);
   };
 };
+
+
+
 
 
 const serializers = {
