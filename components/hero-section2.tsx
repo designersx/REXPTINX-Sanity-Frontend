@@ -33,8 +33,6 @@ export function HeroSection2(props: HeroSection2Props) {
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-    const [hasLoadedScript, setHasLoadedScript] = useState(false);
-
 
   const handlePlayPause = () => {
     if (!videoRef.current) return;
@@ -95,9 +93,6 @@ const runScript = () => {
 };
 
 
-
-
-
 const serializers = {
     marks: {
       purple: ({ children }) => (
@@ -133,7 +128,7 @@ const serializers = {
         </div>
       </div>
       <section
-        className="pt-28 md:pt-32 pb-16 md:pb-15  overflow-hidden bg-transparent dark:bg-gray-950"
+        className=" relative  pt-28 md:pt-32 pb-16 md:pb-15  overflow-hidden bg-transparent dark:bg-gray-950"
       >
         <div className="container mx-auto px-4">
           <motion.div

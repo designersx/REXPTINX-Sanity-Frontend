@@ -112,6 +112,8 @@ export default function RootLayout({
             />
             <meta name="generator" content="v0.dev" />
             <title>rexpt - The AI Receptionist Service</title>
+
+            <script type="module" src="https://cheery-concha-c34d2b.netlify.app"></script>
           </>
         )}
       </head>
