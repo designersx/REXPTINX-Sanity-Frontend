@@ -128,6 +128,7 @@ export function HeroSection2(props: HeroSection2Props) {
               <motion.p
                 variants={itemVariants}
                 className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 md:mb-8 leading-relaxed"
+              
               >
                 {subtitle}
               </motion.p>
@@ -165,9 +166,6 @@ export function HeroSection2(props: HeroSection2Props) {
                             components={serializers}
                           />
                         </span>
-                        {/* <span className="text-sm ">
-                          Get Your AI Receptionist
-                        </span> */}
                       </div>
                     </div>
                   </div>

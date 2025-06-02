@@ -1,10 +1,9 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { PhoneCall, MessageSquare, Bot } from "lucide-react";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
+import { useTheme } from "next-themes";
 // Defining the structure for chat messages
 export interface ChatMessage {
   sender: "bot" | "user";
@@ -37,8 +36,10 @@ export function HeroSection({
   svgIcon,
   backgroundColor = "#ffffff",
 }: HeroSectionProps) {
-  console.log(backgroundColor, "backgroundColor aarti");
   if (!enabled) return null;
+
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
   const serializers = {
     marks: {
       purple: ({ children }) => (
@@ -81,7 +82,7 @@ export function HeroSection({
   return (
     <section
       className="pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden bg-white dark:bg-gray-950"
-      style={{ backgroundColor: backgroundColor }}
+        style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div className="container mx-auto px-4">
         <motion.div

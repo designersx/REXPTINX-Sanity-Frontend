@@ -500,6 +500,10 @@ span.highlight p {
   }
 }
 
+.FreeTrial p:second-child{
+  font-size: 14px;
+  font-family: "Inter";
+}
 .FreeTrial p:first-child {
   font-size: 25px;
   font-weight: 900;

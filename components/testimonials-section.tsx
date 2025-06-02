@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import Image from "next/image";
+import { useTheme } from "next-themes";
 import { TestimonialData } from "@/app/page";
 import { PortableText } from "@portabletext/react";
 type Props = {
@@ -35,6 +35,8 @@ export function TestimonialsSection({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [activeIndex, setActiveIndex] = useState(0);
+     const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const next = () => setActiveIndex((i) => (i + 1) % testimonials.length);
   const prev = () =>
@@ -44,11 +46,7 @@ export function TestimonialsSection({
     <section
       id="testimonials"
       className="py-20 bg-gray-50 dark:bg-gray-900"
-      style={{
-        backgroundColor: !document.documentElement.classList.contains("dark")
-          ? backgroundColor
-          : undefined,
-      }}
+   style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">

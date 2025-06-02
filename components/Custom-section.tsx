@@ -1,7 +1,7 @@
 import React from "react";
 import Lottie from "@lottielab/lottie-player/react";
 import { PortableText } from "@portabletext/react";
-
+import { useTheme } from "next-themes";
 type Feature = {
   svgIcon: string;
   text: string;
@@ -25,6 +25,8 @@ const CustomSection: React.FC<CustomSectionProps> = ({
   features,
 }) => {
   if (!enabled) return null;
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const serializers = {
     marks: {
@@ -46,11 +48,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
   return (
     <section
       className=" py-20"
-      style={{
-        backgroundColor: !document.documentElement.classList.contains("dark")
-          ? backgroundColor
-          : undefined,
-      }}
+      style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div>
         <h2
@@ -58,7 +56,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             marginBottom: "8px",
             fontWeight: "600",
             fontSize: "2rem",
-            color: !document.documentElement.classList.contains("dark")
+            color: !isDarkMode
               ? "#1c1c1e"
               : "#ffffff",
             textAlign: "center",
@@ -71,9 +69,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             marginTop: 0,
             marginBottom: "24px",
             fontSize: "1rem",
-            color: !document.documentElement.classList.contains("dark")
-              ? "#4a5568"
-              : "#ffffff",
+            color: !isDarkMode ? "#4a5568" : "#ffffff",
             textAlign: "center",
           }}
         >
@@ -91,13 +87,11 @@ const CustomSection: React.FC<CustomSectionProps> = ({
           justifyContent: "center",
           gap: "40px",
           fontSize: "1rem",
-          color: !document.documentElement.classList.contains("dark")
-            ? "#4a5568"
-            : "#ffffff",
+          color: !isDarkMode ? "#4a5568" : "#ffffff",
           alignItems: "center",
           marginBottom: "4rem",
           paddingTop: "20px",
-          maxWidth: "600px",
+          flexWrap: "wrap",
           marginLeft: "auto",
           marginRight: "auto",
         }}

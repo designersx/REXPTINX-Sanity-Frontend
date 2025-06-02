@@ -1,9 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, Check, X } from "lucide-react";
 import { PortableText } from "@portabletext/react";
+import { useTheme } from "next-themes";
 import "../app/globals.css";
 export type Plan = {
   title: string;
@@ -59,6 +59,8 @@ export function PricingSection({
   const isInView = useInView(ref, { once: true, amount: 0 });
   const [isYearly, setIsYearly] = useState(false);
   const [expandedTier, setExpandedTier] = useState(null);
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const toggleTier = (index) => {
     if (expandedTier === index) {
@@ -102,7 +104,7 @@ export function PricingSection({
     <section
       id="pricing"
       className="py-20 bg-white dark:bg-gray-950"
-     style={{ backgroundColor: !document.documentElement.classList.contains('dark') ? backgroundColor : undefined }}
+      style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div className="container mx-auto px-4">
         <div className="block md:flex">

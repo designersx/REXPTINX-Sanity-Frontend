@@ -1,8 +1,8 @@
 "use client";
-import { useRef, useEffect ,useState} from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { PortableText } from "@portabletext/react";
-
+import { useTheme } from "next-themes";
 type Feature = {
   enabled: boolean;
   title: string;
@@ -28,11 +28,8 @@ export function FeaturesSection({
   const ref = useRef(null);
 
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    setIsDarkMode(document.documentElement.classList.contains("dark"));
-  }, [isDarkMode]);
+   const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const containerVariants = {
     hidden: { opacity: 0 },
