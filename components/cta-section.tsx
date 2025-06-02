@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { PhoneCall, MessageSquare, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import Link from "next/link";
 type CtaFeature = {
   icon: React.ElementType;
@@ -12,8 +12,8 @@ type CtaFeature = {
 type CtaProps = {
   title: string;
   subtitle: string;
-  primaryCta: { label: string; url: string };
-  secondaryCta: { label: string; url: string };
+  primaryCta: { label: string; url: string; openInNewTab?: boolean };
+  secondaryCta: { label: string; url: string; openInNewTab?: boolean };
   features: CtaFeature[];
 };
 
@@ -57,7 +57,7 @@ export function CtaSection({
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href={primaryCta.url || "#"}
-                target={primaryCta.url ? "_blank" : "_self"}
+                target={primaryCta.openInNewTab ? "_blank" : "_self"}
                 scroll={false}
               >
                 <Button className="bg-white text-[#6524EB] hover:bg-gray-100 text-lg px-8 py-6 w-full">
@@ -69,7 +69,7 @@ export function CtaSection({
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href={secondaryCta.url || "#"}
-                target={secondaryCta.url ? "_blank" : "_self"}
+                target={secondaryCta.openInNewTab ? "_blank" : "_self"}
                 scroll={false}
               >
                 <Button
@@ -98,9 +98,7 @@ export function CtaSection({
                   dangerouslySetInnerHTML={{ __html: feature.icon }}
                 />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-white text-center">
-                  {feature.description}
-                </p>
+                <p className="text-white text-center">{feature.description}</p>
               </div>
             ))}
           </motion.div>

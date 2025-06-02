@@ -1,7 +1,6 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { PortableText } from "@portabletext/react";
 type HeroSection2Props = {
   enabled: boolean;
@@ -73,22 +72,35 @@ export function HeroSection2(props: HeroSection2Props) {
     },
   };
 
-  // Call this when you want to load script, eg. button click
-  const runScript = () => {
-      const script = document.createElement("script");
+  const scriptLoadedRef = useRef(false);
+
+  useEffect(() => {
+    // Script ko page load par hi load karna hai
+    const script = document.createElement("script");
     script.src =
       "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
     script.async = true;
     document.body.appendChild(script);
     script.onload = () => {
-      window.createReviewWidget();
+      scriptLoadedRef.current = true;
+      console.log("Script loaded!");
     };
 
+    // Cleanup (optional)
     return () => {
       document.body.removeChild(script);
+      scriptLoadedRef.current = false;
     };
-  };
+  }, []);
 
+  // Button click pe sirf widget create karenge agar script loaded ho
+  const runScript = () => {
+    if (scriptLoadedRef.current && window.createReviewWidget) {
+      window.createReviewWidget();
+    } else {
+      console.warn("Script not loaded yet!");
+    }
+  };
   const serializers = {
     marks: {
       purple: ({ children }) => (
@@ -165,9 +177,11 @@ export function HeroSection2(props: HeroSection2Props) {
                   </div>
                 </Button> */}
                 <div className=" HeroSectionButton">
-                  <div
+                  <a
                     className="flex flex-wrap justify-center items-center gap-4 inline-block p-2 rounded-[80px]"
                     style={{ background: "#6524eb" }}
+                    href={primaryCta.url || "#"}
+                    target={primaryCta.openInNewTab ? "_blank" : "_self"}
                   >
                     <div className="inline-flex items-center bg-[#6524eb] text-white rounded-[80px] px-6 py-0.5 border border-dashed border-white">
                       <div className="flex flex-col text-start">
@@ -179,9 +193,9 @@ export function HeroSection2(props: HeroSection2Props) {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
-               
+
                 <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">

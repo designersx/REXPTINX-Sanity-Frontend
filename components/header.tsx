@@ -16,6 +16,7 @@ export type HeaderData = {
   showThemeToggle: boolean;
   ctaLabel: string | null;
   ctaUrl: string | null;
+  ctaOpenInNewTab?: boolean;
 };
 
 export function Header({ data }: { data: HeaderData }) {
@@ -27,7 +28,10 @@ export function Header({ data }: { data: HeaderData }) {
     showThemeToggle,
     ctaLabel,
     ctaUrl,
+    ctaOpenInNewTab,
   } = data;
+
+  console.log(ctaOpenInNewTab, "ctaopeninnewtab");
 
   // fallback anchors for when href is null
   const staticRoutes: Record<string, string> = {
@@ -138,7 +142,7 @@ export function Header({ data }: { data: HeaderData }) {
               <Link
                 href={ctaUrl || "#"}
                 className="ml-2 inline-block"
-                target="blank"
+                target={ctaOpenInNewTab ? "_blank" : "_self"}
               >
                 <Button className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white">
                   {ctaLabel}

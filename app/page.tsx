@@ -554,6 +554,7 @@ type HeaderData = {
   showThemeToggle: boolean;
   ctaLabel: string;
   ctaUrl: string;
+  ctaOpenInNewTab?: boolean; 
 };
 
 export default function Home() {
@@ -577,7 +578,8 @@ export default function Home() {
             navLinks[]{label, href},
             showThemeToggle,
             ctaLabel,
-            ctaUrl
+            ctaUrl,
+            ctaOpenInNewTab
           },
           "footer": *[_type=="footerSection"][0]{
             enabled,
