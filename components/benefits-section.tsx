@@ -23,6 +23,7 @@ type BenefitSectionProps = {
 export function BenefitsSection({ data }: BenefitSectionProps) {
     if (!data.enabled) return null;
   const ref = useRef(null);
+  console.log(data,"Data")
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const { title, introText, features, seeTheDifference ,backgroundColor = '#ffffff'} = data;
   const containerVariants = {

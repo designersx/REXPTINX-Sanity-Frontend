@@ -33,6 +33,7 @@ export function HeroSection2(props: HeroSection2Props) {
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  // const [showIframe, setShowIframe] = useState(false);
 
   const handlePlayPause = () => {
     if (!videoRef.current) return;
@@ -72,28 +73,11 @@ export function HeroSection2(props: HeroSection2Props) {
     },
   };
 
-const runScript = () => {
-  const script = document.createElement("script");
-  script.src = "https://cheery-concha-c34d2b.netlify.app/index.html";  // change to actual JS file URL
-  script.async = true;
+  // const runScript = () => {
+  //   setShowIframe(true);
+  // };
 
-  script.onload = () => {
-    console.log("Script loaded successfully");
-  };
-
-  script.onerror = (error) => {
-    console.error("Error loading script:", error);
-  };
-
-  document.body.appendChild(script);
-
-  return () => {
-    document.body.removeChild(script);
-  };
-};
-
-
-const serializers = {
+  const serializers = {
     marks: {
       purple: ({ children }) => (
         <span style={{ color: "#6524EB" }}>{children}</span>
@@ -107,7 +91,6 @@ const serializers = {
       ),
     },
   };
-
 
   return (
     <div>
@@ -127,9 +110,7 @@ const serializers = {
           <img src="images/Ellipse 11.png" alt="Ellipse 11" />
         </div>
       </div>
-      <section
-        className=" relative  pt-28 md:pt-32 pb-16 md:pb-15  overflow-hidden bg-transparent dark:bg-gray-950"
-      >
+      <section className=" relative  pt-28 md:pt-32 pb-16 md:pb-15  overflow-hidden bg-transparent dark:bg-gray-950">
         <div className="container mx-auto px-4">
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center"
@@ -192,7 +173,7 @@ const serializers = {
                   </div>
                 </div>
 
-                <div className="call-rex-button" onClick={runScript}>
+                <div className="call-rex-button">
                   <div className="button-content">
                     <div className="text">
                       <span>
@@ -248,6 +229,18 @@ const serializers = {
           </motion.div>
         </div>
       </section>
+      {/* {showIframe && (
+        <div className="rex-iframe-container mt-4">
+          <iframe
+            src="https://cheery-concha-c34d2b.netlify.app/index.html" // same URL as script or iframe source you want
+            width="660"
+            height="362"
+            frameBorder="0"
+            allowFullScreen
+            title="Rex Agent"
+          ></iframe>
+        </div>
+      )} */}
     </div>
   );
 }
