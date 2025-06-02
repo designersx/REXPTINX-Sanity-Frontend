@@ -59,6 +59,19 @@ export function FeaturesSection({
     },
   };
 
+  
+  const containerVariantss= {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+
   return (
     <section
       id="features"
@@ -68,9 +81,12 @@ export function FeaturesSection({
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+             variants={containerVariantss}
+            initial="hidden"
+            animate="visible"
+            // initial={{ opacity: 0, y: 20 }}
+            // animate={isInView ? { opacity: 1, y: 0 } : {}}
+            // transition={{ duration: 0.5 }}
             className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
             <PortableText value={sectionTitle} components={serializers} />

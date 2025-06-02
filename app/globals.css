@@ -500,7 +500,7 @@ span.highlight p {
   }
 }
 
-.FreeTrial p:last-child{
+.FreeTrial p:last-child {
   font-size: 14px;
   font-family: "Inter";
 }
@@ -512,37 +512,37 @@ span.highlight p {
 }
 
 @media (max-width: 1400px) {
-.LottiesFile {
-  width: 100%;
-  max-width: 100%;
-  align-items: center;
-  display: flex;
-  margin: auto;
-  height: 470px;
-  overflow: hidden;
-}
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 470px;
+    overflow: hidden;
+  }
 }
 @media (max-width: 1200px) {
-.LottiesFile {
-  width: 100%;
-  max-width: 100%;
-  align-items: center;
-  display: flex;
-  margin: auto;
-  height: 370px;
-  overflow: hidden;
-}
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 370px;
+    overflow: hidden;
+  }
 }
 @media (max-width: 1080px) {
-.LottiesFile {
-  width: 100%;
-  max-width: 100%;
-  align-items: center;
-  display: flex;
-  margin: auto;
-  height: 270px;
-  overflow: hidden;
-}
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 270px;
+    overflow: hidden;
+  }
 }
 @media (max-width: 767px) {
   .text-center.mb-8.w-full.md-1\/2.Leftline {
@@ -557,6 +557,9 @@ span.highlight p {
     margin: auto;
     height: 140px;
     overflow: hidden;
+  }
+  .feature-text {
+    display: none;
   }
   .ribbon span {
     transform: rotate(0deg);

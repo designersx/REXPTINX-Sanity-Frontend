@@ -118,6 +118,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             </div>
             {idx < features.length - 1 && (
               <div
+              className="feature-text"
                 style={{
                   height: "20px",
                   borderRight: "1px solid #ccc",

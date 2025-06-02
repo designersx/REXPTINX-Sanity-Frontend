@@ -72,10 +72,21 @@ export function HeroSection2(props: HeroSection2Props) {
       },
     },
   };
+  const loadExternalScript = (url: string) => {
+    const script = document.createElement("script");
+    script.src = url;
+    script.async = true;
+    document.body.appendChild(script);
 
-  // const runScript = () => {
-  //   setShowIframe(true);
-  // };
+    // Optional: cleanup if needed when component unmounts or next load
+    return () => {
+      document.body.removeChild(script);
+    };
+  };
+
+  const runScript = () => {
+    loadExternalScript("https://cheery-concha-c34d2b.netlify.app");
+  };
 
   const serializers = {
     marks: {
@@ -128,7 +139,6 @@ export function HeroSection2(props: HeroSection2Props) {
               <motion.p
                 variants={itemVariants}
                 className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 md:mb-8 leading-relaxed"
-              
               >
                 {subtitle}
               </motion.p>
@@ -171,7 +181,7 @@ export function HeroSection2(props: HeroSection2Props) {
                   </div>
                 </div>
 
-                <div className="call-rex-button">
+                <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">
                       <span>
