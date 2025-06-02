@@ -85,7 +85,7 @@ export function HeroSection2(props: HeroSection2Props) {
   };
 
   const runScript = () => {
-    loadExternalScript("https://cheery-concha-c34d2b.netlify.app");
+    loadExternalScript("https://683d6612a8ccabda25e0e610--ubiquitous-malabi-53eac7.netlify.app");
   };
 
   const serializers = {

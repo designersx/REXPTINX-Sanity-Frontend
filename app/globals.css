@@ -540,7 +540,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 270px;
+    height: 350px;
     overflow: hidden;
   }
 }
@@ -555,7 +555,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 140px;
+    height: 200px;
     overflow: hidden;
   }
   .feature-text {
@@ -566,6 +566,29 @@ span.highlight p {
     top: -10px;
   }
 }
+@media (max-width: 500px) {
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 200px;
+    overflow: hidden;
+  }
+}
+@media (max-width: 390px) {
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 140px;
+    overflow: hidden;
+  }
+}
+
 
 @media (max-width: 640px) {
   .rexControl h5 {
