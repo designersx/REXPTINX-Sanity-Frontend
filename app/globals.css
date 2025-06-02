@@ -500,7 +500,7 @@ span.highlight p {
   }
 }
 
-.FreeTrial p:second-child{
+.FreeTrial p:last-child{
   font-size: 14px;
   font-family: "Inter";
 }
