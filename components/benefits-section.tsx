@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { PortableText } from "@portabletext/react";
+import { useTheme } from "next-themes";
 type BenefitSectionProps = {
   data: {
     enabled: boolean;
@@ -23,7 +24,8 @@ type BenefitSectionProps = {
 export function BenefitsSection({ data }: BenefitSectionProps) {
   if (!data.enabled) return null;
   const ref = useRef(null);
-  console.log(data, "Data");
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const {
     title,
@@ -73,11 +75,12 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
     <section
       id="benefits"
       className="py-20 bg-white dark:bg-gray-950"
-      style={{
-        backgroundColor: !document.documentElement.classList.contains("dark")
-          ? backgroundColor
-          : undefined,
-      }}
+      style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
+      // style={{
+      //   backgroundColor: !document.documentElement.classList.contains("dark")
+      //     ? backgroundColor
+      //     : undefined,
+      // }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
