@@ -80,6 +80,8 @@ export function HeroSection2(props: HeroSection2Props) {
       "https://gorgeous-meringue-0b85b5.netlify.app/index.js?agentId=agent_542f5733db8a5c42139313349b";
     script.async = true;
     document.body.appendChild(script);
+    console.log("Rex Agent script appended");
+
     return () => {
       document.body.removeChild(script);
     };
@@ -177,10 +179,8 @@ export function HeroSection2(props: HeroSection2Props) {
                     </div>
                   </div>
                 </div>
-<div id="rexWidgetContainer"> 
-
-</div>
-                <div className="call-rex-button" >
+                <div id="rexWidgetContainer"></div>
+                <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">
                       <span>

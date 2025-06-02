@@ -28,7 +28,7 @@ export function FeaturesSection({
   const ref = useRef(null);
 
   const isInView = true
-  const { theme } = useTheme();
+   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
   const containerVariants = {
@@ -97,8 +97,6 @@ export function FeaturesSection({
             <motion.div
               key={idx}
               variants={itemVariants}
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
               whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
             >

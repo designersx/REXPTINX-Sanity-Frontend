@@ -236,7 +236,7 @@ export function PricingSection({
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className={`rounded-xl overflow-hidden h-full flex flex-col ${
                   plan.togglePurplePricing
-                    ? "bg-[#5a1fc0] text-white shadow-xl transform md:-translate-y-4 "
+                    ? "bg-[#6524ebe3] text-white shadow-xl transform md:-translate-y-4 "
                     : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200"
                 }`}
               >
