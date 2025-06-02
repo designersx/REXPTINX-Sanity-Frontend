@@ -455,6 +455,7 @@ span.highlight p {
   margin: auto;
   height: 600px;
   overflow: hidden;
+  justify-content: center;
 }
 
 .play-video {
@@ -555,7 +556,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 200px;
+    height: 240px;
     overflow: hidden;
   }
   .feature-text {
