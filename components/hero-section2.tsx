@@ -75,12 +75,14 @@ export function HeroSection2(props: HeroSection2Props) {
 
   // Call this when you want to load script, eg. button click
   const runScript = () => {
-    const script = document.createElement("script");
+      const script = document.createElement("script");
     script.src =
-      "https://gorgeous-meringue-0b85b5.netlify.app/index.js?agentId=agent_542f5733db8a5c42139313349b";
+      "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
     script.async = true;
     document.body.appendChild(script);
-    console.log("Rex Agent script appended");
+    script.onload = () => {
+      window.createReviewWidget();
+    };
 
     return () => {
       document.body.removeChild(script);
@@ -179,7 +181,7 @@ export function HeroSection2(props: HeroSection2Props) {
                     </div>
                   </div>
                 </div>
-                <div id="rexWidgetContainer"></div>
+               
                 <div className="call-rex-button" onClick={runScript}>
                   <div className="button-content">
                     <div className="text">
