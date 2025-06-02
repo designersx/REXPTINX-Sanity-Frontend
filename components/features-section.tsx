@@ -1,15 +1,7 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect ,useState} from "react";
 import { motion, useInView } from "framer-motion";
 import { PortableText } from "@portabletext/react";
-import {
-  PhoneCall,
-  Calendar,
-  MessageSquare,
-  Bot,
-  Headphones,
-  Brain,
-} from "lucide-react";
 
 type Feature = {
   enabled: boolean;
@@ -34,7 +26,13 @@ export function FeaturesSection({
 }: Props) {
   if (!enabled) return null;
   const ref = useRef(null);
+
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
+  }, [isDarkMode]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -68,7 +66,7 @@ export function FeaturesSection({
     <section
       id="features"
       className="py-20 bg-gray-50 dark:bg-gray-900 relative z-1"
-      style={{ backgroundColor: backgroundColor }}
+      style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">

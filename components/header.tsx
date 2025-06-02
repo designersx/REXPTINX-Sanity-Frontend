@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-
 export type NavLink = { label: string; href: string | null };
 export type HeaderData = {
   logoUrl: string;
@@ -50,6 +49,22 @@ export function Header({ data }: { data: HeaderData }) {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    document.documentElement.classList.contains("dark")
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 10);
@@ -72,11 +87,24 @@ export function Header({ data }: { data: HeaderData }) {
         <Link href="/">
           <div className="flex items-center cursor-pointer">
             <Image
-              src={logoUrl}
+              src={
+                document.documentElement.classList.contains("dark")
+                  ? "./images/footer_logo.png"
+                  : logoUrl
+              }
               alt={logoAlt}
               width={150}
               height={50}
-              className="h-10 w-auto dark:brightness-0 dark:invert"
+              className={
+                document.documentElement.classList.contains("dark")
+                  ? "h-10 w-auto"
+                  : "h-10 w-auto dark:brightness-0 dark:invert"
+              }
+              // className={
+              //   !document.documentElement.classList.contains("dark")
+              //     ? "h-10 w-auto dark:brightness-0 dark:invert"
+              //     : "h-10 w-auto "
+              // }
             />
             {tagline && (
               <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
@@ -107,7 +135,11 @@ export function Header({ data }: { data: HeaderData }) {
 
           {ctaLabel && (
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href={ctaUrl || "#"} className="ml-2 inline-block" target="blank">
+              <Link
+                href={ctaUrl || "#"}
+                className="ml-2 inline-block"
+                target="blank"
+              >
                 <Button className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white">
                   {ctaLabel}
                 </Button>

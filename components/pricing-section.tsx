@@ -102,7 +102,7 @@ export function PricingSection({
     <section
       id="pricing"
       className="py-20 bg-white dark:bg-gray-950"
-      style={{ backgroundColor: backgroundColor }}
+     style={{ backgroundColor: !document.documentElement.classList.contains('dark') ? backgroundColor : undefined }}
     >
       <div className="container mx-auto px-4">
         <div className="block md:flex">
@@ -129,7 +129,7 @@ export function PricingSection({
               <span
                 className={`font-medium ${
                   !isYearly
-                    ? "text-[#6524EB] dark:text-[#6524EB]"
+                    ? "text-[#6524EB] dark:text-[#e5e7eb]"
                     : "text-gray-600 dark:text-gray-400"
                 }`}
               >
@@ -156,8 +156,8 @@ export function PricingSection({
               <span
                 className={`font-medium ${
                   isYearly
-                    ? "text-[#6524EB] dark:text-[#6524EB]"
-                    : "text-gray-600 dark:text-gray-400"
+                    ? "text-[#6524EB] dark:text-[#e5e7eb]"
+                    : "text-gray-600 dark:text-[#e5e7eb]"
                 }`}
               >
                 {toggleLabels.right}
@@ -235,7 +235,7 @@ export function PricingSection({
                 className={`rounded-xl overflow-hidden h-full flex flex-col ${
                   plan.togglePurplePricing
                     ? "bg-[#5a1fc0] text-white shadow-xl transform md:-translate-y-4 "
-                    : "bg-white dark:bg-white-800 border border-white-200 dark:border-white-700 text-white-900 dark:text-white-100"
+                    : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200"
                 }`}
               >
                 {/* Mobile view */}
@@ -378,7 +378,7 @@ export function PricingSection({
                         className={`w-full mt-6 py-3 rounded ${
                           plan.togglePurplePricing
                             ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
-                            : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-[#6524EB] dark:bg-[#6524EB] text-white hover:bg-[#6524EB] dark:hover:bg-[#6524EB]"
+                            : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white text-purple-600 hover:bg-gray-100"
                         }`}
                       >
                         {plan.ctaLabel}
@@ -417,7 +417,7 @@ export function PricingSection({
                     <button
                       className={`w-full py-6 rounded ${
                         plan.togglePurplePricing
-                          ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
+                          ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-white text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
                           : "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-[#6524EB] dark:bg-[#6524EB] text-white hover:bg-[#6524EB] dark:hover:bg-[#6524EB]"
                       }`}
                     >

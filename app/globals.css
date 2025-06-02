@@ -86,6 +86,10 @@ body {
   -webkit-touch-callout: none;
 }
 
+.container {
+  will-change: backgroundColor;
+}
+
 .StartMain {
   position: absolute;
   width: 100%;
@@ -444,14 +448,15 @@ span.highlight p {
   font-family: var(--font-lato);
 }
 .LottiesFile {
-  width: 80%;
+  width: 100%;
   max-width: 100%;
-  overflow: hidden;
-  height: 350px;
   align-items: center;
   display: flex;
   margin: auto;
+  height: 600px;
+  overflow: hidden;
 }
+
 .play-video {
   height: 60px;
   width: 60px;
@@ -495,13 +500,24 @@ span.highlight p {
   }
 }
 
-.FreeTrial p:first-child{
+.FreeTrial p:first-child {
   font-size: 25px;
   font-weight: 900;
-  font-family: 'Inter';
+  font-family: "Inter";
   white-space: nowrap;
 }
 
+@media (min-width: 1400px) {
+.LottiesFile {
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  height: 500px;
+  overflow: hidden;
+}
+}
 @media (max-width: 767px) {
   .text-center.mb-8.w-full.md-1\/2.Leftline {
     border-left: 0px solid #e3e3e3;
@@ -509,7 +525,12 @@ span.highlight p {
   }
   .LottiesFile {
     width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
     height: 140px;
+    overflow: hidden;
   }
   .ribbon span {
     transform: rotate(0deg);

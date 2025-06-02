@@ -44,7 +44,11 @@ export function TestimonialsSection({
     <section
       id="testimonials"
       className="py-20 bg-gray-50 dark:bg-gray-900"
-      style={{ backgroundColor: backgroundColor }}
+      style={{
+        backgroundColor: !document.documentElement.classList.contains("dark")
+          ? backgroundColor
+          : undefined,
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">

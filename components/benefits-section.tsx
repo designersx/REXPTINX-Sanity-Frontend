@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { PortableText } from "@portabletext/react";
 type BenefitSectionProps = {
   data: {
-    enabled:boolean,
+    enabled: boolean;
     backgroundColor?: string;
     title: string;
     introText: string;
@@ -21,11 +21,17 @@ type BenefitSectionProps = {
 };
 
 export function BenefitsSection({ data }: BenefitSectionProps) {
-    if (!data.enabled) return null;
+  if (!data.enabled) return null;
   const ref = useRef(null);
-  console.log(data,"Data")
+  console.log(data, "Data");
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const { title, introText, features, seeTheDifference ,backgroundColor = '#ffffff'} = data;
+  const {
+    title,
+    introText,
+    features,
+    seeTheDifference,
+    backgroundColor = "#ffffff",
+  } = data;
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,9 +56,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
   const serializers = {
     marks: {
       purple: ({ children }: { children: React.ReactNode }) => (
-        <span style={{ color: "#6524EB" }}>
-          {children}
-        </span>
+        <span style={{ color: "#6524EB" }}>{children}</span>
       ),
       strong: ({ children }: { children: React.ReactNode }) => (
         <strong>{children}</strong>
@@ -66,7 +70,15 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
     },
   };
   return (
-    <section id="benefits" className="py-20 bg-white dark:bg-gray-950"       style={{ backgroundColor: backgroundColor }}>
+    <section
+      id="benefits"
+      className="py-20 bg-white dark:bg-gray-950"
+      style={{
+        backgroundColor: !document.documentElement.classList.contains("dark")
+          ? backgroundColor
+          : undefined,
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div
@@ -108,7 +120,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
                     dangerouslySetInnerHTML={{
                       __html: feature.svgIcon,
                     }}
-                    className="h-6 w-6 text-white dark:text-[#6524EB]"
+                    className="h-6 w-6 text-white dark:text-[#ffffff]"
                   />
                 </div>
                 <div>

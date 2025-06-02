@@ -20,7 +20,7 @@ export function ThemeToggle() {
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
       <Button
         variant="outline"
-        size="icon"
+        size="icon" 
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         className="rounded-full w-9 h-9 border-gray-200 dark:border-gray-800"
         aria-label="Toggle theme"

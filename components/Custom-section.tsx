@@ -44,14 +44,23 @@ const CustomSection: React.FC<CustomSectionProps> = ({
   };
 
   return (
-    <section className=" py-20"style={{ backgroundColor }}>
+    <section
+      className=" py-20"
+      style={{
+        backgroundColor: !document.documentElement.classList.contains("dark")
+          ? backgroundColor
+          : undefined,
+      }}
+    >
       <div>
         <h2
           style={{
             marginBottom: "8px",
             fontWeight: "600",
             fontSize: "2rem",
-            color: "#1c1c1e",
+            color: !document.documentElement.classList.contains("dark")
+              ? "#1c1c1e"
+              : "#ffffff",
             textAlign: "center",
           }}
         >
@@ -62,7 +71,9 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             marginTop: 0,
             marginBottom: "24px",
             fontSize: "1rem",
-            color: "#4a5568",
+            color: !document.documentElement.classList.contains("dark")
+              ? "#4a5568"
+              : "#ffffff",
             textAlign: "center",
           }}
         >
@@ -80,8 +91,9 @@ const CustomSection: React.FC<CustomSectionProps> = ({
           justifyContent: "center",
           gap: "40px",
           fontSize: "1rem",
-       
-          color: "#4a5568",
+          color: !document.documentElement.classList.contains("dark")
+            ? "#4a5568"
+            : "#ffffff",
           alignItems: "center",
           marginBottom: "4rem",
           paddingTop: "20px",
