@@ -27,8 +27,8 @@ export function FeaturesSection({
   if (!enabled) return null;
   const ref = useRef(null);
 
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-   const { theme } = useTheme();
+  const isInView = true
+  const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
   const containerVariants = {
@@ -59,19 +59,6 @@ export function FeaturesSection({
     },
   };
 
-  
-  const containerVariantss= {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-
   return (
     <section
       id="features"
@@ -81,12 +68,9 @@ export function FeaturesSection({
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.div
-             variants={containerVariantss}
-            initial="hidden"
-            animate="visible"
-            // initial={{ opacity: 0, y: 20 }}
-            // animate={isInView ? { opacity: 1, y: 0 } : {}}
-            // transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
             className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
           >
             <PortableText value={sectionTitle} components={serializers} />
@@ -113,6 +97,8 @@ export function FeaturesSection({
             <motion.div
               key={idx}
               variants={itemVariants}
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
               whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
             >

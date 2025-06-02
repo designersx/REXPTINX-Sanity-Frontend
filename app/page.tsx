@@ -540,7 +540,7 @@ import { Footer } from "@/components/footer";
 import { client } from "@/lib/sanityClient";
 import { HeroSection2 } from "@/components/hero-section2";
 import dynamic from "next/dynamic";
-
+import RexWidget from "../components/test"
 const CustomSection = dynamic(() => import("@/components/Custom-section"), {
   ssr: false,
 });
@@ -626,6 +626,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {header?.enabled && <Header data={header} />}
+      <RexWidget/>
       <main>
         {sections.map((section, index) => {
           switch (section._type) {

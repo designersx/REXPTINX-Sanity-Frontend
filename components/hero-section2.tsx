@@ -72,20 +72,17 @@ export function HeroSection2(props: HeroSection2Props) {
       },
     },
   };
-  const loadExternalScript = (url: string) => {
+
+  // Call this when you want to load script, eg. button click
+  const runScript = () => {
     const script = document.createElement("script");
-    script.src = url;
+    script.src =
+      "https://gorgeous-meringue-0b85b5.netlify.app/index.js?agentId=agent_542f5733db8a5c42139313349b";
     script.async = true;
     document.body.appendChild(script);
-
-    // Optional: cleanup if needed when component unmounts or next load
     return () => {
       document.body.removeChild(script);
     };
-  };
-
-  const runScript = () => {
-    loadExternalScript("https://683d6612a8ccabda25e0e610--ubiquitous-malabi-53eac7.netlify.app/index.js");
   };
 
   const serializers = {
@@ -180,8 +177,10 @@ export function HeroSection2(props: HeroSection2Props) {
                     </div>
                   </div>
                 </div>
+<div id="rexWidgetContainer"> 
 
-                <div className="call-rex-button" onClick={runScript}>
+</div>
+                <div className="call-rex-button" >
                   <div className="button-content">
                     <div className="text">
                       <span>
