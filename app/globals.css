@@ -507,14 +507,36 @@ span.highlight p {
   white-space: nowrap;
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 1400px) {
 .LottiesFile {
   width: 100%;
   max-width: 100%;
   align-items: center;
   display: flex;
   margin: auto;
-  height: 500px;
+  height: 470px;
+  overflow: hidden;
+}
+}
+@media (max-width: 1200px) {
+.LottiesFile {
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  height: 370px;
+  overflow: hidden;
+}
+}
+@media (max-width: 1080px) {
+.LottiesFile {
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  height: 270px;
   overflow: hidden;
 }
 }
