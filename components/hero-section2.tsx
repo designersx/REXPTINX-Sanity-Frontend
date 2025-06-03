@@ -75,14 +75,45 @@ export function HeroSection2(props: HeroSection2Props) {
 
   // Call this when you want to load script, eg. button click
   const runScript = () => {
+    // const script = document.createElement("script");
+    // script.src =
+    //   "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
+    // script.async = true;
+    // document.body.appendChild(script);
+    // script.onload = () => {
+    //   window.createReviewWidget();
+    // };
+
+    // return () => {
+    //   document.body.removeChild(script);
+    // };
+    const agentId = "agent_b7c31a2131da62f5c48663770a";
+
+    // Check if widget is already loaded
+    if (window.createReviewWidget) {
+      window.createReviewWidget(agentId);
+      return;
+    }
+
+    // Load the widget script
     const script = document.createElement("script");
     script.src =
-      "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
+      "https://683e7932f80bc4ccfcbeb808--mellow-vacherin-b51e16.netlify.app/index.js";
     script.async = true;
-    document.body.appendChild(script);
+
     script.onload = () => {
-      window.createReviewWidget();
+      if (window.createReviewWidget) {
+        window.createReviewWidget(agentId);
+      } else {
+        console.error("Widget function not available after script load");
+      }
     };
+
+    script.onerror = () => {
+      console.error("Failed to load widget script");
+    };
+
+    document.body.appendChild(script);
 
     return () => {
       document.body.removeChild(script);
@@ -168,7 +199,7 @@ export function HeroSection2(props: HeroSection2Props) {
                   <a
                     className="flex flex-wrap justify-center items-center gap-4 inline-block p-2 rounded-[80px]"
                     style={{ background: "#6524eb" }}
-                    href={primaryCta.url||"#"}
+                    href={primaryCta.url || "#"}
                     target={primaryCta.openInNewTab ? "_blank" : "_self"}
                   >
                     <div className="inline-flex items-center bg-[#6524eb] text-white rounded-[80px] px-6 py-0.5 border border-dashed border-white">

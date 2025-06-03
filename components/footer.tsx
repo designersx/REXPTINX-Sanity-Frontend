@@ -19,13 +19,16 @@ type FooterData = {
   contactInfo: {
     email: string;
     phone: string;
+    contactUs: string;
     phoneSvgIcon: string;
     emailSvgIcon: string;
+    contactUsSvgIcon: string;
   };
   copyright: string;
   privacyPolicy: string;
   termsOfService: string;
-  cookiePolicy: string;
+  cancellationRefundPolicy: { label: string };
+  shippingDeliveryPolicy: { label: string };
 };
 
 type FooterProps = {
@@ -62,7 +65,7 @@ export function Footer({ footerData }: FooterProps) {
                     href={socialLink.url}
                     target="_blank"
                     scroll={false}
-                    className="text-gray-400 hover:text-[#6524EB] transition-colors"
+                    className="text-gray-400 hover:text-[#6524EB]   transition-colors"
                   >
                     <div
                       dangerouslySetInnerHTML={{ __html: socialLink.icon }}
@@ -125,28 +128,42 @@ export function Footer({ footerData }: FooterProps) {
           <div>
             <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
             <ul className="space-y-3">
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3  hover:text-[#6524EB]">
                 <div
                   className="text-[#6524EB]"
                   dangerouslySetInnerHTML={{
                     __html: footerData?.contactInfo?.emailSvgIcon,
                   }}
                 />
-                <span className="text-gray-400">
+                <span className="text-gray-400  hover:text-[#6524EB]">
                   {footerData?.contactInfo?.email}
                 </span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3  hover:text-[#6524EB]  ">
                 <div
                   className="text-[#6524EB]"
                   dangerouslySetInnerHTML={{
                     __html: footerData?.contactInfo?.phoneSvgIcon,
                   }}
                 />
-                <span className="text-gray-400">
+                <span className="text-gray-400  hover:text-[#6524EB] ">
                   {footerData?.contactInfo?.phone}
                 </span>
               </li>
+              <Link
+                className="flex items-center gap-3  hover:text-[#6524EB]"
+                href="/Contact-us"
+              >
+                <div
+                  className="text-[#6524EB]"
+                  dangerouslySetInnerHTML={{
+                    __html: footerData?.contactInfo?.phoneSvgIcon,
+                  }}
+                />
+                <span className="text-gray-400  hover:text-[#6524EB]">
+                  {footerData?.contactInfo?.contactUs||"Contact Us"}
+                </span>
+              </Link>
             </ul>
           </div>
         </div>
@@ -159,22 +176,32 @@ export function Footer({ footerData }: FooterProps) {
             </p>
             <div className="flex space-x-6">
               <Link
-                href={footerData?.privacyPolicy ?? "#"}
+                href="/Privacy-Policy"
+                // href={footerData?.privacyPolicy ?? "#"}
                 className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
-                Privacy Policy
+                {footerData.privacyPolicy?.label}
               </Link>
               <Link
-                href={footerData?.termsOfService ?? "#"}
+                href="/Terms-Condition"
+                // href={footerData?.termsOfService ?? "#"}
                 className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
-                Terms of Service
+                {footerData?.termsOfService?.label}
               </Link>
               <Link
-                href={footerData?.cookiePolicy ?? "#"}
+                href="/Cancellation-Refund"
+                // href={footerData?.termsOfService ?? "#"}
                 className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
               >
-                Cookie Policy
+                {footerData?.cancellationRefundPolicy?.label}
+              </Link>
+              <Link
+                href="/Shipping-Delivery"
+                // href={footerData?.termsOfService ?? "#"}
+                className="text-gray-400 hover:text-[#6524EB]   text-sm transition-colors"
+              >
+                {footerData?.shippingDeliveryPolicy?.label}
               </Link>
             </div>
           </div>

@@ -126,12 +126,12 @@ export function Header({ data }: { data: HeaderData }) {
               whileHover={{ y: -2, scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <a
+              <Link
                 href={link.href}
                 className="font-medium px-2 text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             </motion.div>
           ))}
 

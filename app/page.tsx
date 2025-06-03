@@ -554,7 +554,7 @@ type HeaderData = {
   showThemeToggle: boolean;
   ctaLabel: string;
   ctaUrl: string;
-  ctaOpenInNewTab?: boolean; 
+  ctaOpenInNewTab?: boolean;
 };
 
 export default function Home() {
@@ -588,11 +588,12 @@ export default function Home() {
             socialLinks[]{platform, url, icon},
             quickLinks[]{label, url},
             resourcesLinks[]{label, url},
-            contactInfo{ email, phone, emailSvgIcon,phoneSvgIcon },
+            contactInfo{ email, phone, emailSvgIcon,phoneSvgIcon ,contactUs,contactUsSvgIcon},
             copyright,
-            privacyPolicy,
-            termsOfService,
-            cookiePolicy
+ privacyPolicy { label },
+  termsOfService { label },
+  cancellationRefundPolicy { label },
+  shippingDeliveryPolicy { label }
           },
           sections[]->{
             _type,
