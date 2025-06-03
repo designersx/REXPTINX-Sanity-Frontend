@@ -33,7 +33,7 @@ export function HeroSection2(props: HeroSection2Props) {
   } = props;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  // const [showIframe, setShowIframe] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   const handlePlayPause = () => {
     if (!videoRef.current) return;
@@ -74,28 +74,62 @@ export function HeroSection2(props: HeroSection2Props) {
   };
 
   // Call this when you want to load script, eg. button click
+  // const runScript = () => {
+  //   // const script = document.createElement("script");
+  //   // script.src =
+  //   //   "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
+  //   // script.async = true;
+  //   // document.body.appendChild(script);
+  //   // script.onload = () => {
+  //   //   window.createReviewWidget();
+  //   // };
+
+  //   // return () => {
+  //   //   document.body.removeChild(script);
+  //   // };
+  //   const agentId = "agent_b7c31a2131da62f5c48663770a";
+
+  //   // Check if widget is already loaded
+  //   if (window.createReviewWidget) {
+  //     window.createReviewWidget(agentId);
+  //     return;
+  //   }
+
+  //   // Load the widget script
+  //   const script = document.createElement("script");
+  //   script.src =
+  //     "https://683e7932f80bc4ccfcbeb808--mellow-vacherin-b51e16.netlify.app/index.js";
+  //   script.async = true;
+
+  //   script.onload = () => {
+  //     if (window.createReviewWidget) {
+  //       window.createReviewWidget(agentId);
+  //     } else {
+  //       console.error("Widget function not available after script load");
+  //     }
+  //   };
+
+  //   script.onerror = () => {
+  //     console.error("Failed to load widget script");
+  //   };
+
+  //   document.body.appendChild(script);
+
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // };
+
   const runScript = () => {
-    // const script = document.createElement("script");
-    // script.src =
-    //   "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
-    // script.async = true;
-    // document.body.appendChild(script);
-    // script.onload = () => {
-    //   window.createReviewWidget();
-    // };
-
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
-    const agentId = "agent_b7c31a2131da62f5c48663770a";
-
-    // Check if widget is already loaded
-    if (window.createReviewWidget) {
-      window.createReviewWidget(agentId);
+    if (scriptLoaded) {
       return;
     }
-
-    // Load the widget script
+    const agentId = "agent_b7c31a2131da62f5c48663770a";
+    if (window.createReviewWidget) {
+      window.createReviewWidget(agentId);
+      setScriptLoaded(true);
+      return;
+    }
     const script = document.createElement("script");
     script.src =
       "https://683e7932f80bc4ccfcbeb808--mellow-vacherin-b51e16.netlify.app/index.js";
@@ -104,20 +138,15 @@ export function HeroSection2(props: HeroSection2Props) {
     script.onload = () => {
       if (window.createReviewWidget) {
         window.createReviewWidget(agentId);
+        setScriptLoaded(true);
       } else {
         console.error("Widget function not available after script load");
       }
     };
-
     script.onerror = () => {
       console.error("Failed to load widget script");
     };
-
     document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
   };
 
   const serializers = {
