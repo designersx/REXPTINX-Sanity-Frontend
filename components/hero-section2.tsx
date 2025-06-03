@@ -135,7 +135,7 @@ export function HeroSection2(props: HeroSection2Props) {
     }
     const script = document.createElement("script");
     script.src =
-      "https://683eee5719c16bebba84d7e7--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_7e88a661524bf53b4ede810d7c"
+      "https://683eee5719c16bebba84d7e7--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51"
     script.async = true;
     script.defer = true;
     script.id = "rex-widget-script";
