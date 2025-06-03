@@ -121,23 +121,29 @@ export function HeroSection2(props: HeroSection2Props) {
   // };
 
   const runScript = () => {
+    const oldScript = document.getElementById("rex-widget-script");
+    if (oldScript) document.body.removeChild(oldScript);
     if (scriptLoaded) {
       return;
     }
-    const agentId = "agent_b7c31a2131da62f5c48663770a";
+    
+    // const agentId = "agent_2ba68e97b6150ed063e24668fa";
     if (window.createReviewWidget) {
-      window.createReviewWidget(agentId);
+      window.createReviewWidget();
       setScriptLoaded(true);
       return;
     }
     const script = document.createElement("script");
     script.src =
-      "https://683e7932f80bc4ccfcbeb808--mellow-vacherin-b51e16.netlify.app/index.js";
+      "https://683eee5719c16bebba84d7e7--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_7e88a661524bf53b4ede810d7c"
     script.async = true;
+    script.defer = true;
+    script.id = "rex-widget-script";
+    document.body.appendChild(script);
 
     script.onload = () => {
       if (window.createReviewWidget) {
-        window.createReviewWidget(agentId);
+        window.createReviewWidget();
         setScriptLoaded(true);
       } else {
         console.error("Widget function not available after script load");
