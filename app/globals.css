@@ -503,10 +503,10 @@ span.highlight p {
   align-items: center;
 }
 .logo_d{
-  width: 50%;
+  width: 100%;
 }
 .h-10{
-  height: 2.5rem;
+  height: 1.5rem !important;
 }
 
 @keyframes pulse {
