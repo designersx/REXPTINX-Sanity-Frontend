@@ -31,7 +31,6 @@ export function Header({ data }: { data: HeaderData }) {
     ctaOpenInNewTab,
   } = data;
 
-  console.log(ctaOpenInNewTab, "ctaopeninnewtab");
 
   // fallback anchors for when href is null
   const staticRoutes: Record<string, string> = {
@@ -128,7 +127,7 @@ export function Header({ data }: { data: HeaderData }) {
             >
               <Link
                 href={link.href}
-                className="font-medium px-2 text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                className="font-medium px-2 text-gray-700 dark:text-gray-200 hover:text-[#6524EB] dark:hover:text-[#6524EB] transition-colors"
               >
                 {link.label}
               </Link>

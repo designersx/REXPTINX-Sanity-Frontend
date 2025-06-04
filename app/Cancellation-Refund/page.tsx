@@ -4,6 +4,7 @@ import { client } from "@/lib/sanityClient";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PortableText } from "@portabletext/react";
+import { useTheme } from "next-themes";
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -35,6 +36,9 @@ export default function CancellationRefundPolicy() {
   } | null>(null);
   const [policy, setPolicy] = useState<CancellationPolicyData | null>(null);
 
+
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
   useEffect(() => {
     client
       .fetch(
@@ -130,20 +134,30 @@ export default function CancellationRefundPolicy() {
   };
   const { header, footer } = pageData;
   return (
-    <div className="min-h-screen bg-white mt-5">
+    <div className={`min-h-screen mt-5  ${
+        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}>
       {/* Simple Header */}
       {header?.enabled && <Header data={header} />}
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8 md:py-16">
+      <main className="max-w-4xl mx-auto px-4 py-8 md:py-16"
+      
+      >
         {/* Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            <PortableText value={policy.title} components={serializers} />
+        <div className="text-center mb-12"
+        
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-black mb-4"
+            style={isDarkMode ? { color: "white" } : {}}
+          >
+            <PortableText value={policy?.title} components={serializers} />
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg"
+            style={isDarkMode ? { color: "white" } : {}}
+          >
             Last updated:{" "}
-            {new Date(policy.lastUpdated).toLocaleDateString(undefined, {
+            {new Date(policy?.lastUpdated).toLocaleDateString(undefined, {
               year: "numeric",
               month: "short",
               day: "numeric",
@@ -152,27 +166,32 @@ export default function CancellationRefundPolicy() {
         </div>
 
         {/* Sections */}
-        <div className="space-y-8 text-gray-700 leading-relaxed">
-          {policy.sections.map((section, idx) => (
+        <div className="space-y-8 text-gray-700 leading-relaxed"
+          style={isDarkMode ? { color: "white" } : {}}
+        >
+          {policy?.sections?.map((section, idx) => (
             <section key={idx} className="space-y-4">
-              <h2 className="text-xl font-semibold text-black">
-                {section.heading}
+              <h2 className="text-xl font-semibold text-black"
+                style={isDarkMode ? { color: "white" } : {}}
+              >
+                {section?.heading}
               </h2>
-              <PortableText value={section.content} components={serializers} />
+              <PortableText value={section?.content} components={serializers} />
             </section>
           ))}
 
           {/* Disclaimer */}
-          <section className="space-y-4">
+          <section className="space-y-4"
+            style={isDarkMode ? { color: "black" } : {}}>
             <h2 className="text-xl font-semibold text-black">
-              {policy.disclaimerTitle}
+              {policy?.disclaimerTitle}
             </h2>
             <div
               className="bg-gray-50 p-4 rounded-lg"
               style={{ padding: "2rem" }}
             >
               <PortableText
-                value={policy.disclaimer?.content}
+                value={policy?.disclaimer?.content}
                 components={serializers}
               />
             </div>

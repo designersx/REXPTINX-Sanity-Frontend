@@ -260,12 +260,12 @@ export default function ContactUs() {
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
             <PortableText
-              value={contactUsData.pageTitle}
+              value={contactUsData?.pageTitle}
               components={serializers}
             />
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {contactUsData.pageSubtitle}
+            {contactUsData?.pageSubtitle}
           </p>
         </div>
 
@@ -281,7 +281,7 @@ export default function ContactUs() {
                 Send us a Message
               </h2>
               <p className="text-gray-600">
-                {contactUsData.formLabels.formDescription}
+                {contactUsData?.formLabels?.formDescription}
               </p>
             </div>
 
@@ -292,13 +292,13 @@ export default function ContactUs() {
                     htmlFor="name"
                     className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    {contactUsData.formLabels.fullName}
+                    {contactUsData?.formLabels?.fullName}
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
+                    value={formData?.name}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
@@ -310,13 +310,13 @@ export default function ContactUs() {
                     htmlFor="email"
                     className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    {contactUsData.formLabels.emailAddress}
+                    {contactUsData?.formLabels?.emailAddress}
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
+                    value={formData?.email}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
@@ -331,13 +331,13 @@ export default function ContactUs() {
                     htmlFor="phone"
                     className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    {contactUsData.formLabels.phoneNumber}
+                    {contactUsData?.formLabels?.phoneNumber}
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
-                    value={formData.phone}
+                    value={formData?.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
                     placeholder="Enter your phone number"
@@ -348,21 +348,21 @@ export default function ContactUs() {
                     htmlFor="subject"
                     className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    {contactUsData.formLabels.subject}
+                    {contactUsData?.formLabels?.subject}
                   </label>
                   <select
                     id="subject"
                     name="subject"
-                    value={formData.subject}
+                    value={formData?.subject}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900"
                   >
                     <option value="">Select a subject</option>
-                    {contactUsData.subjectOptions.map((option) => (
+                    {contactUsData?.subjectOptions?.map((option) => (
                       <option
                         key={option}
-                        value={option.toLowerCase().replace(/\s+/g, "-")}
+                        value={option?.toLowerCase().replace(/\s+/g, "-")}
                       >
                         {option}
                       </option>
@@ -376,12 +376,12 @@ export default function ContactUs() {
                   htmlFor="message"
                   className="block text-sm font-semibold text-gray-700 mb-2"
                 >
-                  {contactUsData.formLabels.message}
+                  {contactUsData?.formLabels?.message}
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
+                  value={formData?.message}
                   onChange={handleChange}
                   required
                   rows={6}
@@ -403,7 +403,7 @@ export default function ContactUs() {
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    {contactUsData.formLabels.sendButton}
+                    {contactUsData?.formLabels?.sendButton}
                   </>
                 )}
               </button>
@@ -417,7 +417,7 @@ export default function ContactUs() {
                 Contact Information
               </h2>
               <p className="text-gray-600 text-lg">
-                {contactUsData.contactInfo.description}
+                {contactUsData?.contactInfo?.description}
               </p>
             </div>
 
@@ -427,19 +427,19 @@ export default function ContactUs() {
                 <div
                   className="bg-[#6524eb] p-3 rounded-xl"
                   dangerouslySetInnerHTML={{
-                    __html: contactUsData.contactInfo.phone.iconSvg,
+                    __html: contactUsData?.contactInfo?.phone?.iconSvg,
                   }}
                   style={{ color: "#ffffff" }}
                 ></div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1">
-                    {contactUsData.contactInfo.phone.label}
+                    {contactUsData?.contactInfo?.phone?.label}
                   </h3>
                   <p className="text-gray-600 mb-2">
-                    {contactUsData.contactInfo.phone.subLabel}
+                    {contactUsData?.contactInfo?.phone?.subLabel}
                   </p>
                   <p className="text-xl font-bold text-[#6524eb]">
-                    {contactUsData.contactInfo.phone.number}
+                    {contactUsData?.contactInfo?.phone?.number}
                   </p>
                 </div>
               </div>
@@ -450,18 +450,18 @@ export default function ContactUs() {
                   className="bg-[#6524eb] p-3 rounded-xl"
                   style={{ color: "#ffffff" }}
                   dangerouslySetInnerHTML={{
-                    __html: contactUsData.contactInfo.email.iconSvg,
+                    __html: contactUsData?.contactInfo?.email?.iconSvg,
                   }}
                 ></div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1">
-                    {contactUsData.contactInfo.email.label}
+                    {contactUsData?.contactInfo?.email?.label}
                   </h3>
                   <p className="text-gray-600 mb-2">
-                    {contactUsData.contactInfo.email.subLabel}
+                    {contactUsData?.contactInfo?.email?.subLabel}
                   </p>
                   <p className="text-xl font-bold text-[#6524eb]">
-                    {contactUsData.contactInfo.email.address}
+                    {contactUsData?.contactInfo?.email?.address}
                   </p>
                 </div>
               </div>
@@ -472,22 +472,22 @@ export default function ContactUs() {
                   className="bg-[#6524eb] p-3 rounded-xl"
                   style={{ color: "#ffffff" }}
                   dangerouslySetInnerHTML={{
-                    __html: contactUsData.contactInfo.businessHours.iconSvg,
+                    __html: contactUsData?.contactInfo?.businessHours?.iconSvg,
                   }}
                 ></div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1">
-                    {contactUsData.contactInfo.businessHours.label}
+                    {contactUsData?.contactInfo?.businessHours?.label}
                   </h3>
                   <p className="text-gray-600">
                     Monday - Friday:{" "}
-                    {contactUsData.contactInfo.businessHours.mondayToFriday}
+                    {contactUsData?.contactInfo?.businessHours?.mondayToFriday}
                   </p>
                   <p className="text-gray-600">
-                    Saturday: {contactUsData.contactInfo.businessHours.saturday}
+                    Saturday: {contactUsData?.contactInfo?.businessHours?.saturday}
                   </p>
                   <p className="text-gray-600">
-                    Sunday: {contactUsData.contactInfo.businessHours.sunday}
+                    Sunday: {contactUsData?.contactInfo?.businessHours?.sunday}
                   </p>
                 </div>
               </div>
