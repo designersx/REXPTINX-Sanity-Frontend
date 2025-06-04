@@ -1,7 +1,6 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { PortableText } from "@portabletext/react";
 type HeroSection2Props = {
   enabled: boolean;
@@ -34,7 +33,6 @@ export function HeroSection2(props: HeroSection2Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
-
   const handlePlayPause = () => {
     if (!videoRef.current) return;
 
@@ -72,88 +70,40 @@ export function HeroSection2(props: HeroSection2Props) {
       },
     },
   };
-
-  // Call this when you want to load script, eg. button click
   // const runScript = () => {
-  //   // const script = document.createElement("script");
-  //   // script.src =
-  //   //   "https://683d835278f84c2551780b4a--spectacular-trifle-5f3eeb.netlify.app/index.js";
-  //   // script.async = true;
-  //   // document.body.appendChild(script);
-  //   // script.onload = () => {
-  //   //   window.createReviewWidget();
-  //   // };
-
-  //   // return () => {
-  //   //   document.body.removeChild(script);
-  //   // };
-  //   const agentId = "agent_b7c31a2131da62f5c48663770a";
-
-  //   // Check if widget is already loaded
-  //   if (window.createReviewWidget) {
-  //     window.createReviewWidget(agentId);
+  //   const oldScript = document.getElementById("rex-widget-script");
+  //   if (oldScript) document.body.removeChild(oldScript);
+  //   if (scriptLoaded) {
   //     return;
   //   }
 
-  //   // Load the widget script
+  //   // const agentId = "agent_2ba68e97b6150ed063e24668fa";
+  //   if (window.createReviewWidget) {
+  //     window.createReviewWidget();
+  //     setScriptLoaded(true);
+  //     return;
+  //   }
   //   const script = document.createElement("script");
   //   script.src =
-  //     "https://683e7932f80bc4ccfcbeb808--mellow-vacherin-b51e16.netlify.app/index.js";
+  //     "https://683f0cc188b34b4460f08d83--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51"
   //   script.async = true;
+  //   script.defer = true;
+  //   script.id = "rex-widget-script";
+  //   document.body.appendChild(script);
 
   //   script.onload = () => {
   //     if (window.createReviewWidget) {
-  //       window.createReviewWidget(agentId);
+  //       window.createReviewWidget();
+  //       setScriptLoaded(true);
   //     } else {
   //       console.error("Widget function not available after script load");
   //     }
   //   };
-
   //   script.onerror = () => {
   //     console.error("Failed to load widget script");
   //   };
-
   //   document.body.appendChild(script);
-
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
   // };
-
-  const runScript = () => {
-    const oldScript = document.getElementById("rex-widget-script");
-    if (oldScript) document.body.removeChild(oldScript);
-    if (scriptLoaded) {
-      return;
-    }
-    
-    // const agentId = "agent_2ba68e97b6150ed063e24668fa";
-    if (window.createReviewWidget) {
-      window.createReviewWidget();
-      setScriptLoaded(true);
-      return;
-    }
-    const script = document.createElement("script");
-    script.src =
-      "https://683eee5719c16bebba84d7e7--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51"
-    script.async = true;
-    script.defer = true;
-    script.id = "rex-widget-script";
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      if (window.createReviewWidget) {
-        window.createReviewWidget();
-        setScriptLoaded(true);
-      } else {
-        console.error("Widget function not available after script load");
-      }
-    };
-    script.onerror = () => {
-      console.error("Failed to load widget script");
-    };
-    document.body.appendChild(script);
-  };
 
   const serializers = {
     marks: {
@@ -169,7 +119,56 @@ export function HeroSection2(props: HeroSection2Props) {
       ),
     },
   };
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Step 1: Inject the script once on initial load
+      const existingScript = document.getElementById("rex-widget-script");
 
+      if (!existingScript) {
+        const script = document.createElement("script");
+        script.src =
+          "https://fluffy-bavarois-03810d.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51";
+        script.async = true;
+        script.defer = true;
+        script.id = "rex-widget-script";
+
+        script.onload = () => {
+          console.log("REX widget script loaded");
+
+          // Wait until widget button & popup exist in DOM
+          const interval = setInterval(() => {
+            const widgetBtn = document.querySelector(".floating-agent");
+            const popup = document.querySelector(".popup");
+
+            if (widgetBtn) widgetBtn.style.display = "none"; // hide button
+            if (popup) popup.style.display = "none"; // hide popup
+
+            if (widgetBtn && popup) {
+              clearInterval(interval);
+            }
+          }, 0);
+        };
+
+        document.body.appendChild(script);
+      }
+    }
+  }, []);
+
+  const handleClick = () => {
+    if (typeof window !== "undefined") {
+      // Step 2: Simply unhide the preloaded widget & open popup
+      const widgetBtn = document.querySelector(".floating-agent");
+      const popup = document.querySelector(".popup");
+
+      if (widgetBtn && popup) {
+        widgetBtn.style.display = "block"; // unhide button
+        popup.style.display = "block"; // open popup
+        widgetBtn.classList.add("noFloat"); // apply float lock
+      } else {
+        console.warn("REX widget not ready yet");
+      }
+    }
+  };
   return (
     <div>
       <div className="StartMain">
@@ -250,7 +249,10 @@ export function HeroSection2(props: HeroSection2Props) {
                   </a>
                 </div>
 
-                <div className="call-rex-button" onClick={runScript}>
+                <div
+                  className="call-rex-button"
+                  onClick={handleClick}
+                >
                   <div className="button-content">
                     <div className="text">
                       <span>
@@ -306,18 +308,7 @@ export function HeroSection2(props: HeroSection2Props) {
           </motion.div>
         </div>
       </section>
-      {/* {showIframe && (
-        <div className="rex-iframe-container mt-4">
-          <iframe
-            src="https://cheery-concha-c34d2b.netlify.app/index.html" // same URL as script or iframe source you want
-            width="660"
-            height="362"
-            frameBorder="0"
-            allowFullScreen
-            title="Rex Agent"
-          ></iframe>
-        </div>
-      )} */}
+
     </div>
   );
 }

@@ -297,6 +297,19 @@ export function PricingSection({
                       {plan.description}
                     </p>
                   )}
+                  {expandedTier !== index && (
+                    <a
+                      className={`w-full mt-6 py-3 rounded ${
+                        plan.togglePurplePricing
+                          ? "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-white dark:bg-gray-900 text-[#6524EB] dark:text-[#6524EB] hover:bg-gray-100 dark:hover:bg-gray-800"
+                          : " inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 w-full py-6 bg-[#6524EB] dark:bg-[#6524EB] text-white hover:bg-[#6524EB] dark:hover:bg-[#6524EB]"
+                      }`}
+                      href={plan.ctaUrl || "#"}
+                      target={plan.ctaOpenInNewTab ? "_blank" : "_self"}
+                    >
+                      {plan.ctaLabel}
+                    </a>
+                  )}
 
                   {expandedTier === index && (
                     <div className="mt-4">

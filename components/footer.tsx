@@ -19,10 +19,8 @@ type FooterData = {
   contactInfo: {
     email: string;
     phone: string;
-    contactUs: string;
     phoneSvgIcon: string;
     emailSvgIcon: string;
-    contactUsSvgIcon: string;
   };
   copyright: string;
   privacyPolicy: string;
@@ -150,7 +148,7 @@ export function Footer({ footerData }: FooterProps) {
                   {footerData?.contactInfo?.phone}
                 </span>
               </li>
-              <Link
+              {/* <Link
                 className="flex items-center gap-3  hover:text-[#6524EB]"
                 href="/Contact-us"
               >
@@ -163,7 +161,7 @@ export function Footer({ footerData }: FooterProps) {
                 <span className="text-gray-400  hover:text-[#6524EB]">
                   {footerData?.contactInfo?.contactUs||"Contact Us"}
                 </span>
-              </Link>
+              </Link> */}
             </ul>
           </div>
         </div>

@@ -127,9 +127,9 @@ export default function RootLayout({
           <ZoomPrevention />
           {children}
         </ThemeProvider>
-        <div id="review-widget">
+        {/* <div id="review-widget">
 
-        </div>
+        </div> */}
       </body>
     </html>
   );
