@@ -170,7 +170,7 @@ export function Footer({ footerData }: FooterProps) {
             >
               © 2025 rexpt AI. All rights reserved Powered By{" "}
               <Link
-                href="http://desigersx.com"
+                href="https://www.designersx.us"
                 className="flex items-center space-x-2"
                 target="_blank"
               >
