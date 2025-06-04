@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, PhoneCall } from "lucide-react";
 type FooterData = {
   footerLogo: { asset: { url: string } };
   sectionTitle: string;
@@ -22,7 +21,6 @@ type FooterData = {
     phoneSvgIcon: string;
     emailSvgIcon: string;
   };
-  copyright: string;
   privacyPolicy: string;
   termsOfService: string;
   cancellationRefundPolicy: { label: string };
@@ -70,7 +68,6 @@ export function Footer({ footerData }: FooterProps) {
                     />
                   </Link>
                 ) : (
-                  // Fallback when URL is null (you can decide to render a placeholder or nothing)
                   <span
                     key={`${socialLink.platform}-${index}`}
                     className="text-gray-400"
@@ -170,9 +167,20 @@ export function Footer({ footerData }: FooterProps) {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
-              {footerData?.copyright}
+              © 2025 rexpt AI. All rights reserved Powered By{" "}
+              <Link
+                href="http://desigersx.com"
+                className="flex items-center space-x-2"
+                target="_blank"
+              >
+                <img
+                  src="./images/designerx_logo.png"
+                  alt="DesignersX Logo"
+                  className="w-8 h-8 rounded-full"
+                />
+              </Link>
             </p>
-            <div className="flex space-x-6">
+            <div className="flex space-x-6 DBlock">
               <Link
                 href="/Privacy-Policy"
                 // href={footerData?.privacyPolicy ?? "#"}

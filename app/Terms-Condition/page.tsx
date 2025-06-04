@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PortableText } from "@portabletext/react";
 import { useTheme } from "next-themes";
+import ".././globals.css"
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -134,7 +135,7 @@ export default function Privacy() {
   };
   return (
     <div
-      className={`min-h-screen mt-5 ${
+      className={`min-h-screen mt-5 terms-main ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
@@ -194,7 +195,7 @@ export default function Privacy() {
               {termsData?.disclaimerTitle}
             </h2>
             <div
-              className="bg-gray-50 p-4 rounded-lg"
+              className="bg-gray-50 p-4 rounded-lg BorderRadiousCustom"
               style={{ padding: "2rem" }}
             >
               <PortableText

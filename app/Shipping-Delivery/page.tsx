@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PortableText } from "@portabletext/react";
 import { useTheme } from "next-themes";
+import ".././globals.css"
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -131,7 +132,7 @@ export default function ShippingDeliveryPolicy() {
 
   return (
     <div
-      className={`min-h-screen mt-5 ${
+      className={`min-h-screen mt-5 shipping-main ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
@@ -173,7 +174,7 @@ export default function ShippingDeliveryPolicy() {
             style={isDarkMode ? { color: "black" } : {}}
           >
             <h2 className="text-xl font-semibold text-black">Disclaimer</h2>
-            <div className="bg-gray-100 p-6 rounded-lg max-w-3xl mx-auto shadow-sm border border-gray-200">
+            <div className="bg-gray-100 p-6 rounded-lg max-w-3xl mx-auto shadow-sm border border-gray-200 BorderRadiousCustom">
               {disclaimer}
             </div>
           </section>

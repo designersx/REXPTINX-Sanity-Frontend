@@ -257,7 +257,7 @@ export default function ContactUs() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 mt-5">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
             <PortableText
               value={contactUsData?.pageTitle}
@@ -272,7 +272,7 @@ export default function ContactUs() {
         {/* Contact Form and Info */}
         <div
           className="grid lg:grid-cols-2 gap-12 lg:gap-16"
-          style={{ height: "700px" }}
+          // style={{ height: "700px" }}
         >
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">

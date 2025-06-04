@@ -198,7 +198,7 @@ export function HeroSection2(props: HeroSection2Props) {
             <div>
               <motion.h1
                 variants={itemVariants}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 leading-tight heroText"
               >
                 <PortableText value={title} components={serializers} />
               </motion.h1>

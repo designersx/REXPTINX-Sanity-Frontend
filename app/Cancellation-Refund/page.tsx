@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PortableText } from "@portabletext/react";
 import { useTheme } from "next-themes";
+import ".././globals.css"
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -134,7 +135,7 @@ export default function CancellationRefundPolicy() {
   };
   const { header, footer } = pageData;
   return (
-    <div className={`min-h-screen mt-5  ${
+    <div className={`min-h-screen mt-5 cancel-main  ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }`}>
       {/* Simple Header */}
@@ -187,7 +188,7 @@ export default function CancellationRefundPolicy() {
               {policy?.disclaimerTitle}
             </h2>
             <div
-              className="bg-gray-50 p-4 rounded-lg"
+              className="bg-gray-50 p-4 rounded-lg BorderRadiousCustom"
               style={{ padding: "2rem" }}
             >
               <PortableText
