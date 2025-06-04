@@ -102,7 +102,7 @@ export function Footer({ footerData }: FooterProps) {
           </div>
 
           {/* Resources Links */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-3">
               {footerData?.resourcesLinks?.map((link, index) => (
@@ -120,7 +120,7 @@ export function Footer({ footerData }: FooterProps) {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
           <div>
