@@ -67,9 +67,9 @@ export default function Privacy() {
                 contactInfo{ email, phone, emailSvgIcon,phoneSvgIcon ,contactUs,contactUsSvgIcon},
                 copyright,
                 privacyPolicy { label },
-  termsOfService { label },
-  cancellationRefundPolicy { label },
-  shippingDeliveryPolicy { label }
+                termsOfService { label },
+                cancellationRefundPolicy { label },
+                shippingDeliveryPolicy { label }
               },
               sections[]->{
                 _type,

@@ -177,7 +177,7 @@ export function Footer({ footerData }: FooterProps) {
                 <img
                   src="./images/designerx_logo.png"
                   alt="DesignersX Logo"
-                  className="w-8 h-8 rounded-full"
+                  className="w-10 h-10 logo_d"
                 />
               </Link>
             </p>
