@@ -492,10 +492,15 @@ span.highlight p {
   margin-top: 3rem;
 }
 .cancel-main {
-  margin-top:3rem;
+  margin-top: 3rem;
 }
-.terms-main{
-    margin-top:3rem;
+.terms-main {
+  margin-top: 3rem;
+}
+.footer-d-logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 @keyframes pulse {
@@ -524,8 +529,6 @@ span.highlight p {
   white-space: nowrap;
 }
 
-
-
 @media (max-width: 1400px) {
   .LottiesFile {
     width: 100%;
@@ -547,9 +550,9 @@ span.highlight p {
     height: 370px;
     overflow: hidden;
   }
-  .BorderRadiousCustom{
-  border-radius: 1rem !important;
-}
+  .BorderRadiousCustom {
+    border-radius: 1rem !important;
+  }
 }
 @media (max-width: 1080px) {
   .LottiesFile {
@@ -583,9 +586,9 @@ span.highlight p {
     transform: rotate(0deg);
     top: -10px;
   }
-  .BorderRadiousCustom{
-  border-radius: 1rem !important;
-}
+  .BorderRadiousCustom {
+    border-radius: 1rem !important;
+  }
 }
 @media (max-width: 500px) {
   .LottiesFile {
@@ -597,10 +600,10 @@ span.highlight p {
     height: 200px;
     overflow: hidden;
   }
-  .DBlock{
+  .DBlock {
     display: block !important;
   }
-  .heroText p{
+  .heroText p {
     font-size: 2rem !important;
   }
 }
