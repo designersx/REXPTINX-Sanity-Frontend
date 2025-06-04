@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { client } from "@/lib/sanityClient";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { useTheme } from "next-themes";
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -59,6 +60,9 @@ export default function ContactUs() {
     header: HeaderData | null;
     footer: any;
   } | null>(null);
+
+  const { theme } = useTheme();
+  const isDarkMode = theme === "dark";
 
   const [contactUsData, setContactUsData] = useState<ContactUsData | null>(
     null
@@ -251,20 +255,30 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div
+      className={`min-h-screen mt-5 cancel-main  ${
+        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       {/* Header */}
       {header?.enabled && <Header data={header} />}
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {/* Header Section */}
         <div className="text-center mb-16 mt-5">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+            style={isDarkMode ? { color: "white" } : {}}
+          >
             <PortableText
               value={contactUsData?.pageTitle}
               components={serializers}
             />
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p
+            className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            style={isDarkMode ? { color: "white" } : {}}
+          >
             {contactUsData?.pageSubtitle}
           </p>
         </div>
@@ -301,7 +315,12 @@ export default function ContactUs() {
                     value={formData?.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#6524EB] focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 ${
+                      isDarkMode
+                        ? "bg-black text-white border-gray-600 placeholder-gray-500"
+                        : "bg-white text-black border-gray-300 placeholder-gray-400"
+                    }`}
+                    // className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -319,7 +338,11 @@ export default function ContactUs() {
                     value={formData?.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#6524EB] focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 ${
+                      isDarkMode
+                        ? "bg-black text-white border-gray-600 placeholder-gray-500"
+                        : "bg-white text-black border-gray-300 placeholder-gray-400"
+                    }`}
                     placeholder="Enter your email"
                   />
                 </div>
@@ -339,7 +362,11 @@ export default function ContactUs() {
                     name="phone"
                     value={formData?.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#6524EB] focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 ${
+                      isDarkMode
+                        ? "bg-black text-white border-gray-600 placeholder-gray-500"
+                        : "bg-white text-black border-gray-300 placeholder-gray-400"
+                    }`}
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -356,7 +383,11 @@ export default function ContactUs() {
                     value={formData?.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#6524EB] focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 ${
+                      isDarkMode
+                        ? "bg-black text-white border-gray-600 placeholder-gray-500"
+                        : "bg-white text-black border-gray-300 placeholder-gray-400"
+                    }`}
                   >
                     <option value="">Select a subject</option>
                     {contactUsData?.subjectOptions?.map((option) => (
@@ -385,7 +416,11 @@ export default function ContactUs() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 resize-none"
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-400 resize-none ${
+                    isDarkMode
+                      ? "bg-black text-white border-gray-600 placeholder-gray-500"
+                      : "bg-white text-black border-gray-300 placeholder-gray-400"
+                  }`}
                   placeholder="Tell us about your requirements or questions..."
                 />
               </div>
@@ -413,10 +448,16 @@ export default function ContactUs() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+              <h2
+                className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4"
+                style={isDarkMode ? { color: "white" } : {}}
+              >
                 Contact Information
               </h2>
-              <p className="text-gray-600 text-lg">
+              <p
+                className="text-gray-600 text-lg"
+                style={isDarkMode ? { color: "white" } : {}}
+              >
                 {contactUsData?.contactInfo?.description}
               </p>
             </div>
@@ -432,10 +473,16 @@ export default function ContactUs() {
                   style={{ color: "#ffffff" }}
                 ></div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">
+                  <h3
+                    className="font-bold text-gray-900 mb-1"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     {contactUsData?.contactInfo?.phone?.label}
                   </h3>
-                  <p className="text-gray-600 mb-2">
+                  <p
+                    className="text-gray-600 mb-2"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     {contactUsData?.contactInfo?.phone?.subLabel}
                   </p>
                   <p className="text-xl font-bold text-[#6524eb]">
@@ -454,10 +501,16 @@ export default function ContactUs() {
                   }}
                 ></div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">
+                  <h3
+                    className="font-bold text-gray-900 mb-1"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     {contactUsData?.contactInfo?.email?.label}
                   </h3>
-                  <p className="text-gray-600 mb-2">
+                  <p
+                    className="text-gray-600 mb-2"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     {contactUsData?.contactInfo?.email?.subLabel}
                   </p>
                   <p className="text-xl font-bold text-[#6524eb]">
@@ -476,17 +529,30 @@ export default function ContactUs() {
                   }}
                 ></div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">
+                  <h3
+                    className="font-bold text-gray-900 mb-1"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     {contactUsData?.contactInfo?.businessHours?.label}
                   </h3>
-                  <p className="text-gray-600">
+                  <p
+                    className="text-gray-600"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     Monday - Friday:{" "}
                     {contactUsData?.contactInfo?.businessHours?.mondayToFriday}
                   </p>
-                  <p className="text-gray-600">
-                    Saturday: {contactUsData?.contactInfo?.businessHours?.saturday}
+                  <p
+                    className="text-gray-600"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
+                    Saturday:{" "}
+                    {contactUsData?.contactInfo?.businessHours?.saturday}
                   </p>
-                  <p className="text-gray-600">
+                  <p
+                    className="text-gray-600"
+                    style={isDarkMode ? { color: "black" } : {}}
+                  >
                     Sunday: {contactUsData?.contactInfo?.businessHours?.sunday}
                   </p>
                 </div>

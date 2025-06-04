@@ -119,7 +119,7 @@ export default function CancellationRefundPolicy() {
   const serializers = {
     marks: {
       purple: ({ children }: any) => (
-        <span className="text-purple-600">{children}</span>
+        <span className="text-[#6524EB]">{children}</span>
       ),
       strong: ({ children }: any) => <strong>{children}</strong>,
       break: () => <br />,
