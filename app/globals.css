@@ -502,12 +502,13 @@ span.highlight p {
   gap: 10px;
   align-items: center;
 }
-.logo_d{
+.logo_d {
   width: 100%;
-}
-.h-10{
   height: 1.5rem !important;
 }
+/* .h-10 {
+  height: 1.5rem !important;
+} */
 
 @keyframes pulse {
   0% {

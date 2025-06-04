@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
+import { CallRex } from "./CallRex";
 type HeroSection2Props = {
   enabled: boolean;
   title: string;
@@ -307,8 +308,9 @@ export function HeroSection2(props: HeroSection2Props) {
             </motion.div>
           </motion.div>
         </div>
-      </section>
 
+      </section>
+{/* <CallRex/> */}
     </div>
   );
 }
