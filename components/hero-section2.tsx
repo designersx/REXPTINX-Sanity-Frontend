@@ -3,6 +3,8 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import { CallRex } from "./CallRex";
+import { Agent } from "http";
+import { FloatingAgent } from "./FloatingAgent.tsx/Agent";
 type HeroSection2Props = {
   enabled: boolean;
   title: string;
@@ -250,10 +252,7 @@ export function HeroSection2(props: HeroSection2Props) {
                   </a>
                 </div>
 
-                <div
-                  className="call-rex-button"
-                  onClick={handleClick}
-                >
+                <div className="call-rex-button" onClick={handleClick}>
                   <div className="button-content">
                     <div className="text">
                       <span>
@@ -308,9 +307,8 @@ export function HeroSection2(props: HeroSection2Props) {
             </motion.div>
           </motion.div>
         </div>
-
       </section>
-{/* <CallRex/> */}
+      <FloatingAgent />
     </div>
   );
 }
