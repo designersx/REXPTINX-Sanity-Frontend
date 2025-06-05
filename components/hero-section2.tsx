@@ -2,7 +2,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
-import { CallRex } from "./CallRex";
+import { FloatingAgent } from "./FloatingAgent.tsx/Agent";
+import { Agent } from "http";
 type HeroSection2Props = {
   enabled: boolean;
   title: string;
@@ -160,9 +161,16 @@ export function HeroSection2(props: HeroSection2Props) {
       // Step 2: Simply unhide the preloaded widget & open popup
       const widgetBtn = document.querySelector(".floating-agent");
       const popup = document.querySelector(".popup");
+      const agentButton = document.querySelector("#agentButton");
 
-      if (widgetBtn && popup) {
+      // Debugging: Log the elements to check if they are found
+      console.log("widgetBtn:", widgetBtn);
+      console.log("popup:", popup);
+      console.log("agentButton:", agentButton);
+
+      if (widgetBtn && popup && agentButton) {
         widgetBtn.style.display = "block"; // unhide button
+        agentButton.style.display = "none";
         popup.style.display = "block"; // open popup
         widgetBtn.classList.add("noFloat"); // apply float lock
       } else {
@@ -250,10 +258,7 @@ export function HeroSection2(props: HeroSection2Props) {
                   </a>
                 </div>
 
-                <div
-                  className="call-rex-button"
-                  onClick={handleClick}
-                >
+                <div className="call-rex-button" onClick={handleClick}>
                   <div className="button-content">
                     <div className="text">
                       <span>
@@ -308,9 +313,8 @@ export function HeroSection2(props: HeroSection2Props) {
             </motion.div>
           </motion.div>
         </div>
-
       </section>
-{/* <CallRex/> */}
+      <FloatingAgent />
     </div>
   );
 }
