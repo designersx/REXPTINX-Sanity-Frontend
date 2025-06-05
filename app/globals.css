@@ -448,8 +448,8 @@ span.highlight p {
   font-family: var(--font-lato);
 }
 .LottiesFile {
-  width: 90%;
-  max-width: 90%;
+  width: 90% !important;
+  max-width: 90% !important;
   align-items: center;
   display: flex;
   margin: auto;
