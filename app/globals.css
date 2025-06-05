@@ -448,7 +448,7 @@ span.highlight p {
   font-family: var(--font-lato);
 }
 .LottiesFile {
-  width: 90% !important;
+  width:75% !important;
   max-width: 90% !important;
   align-items: center;
   display: flex;
@@ -538,7 +538,7 @@ span.highlight p {
 
 @media (max-width: 1400px) {
   .LottiesFile {
-    width: 90%;
+    width: 75%;
     max-width: 90%;
     align-items: center;
     display: flex;
