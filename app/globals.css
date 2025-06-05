@@ -453,7 +453,7 @@ span.highlight p {
   align-items: center;
   display: flex;
   margin: auto;
-  height: 600px;
+  height: 700px;
   overflow: hidden;
   justify-content: center;
 }
@@ -552,7 +552,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 470px;
+    height: 650px;
     overflow: hidden;
   }
 }
@@ -563,7 +563,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 370px;
+    height: 540px;
     overflow: hidden;
   }
   .BorderRadiousCustom {
@@ -572,12 +572,14 @@ span.highlight p {
 }
 @media (max-width: 1080px) {
   .LottiesFile {
-    width: 100%;
-    max-width: 100%;
+    
+    width: 100% !important;
+    max-width: 95% !important;
+
     align-items: center;
     display: flex;
     margin: auto;
-    height: 350px;
+    height: 488px;
     overflow: hidden;
   }
 }
@@ -592,7 +594,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 240px;
+    height: 432px;
     overflow: hidden;
   }
   .feature-text {
@@ -613,7 +615,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 200px;
+    height: 280px;
     overflow: hidden;
   }
   .DBlock {
@@ -630,7 +632,7 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 140px;
+    height: 240px;
     overflow: hidden;
   }
 }
