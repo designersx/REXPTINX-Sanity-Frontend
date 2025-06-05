@@ -102,7 +102,7 @@ export function HeroSection2(props: HeroSection2Props) {
   
       script = document.createElement("script");
       script.src =
-        "https://tiny-lolly-3f6a7a.netlify.app/index.js?agentId=agent_0498e1599d6ea9e13d09657f79";
+        "https://fanciful-faun-02a7f0.netlify.app/index.js?agentId=agent_0498e1599d6ea9e13d09657f79";
       script.id = "rex-widget-script";
       script.async = false; 
       script.defer = false;
