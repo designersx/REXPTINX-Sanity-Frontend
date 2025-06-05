@@ -174,11 +174,11 @@ export function Footer({ footerData }: FooterProps) {
                 className="flex items-center space-x-2"
                 target="_blank"
               >
+                <div className="DesignerxLogo">
                 <img
                   src="./images/designerx_logo.png"
-                  alt="DesignersX Logo"
-                  className="w-10 h-10 logo_d"
-                />
+                  alt="DesignersX Logo"      />
+                </div>
               </Link>
             </p>
             <div className="flex space-x-6 DBlock">
