@@ -1,6 +1,6 @@
 // components/FloatingAgent.tsx
 import React, { useState } from "react";
-
+import "./Agent.css"
 export function FloatingAgent() {
   return (
     <div>
