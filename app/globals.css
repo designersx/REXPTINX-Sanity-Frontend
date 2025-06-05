@@ -448,12 +448,14 @@ span.highlight p {
   font-family: var(--font-lato);
 }
 .LottiesFile {
-  width:75% !important;
-  max-width: 90% !important;
+  width:100% !important;
+  max-width: 1100px !important;
   align-items: center;
   display: flex;
   margin: auto;
-  height: 700px;
+  max-height: 700px;
+  height: 100%;
+
   overflow: hidden;
   justify-content: center;
 }
@@ -558,12 +560,13 @@ span.highlight p {
 }
 @media (max-width: 1200px) {
   .LottiesFile {
-    width: 90%;
-    max-width: 90%;
+    width: 90% !important;
+    max-width: 90% !important;
     align-items: center;
     display: flex;
     margin: auto;
-    height: 540px;
+    max-height: 692px;
+    height: 100%;
     overflow: hidden;
   }
   .BorderRadiousCustom {
@@ -579,10 +582,22 @@ span.highlight p {
     align-items: center;
     display: flex;
     margin: auto;
-    height: 488px;
+    max-height: 648px;
+    height: 100%;
     overflow: hidden;
   }
 }
+
+@media (max-width: 798px) {
+  .LottiesFile {
+    
+    
+    max-height: 611px;
+    
+  }
+}
+
+
 @media (max-width: 767px) {
   .text-center.mb-8.w-full.md-1\/2.Leftline {
     border-left: 0px solid #e3e3e3;
@@ -608,6 +623,19 @@ span.highlight p {
     border-radius: 1rem !important;
   }
 }
+@media (max-width: 531px) {
+  .LottiesFile {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    height: 300px;
+    overflow: hidden;
+  }
+}
+
+
 @media (max-width: 500px) {
   .LottiesFile {
     width: 100%;
