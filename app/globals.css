@@ -549,8 +549,8 @@ span.highlight p {
 }
 @media (max-width: 1200px) {
   .LottiesFile {
-    width: 100%;
-    max-width: 100%;
+    width: 90%;
+    max-width: 90%;
     align-items: center;
     display: flex;
     margin: auto;
