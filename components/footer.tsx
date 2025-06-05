@@ -165,20 +165,20 @@ export function Footer({ footerData }: FooterProps) {
 
         {/* Footer Links (Privacy Policy, Terms of Service, Cookie Policy) */}
         <div className="border-t border-gray-800 pt-8">
-
           <div className="flex flex-col md:flex-row  justify-between items-center flex-wrap gap-8 sm:justify-center">
-            <p className="text-gray-500 text-sm mb-4 md:mb-0   footer-d-logo"
-            >
-              © 2025 rexpt AI. All rights reserved Powered By{" "}
+            <p className="text-gray-500 text-sm mb-4 md:mb-0   footer-d-logo">
+              © {new Date().getFullYear()} rexpt AI. All rights reserved Powered
+              By{" "}
               <Link
                 href="https://www.designersx.us"
                 className="flex items-center space-x-2"
                 target="_blank"
               >
                 <div className="DesignerxLogo">
-                <img
-                  src="./images/designerx_logo.png"
-                  alt="DesignersX Logo"      />
+                  <img
+                    src="./images/designerx_logo.png"
+                    alt="DesignersX Logo"
+                  />
                 </div>
               </Link>
             </p>
