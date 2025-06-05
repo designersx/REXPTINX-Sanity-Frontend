@@ -74,7 +74,7 @@ export function BenefitsSection({ data }: BenefitSectionProps) {
   return (
     <section
       id="benefits"
-      className="py-20 bg-white dark:bg-gray-950"
+      className="py-10 bg-white dark:bg-gray-950"
       style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
       // style={{
       //   backgroundColor: !document.documentElement.classList.contains("dark")

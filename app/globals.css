@@ -647,7 +647,12 @@ span.highlight p {
     overflow: hidden;
   }
   .DBlock {
-    display: block !important;
+    /* display: block !important; */
+    display: grid;
+    gap: 10px;
+    margin-right: auto;
+
+
   }
   .heroText p {
     font-size: 2rem !important;

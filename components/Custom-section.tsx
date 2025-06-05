@@ -47,7 +47,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
 
   return (
     <section
-      className=" py-20"
+      className=" py-10"
       style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
       <div>

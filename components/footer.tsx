@@ -165,8 +165,8 @@ export function Footer({ footerData }: FooterProps) {
 
         {/* Footer Links (Privacy Policy, Terms of Service, Cookie Policy) */}
         <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm mb-4 md:mb-0 footer-d-logo"
+          <div className="flex flex-col md:flex-row  justify-between items-center flex-wrap gap-6 md:justify-center">
+            <p className="text-gray-500 text-sm mb-4 md:mb-0   footer-d-logo"
             >
               © 2025 rexpt AI. All rights reserved Powered By{" "}
               <Link
@@ -181,7 +181,7 @@ export function Footer({ footerData }: FooterProps) {
                 </div>
               </Link>
             </p>
-            <div className="flex space-x-6 DBlock">
+            <div className="  DBlock">
               <Link
                 href="/Privacy-Policy"
                 // href={footerData?.privacyPolicy ?? "#"}
