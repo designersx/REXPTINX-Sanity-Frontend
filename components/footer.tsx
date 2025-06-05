@@ -165,7 +165,8 @@ export function Footer({ footerData }: FooterProps) {
 
         {/* Footer Links (Privacy Policy, Terms of Service, Cookie Policy) */}
         <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row  justify-between items-center flex-wrap gap-6 md:justify-center">
+
+          <div className="flex flex-col md:flex-row  justify-between items-center flex-wrap gap-8 sm:justify-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0   footer-d-logo"
             >
               © 2025 rexpt AI. All rights reserved Powered By{" "}

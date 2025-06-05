@@ -73,6 +73,65 @@ export function HeroSection2(props: HeroSection2Props) {
       },
     },
   };
+
+    const openAgentPopup = () => {
+    const agentPopup = document.getElementById("agentPopup");
+    const agentButton = document.getElementById("agentButton");
+  
+    if (agentPopup && agentButton) {
+      agentPopup.style.display = "block";
+      agentButton.classList.add("noFloat");
+    } else {
+      console.warn("Rex widget not ready yet. Retrying...");
+      setTimeout(openAgentPopup, 500); 
+    }
+  };
+
+  useEffect(() => {
+    let script: HTMLScriptElement | null = null;
+  
+    const removeExistingWidgetElements = () => {
+      document.getElementById("review-widget")?.append();
+    };
+  
+    const runScript = () => {
+      removeExistingWidgetElements();
+  
+     
+      document.getElementById("rex-widget-script")?.remove();
+  
+      script = document.createElement("script");
+      script.src =
+        "https://tiny-lolly-3f6a7a.netlify.app/index.js?agentId=agent_0498e1599d6ea9e13d09657f79";
+      script.id = "rex-widget-script";
+      script.async = false; 
+      script.defer = false;
+  
+      script.onload = () => {
+        console.log("REX widget script loaded");
+        if ((window as any).createReviewWidget) {
+          (window as any).createReviewWidget();
+          setScriptLoaded(true);
+        } else {
+          console.error("createReviewWidget not found after load");
+        }
+      };
+  
+      script.onerror = () => {
+        console.error("Failed to load REX widget script");
+      };
+  
+      document.body.appendChild(script);
+    };
+  
+    runScript();
+  
+    return () => {
+      script?.remove();
+      removeExistingWidgetElements();
+    };
+  }, []);
+
   // const runScript = () => {
   //   const oldScript = document.getElementById("rex-widget-script");
   //   if (oldScript) document.body.removeChild(oldScript);
@@ -122,56 +181,56 @@ export function HeroSection2(props: HeroSection2Props) {
       ),
     },
   };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Step 1: Inject the script once on initial load
-      const existingScript = document.getElementById("rex-widget-script");
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     // Step 1: Inject the script once on initial load
+  //     const existingScript = document.getElementById("rex-widget-script");
 
-      if (!existingScript) {
-        const script = document.createElement("script");
-        script.src =
-          "https://fluffy-bavarois-03810d.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51";
-        script.async = true;
-        script.defer = true;
-        script.id = "rex-widget-script";
+  //     if (!existingScript) {
+  //       const script = document.createElement("script");
+  //       script.src =
+  //         "https://fluffy-bavarois-03810d.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51";
+  //       script.async = true;
+  //       script.defer = true;
+  //       script.id = "rex-widget-script";
 
-        script.onload = () => {
-          console.log("REX widget script loaded");
+  //       script.onload = () => {
+  //         console.log("REX widget script loaded");
 
-          // Wait until widget button & popup exist in DOM
-          const interval = setInterval(() => {
-            const widgetBtn = document.querySelector(".floating-agent");
-            const popup = document.querySelector(".popup");
+  //         // Wait until widget button & popup exist in DOM
+  //         const interval = setInterval(() => {
+  //           const widgetBtn = document.querySelector(".floating-agent");
+  //           const popup = document.querySelector(".popup");
 
-            if (widgetBtn) widgetBtn.style.display = "none"; // hide button
-            if (popup) popup.style.display = "none"; // hide popup
+  //           if (widgetBtn) widgetBtn.style.display = "none"; // hide button
+  //           if (popup) popup.style.display = "none"; // hide popup
 
-            if (widgetBtn && popup) {
-              clearInterval(interval);
-            }
-          }, 0);
-        };
+  //           if (widgetBtn && popup) {
+  //             clearInterval(interval);
+  //           }
+  //         }, 0);
+  //       };
 
-        document.body.appendChild(script);
-      }
-    }
-  }, []);
+  //       document.body.appendChild(script);
+  //     }
+  //   }
+  // }, []);
 
-  const handleClick = () => {
-    if (typeof window !== "undefined") {
-      // Step 2: Simply unhide the preloaded widget & open popup
-      const widgetBtn = document.querySelector(".floating-agent");
-      const popup = document.querySelector(".popup");
+  // const handleClick = () => {
+  //   if (typeof window !== "undefined") {
+  //     // Step 2: Simply unhide the preloaded widget & open popup
+  //     const widgetBtn = document.querySelector(".floating-agent");
+  //     const popup = document.querySelector(".popup");
 
-      if (widgetBtn && popup) {
-        widgetBtn.style.display = "block"; // unhide button
-        popup.style.display = "block"; // open popup
-        widgetBtn.classList.add("noFloat"); // apply float lock
-      } else {
-        console.warn("REX widget not ready yet");
-      }
-    }
-  };
+  //     if (widgetBtn && popup) {
+  //       widgetBtn.style.display = "block"; // unhide button
+  //       popup.style.display = "block"; // open popup
+  //       widgetBtn.classList.add("noFloat"); // apply float lock
+  //     } else {
+  //       console.warn("REX widget not ready yet");
+  //     }
+  //   }
+  // };
   return (
     <div>
       <div className="StartMain">
@@ -252,7 +311,7 @@ export function HeroSection2(props: HeroSection2Props) {
                   </a>
                 </div>
 
-                <div className="call-rex-button" onClick={handleClick}>
+                <div className="call-rex-button" onClick={openAgentPopup}>
                   <div className="button-content">
                     <div className="text">
                       <span>
@@ -308,7 +367,7 @@ export function HeroSection2(props: HeroSection2Props) {
           </motion.div>
         </div>
       </section>
-      <FloatingAgent />
+      {/* <FloatingAgent /> */}
     </div>
   );
 }

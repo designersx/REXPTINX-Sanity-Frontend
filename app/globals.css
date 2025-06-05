@@ -521,6 +521,13 @@ span.highlight p {
   height: 1.5rem !important;
 } */
 
+ .DBlock {
+    /* display: block !important; */
+    display: flex;
+    gap: 20px;
+   
+
+  }
 
 
 @keyframes pulse {
