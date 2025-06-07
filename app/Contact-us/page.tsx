@@ -219,7 +219,6 @@ export default function ContactUs() {
       )
       .then(setPageData)
       .catch(console.error);
-    // Fetch Contact Us specific data from its own schema/document
     client
       .fetch(
         `*[_type=="contactUs"][0]{
