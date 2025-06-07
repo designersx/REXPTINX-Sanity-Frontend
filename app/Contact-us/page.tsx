@@ -71,7 +71,6 @@ export default function ContactUs() {
   );
   console.log(contactUsData, "contactUsData");
 
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -124,7 +123,7 @@ export default function ContactUs() {
       formDataToSend.append("to", "rexport@rexpt.in");
       formDataToSend.append("subject", `Contact Us Enquiry: ${subject}`);
       formDataToSend.append("html", html);
-      formDataToSend.append("text", text); 
+      formDataToSend.append("text", text);
 
       const response = await axios.post(
         `https://api.mailgun.net/v3/${process.env.NEXT_PUBLIC_MAILGUN_DOMAIN}/messages`,
@@ -139,7 +138,7 @@ export default function ContactUs() {
           },
         }
       );
-
+      // swal
 
       Swal.fire({
         title: "Thank you for your message!",
@@ -505,7 +504,6 @@ export default function ContactUs() {
             </form>
           </div>
 
-          {/* Contact Information */}
           <div className="space-y-8">
             <div>
               <h2
