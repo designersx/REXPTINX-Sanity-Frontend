@@ -100,45 +100,45 @@ export default function ContactUs() {
       // Form Data to send in the API request
       const { name, email, phone, subject, message } = formData;
 
-      // Prepare the email content
-      const html = `
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Subject:</strong> ${subject}</p>
-      <p><strong>Message:</strong> ${message}</p>
-    `;
+    //   // Prepare the email content
+    //   const html = `
+    //   <p><strong>Name:</strong> ${name}</p>
+    //   <p><strong>Email:</strong> ${email}</p>
+    //   <p><strong>Phone:</strong> ${phone}</p>
+    //   <p><strong>Subject:</strong> ${subject}</p>
+    //   <p><strong>Message:</strong> ${message}</p>
+    // `;
 
-      const text = `
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Subject: ${subject}
-      Message: ${message}
-    `;
+    //   const text = `
+    //   Name: ${name}
+    //   Email: ${email}
+    //   Phone: ${phone}
+    //   Subject: ${subject}
+    //   Message: ${message}
+    // `;
 
-      // Sending form data via Mailgun
-      const formDataToSend = new FormData();
-      formDataToSend.append("from", email);
-      formDataToSend.append("to", "rexport@rexpt.in");
-      formDataToSend.append("subject", `Contact Us Enquiry: ${subject}`);
-      formDataToSend.append("html", html);
-      formDataToSend.append("text", text);
+    //   // Sending form data via Mailgun
+    //   const formDataToSend = new FormData();
+    //   formDataToSend.append("from", email);
+    //   formDataToSend.append("to", "rexport@rexpt.in");
+    //   formDataToSend.append("subject", `Contact Us Enquiry: ${subject}`);
+    //   formDataToSend.append("html", html);
+    //   formDataToSend.append("text", text);
 
-      const response = await axios.post(
-        `https://api.mailgun.net/v3/${process.env.NEXT_PUBLIC_MAILGUN_DOMAIN}/messages`,
-        formDataToSend,
-        {
-          auth: {
-            username: "api",
-            password: process.env.NEXT_PUBLIC_MAILGUN_API_KEY,
-          },
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      // swal
+    //   const response = await axios.post(
+    //     `https://api.mailgun.net/v3/${process.env.NEXT_PUBLIC_MAILGUN_DOMAIN}/messages`,
+    //     formDataToSend,
+    //     {
+    //       auth: {
+    //         username: "api",
+    //         password: process.env.NEXT_PUBLIC_MAILGUN_API_KEY,
+    //       },
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     }
+    //   );
+    //   // swal
 
       Swal.fire({
         title: "Thank you for your message!",
