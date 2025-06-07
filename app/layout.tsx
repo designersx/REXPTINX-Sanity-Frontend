@@ -8,7 +8,7 @@ import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import sanityClient from "@sanity/client";
 import { Lato } from "next/font/google";
-
+import Script from "next/script";
 // Load Lato font with the correct variable
 const inter = Inter({
   subsets: ["latin"],
@@ -87,6 +87,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+     
         {metadata ? (
           <>
             <meta
@@ -112,7 +113,19 @@ export default function RootLayout({
             />
             <meta name="generator" content="v0.dev" />
             <title>rexpt - The AI Receptionist Service</title>
-
+  {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GJHHPPH2V6"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GJHHPPH2V6');
+          `}
+        </Script>
             <script type="module" src="https://cheery-concha-c34d2b.netlify.app"></script>
           </>
         )}
