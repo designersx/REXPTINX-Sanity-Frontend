@@ -124,7 +124,7 @@ export default function ContactUs() {
       formDataToSend.append("to", "rexport@rexpt.in");
       formDataToSend.append("subject", `Contact Us Enquiry: ${subject}`);
       formDataToSend.append("html", html);
-      formDataToSend.append("text", text); // Fallback plain text
+      formDataToSend.append("text", text); 
 
       const response = await axios.post(
         `https://api.mailgun.net/v3/${process.env.NEXT_PUBLIC_MAILGUN_DOMAIN}/messages`,
