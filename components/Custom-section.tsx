@@ -56,9 +56,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             marginBottom: "8px",
             fontWeight: "600",
             fontSize: "2rem",
-            color: !isDarkMode
-              ? "#1c1c1e"
-              : "#ffffff",
+            color: !isDarkMode ? "#1c1c1e" : "#ffffff",
             textAlign: "center",
           }}
         >
@@ -68,9 +66,10 @@ const CustomSection: React.FC<CustomSectionProps> = ({
           style={{
             marginTop: 0,
             marginBottom: "24px",
-            fontSize: "1rem",
+            fontSize: "20px",
             color: !isDarkMode ? "#4a5568" : "#ffffff",
             textAlign: "center",
+            fontFamily: "Lato, sans-serif",
           }}
         >
           {subtitle}
@@ -118,7 +117,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
             </div>
             {idx < features.length - 1 && (
               <div
-              className="feature-text"
+                className="feature-text"
                 style={{
                   height: "20px",
                   borderRight: "1px solid #ccc",
