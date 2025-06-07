@@ -88,12 +88,7 @@ export function HeroSection2(props: HeroSection2Props) {
   };
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-      console.log("Mobile detected, not loading the script.");
-      return;
-    }
+    
     let script: HTMLScriptElement | null = null;
 
     const removeExistingWidgetElements = () => {
@@ -136,6 +131,7 @@ export function HeroSection2(props: HeroSection2Props) {
       removeExistingWidgetElements();
     };
   }, []);
+
 
   const serializers = {
     marks: {
