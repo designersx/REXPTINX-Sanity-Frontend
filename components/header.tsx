@@ -83,7 +83,6 @@ export function Header({ data }: { data: HeaderData }) {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* Logo + optional tagline */}
         <Link href="/">
           <div className="flex items-center cursor-pointer">
             <Image
