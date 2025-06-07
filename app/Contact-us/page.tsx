@@ -8,6 +8,7 @@ import { client } from "@/lib/sanityClient";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { useTheme } from "next-themes";
+import axios from "axios";
 type HeaderData = {
   enabled: boolean;
   logoUrl: string;
@@ -90,15 +91,54 @@ export default function ContactUs() {
     });
   };
 
-  // Inside the handleSubmit function:
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Simulate form submission (you can replace this with actual submission logic if required)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  try {
+    // Form Data to send in the API request
+    const { name, email, phone, subject, message } = formData;
 
-    // Show SweetAlert2
+    // Prepare the email content
+    const html = `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `;
+
+    const text = `
+      Name: ${name}
+      Email: ${email}
+      Phone: ${phone}
+      Subject: ${subject}
+      Message: ${message}
+    `;
+
+    // Sending form data via Mailgun
+    const formDataToSend = new FormData();
+    formDataToSend.append('from', email);
+    formDataToSend.append('to', 'rexport@rexpt.in');
+    formDataToSend.append('subject', `Contact Us: ${subject}`);
+    formDataToSend.append('html', html);
+    formDataToSend.append('text', text); // Fallback plain text
+
+    const response = await axios.post(
+      `https://api.mailgun.net/v3/rexpt.cloud/messages`,
+      formDataToSend,
+      {
+        auth: {
+          username: 'api',
+          password: "9cff9bf225c42ec2a593948c03e57d02-7c5e3295-c6ce9b48",
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    // Show SweetAlert success message
     Swal.fire({
       title: "Thank you for your message!",
       text: "We'll get back to you soon.",
@@ -106,7 +146,7 @@ export default function ContactUs() {
       confirmButtonText: "OK",
     });
 
-    // Reset form data after submission
+    // Reset form data after successful submission
     setFormData({
       name: "",
       email: "",
@@ -114,8 +154,20 @@ export default function ContactUs() {
       subject: "",
       message: "",
     });
+  } catch (err) {
+    console.error('Error sending email:', err.response?.data || err.message);
+
+    // Show SweetAlert error message
+    Swal.fire({
+      title: "Oops!",
+      text: "There was an error while sending your message. Please try again later.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+  } finally {
     setIsSubmitting(false);
-  };
+  }
+};
 
   useEffect(() => {
     client
