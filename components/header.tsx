@@ -30,9 +30,6 @@ export function Header({ data }: { data: HeaderData }) {
     ctaUrl,
     ctaOpenInNewTab,
   } = data;
-
-
-  // fallback anchors for when href is null
   const staticRoutes: Record<string, string> = {
     Features: "#features",
     Benefits: "#benefits",
