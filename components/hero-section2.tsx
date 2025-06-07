@@ -74,39 +74,38 @@ export function HeroSection2(props: HeroSection2Props) {
     },
   };
 
-    const openAgentPopup = () => {
+  const openAgentPopup = () => {
     const agentPopup = document.getElementById("agentPopup");
     const agentButton = document.getElementById("agentButton");
-  
+
     if (agentPopup && agentButton) {
       agentPopup.style.display = "block";
       agentButton.classList.add("noFloat");
     } else {
       console.warn("Rex widget not ready yet. Retrying...");
-      setTimeout(openAgentPopup, 500); 
+      setTimeout(openAgentPopup, 500);
     }
   };
 
   useEffect(() => {
     let script: HTMLScriptElement | null = null;
-  
+
     const removeExistingWidgetElements = () => {
       document.getElementById("review-widget")?.append();
     };
-  
+
     const runScript = () => {
       removeExistingWidgetElements();
-  
-     
+
       document.getElementById("rex-widget-script")?.remove();
-  
+
       script = document.createElement("script");
       script.src =
         "https://fanciful-faun-02a7f0.netlify.app/index.js?agentId=agent_0498e1599d6ea9e13d09657f79";
       script.id = "rex-widget-script";
-      script.async = false; 
+      script.async = false;
       script.defer = false;
-  
+
       script.onload = () => {
         console.log("REX widget script loaded");
         if ((window as any).createReviewWidget) {
@@ -116,16 +115,16 @@ export function HeroSection2(props: HeroSection2Props) {
           console.error("createReviewWidget not found after load");
         }
       };
-  
+
       script.onerror = () => {
         console.error("Failed to load REX widget script");
       };
-  
+
       document.body.appendChild(script);
     };
-  
+
     runScript();
-  
+
     return () => {
       script?.remove();
       removeExistingWidgetElements();
@@ -268,7 +267,7 @@ export function HeroSection2(props: HeroSection2Props) {
                 variants={itemVariants}
                 className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 md:mb-8 leading-relaxed"
               >
-                {subtitle}
+                <PortableText value={subtitle} components={serializers} />
               </motion.p>
               <motion.div
                 variants={itemVariants}

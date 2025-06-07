@@ -373,8 +373,8 @@ export function PricingSection({
                                   <div
                                     className={`rounded-full p-1 mt-0.5 flex-shrink-0 ${
                                       plan.togglePurplePricing
-                                        ? "bg-[#6524EB] text-white/70"
-                                        : "bg-[#6524EB] dark:bg-gray-700 text-white dark:text-white"
+                                        ? "bg-[#E67C73] text-white/70"
+                                        : "bg-[#E67C73] dark:bg-[#E67C73] text-white dark:text-white"
                                     }`}
                                   >
                                     <X className="h-3 w-3" />
@@ -507,8 +507,8 @@ export function PricingSection({
                               <div
                                 className={`rounded-full p-1 mt-0.5 ${
                                   plan.togglePurplePricing
-                                    ? "bg-[#6524EB] text-white/70"
-                                    : "bg-[#6524EB] dark:bg-gray-700 text-white dark:text-white"
+                                    ? "bg-[#E67C73] text-white/70"
+                                    : "bg-[#E67C73] dark:bg-[#E67C73] text-white dark:text-white"
                                 }`}
                               >
                                 <X className="h-4 w-4" />
