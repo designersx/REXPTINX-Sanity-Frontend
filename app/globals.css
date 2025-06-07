@@ -81,6 +81,7 @@ body {
   overscroll-behavior: none;
 }
 
+
 /* Additional touch handling for iOS devices */
  {
   -webkit-touch-callout: none;
@@ -96,6 +97,9 @@ body {
   height: 100%;
   overflow: hidden;
   z-index: 0;
+}
+.custom-title span{
+  font-size: 36px;
 }
 
 .StartMain div {
