@@ -1,7 +1,8 @@
 "use client";
 import type React from "react";
 import { PortableText } from "@portabletext/react";
-import { Phone, Mail, Clock, Send } from "lucide-react";
+import { Send } from "lucide-react";
+import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanityClient";
 import { Header } from "@/components/header";
@@ -89,14 +90,23 @@ export default function ContactUs() {
     });
   };
 
+  // Inside the handleSubmit function:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
+    // Simulate form submission (you can replace this with actual submission logic if required)
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    alert("Thank you for your message! We'll get back to you soon.");
+    // Show SweetAlert2
+    Swal.fire({
+      title: "Thank you for your message!",
+      text: "We'll get back to you soon.",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+
+    // Reset form data after submission
     setFormData({
       name: "",
       email: "",
