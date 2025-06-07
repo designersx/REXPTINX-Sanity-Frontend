@@ -50,7 +50,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
       className=" py-10"
       style={{ backgroundColor: !isDarkMode ? backgroundColor : undefined }}
     >
-      <div>
+      <div className="container mx-auto px-4">
         <h2
           style={{
             marginBottom: "8px",
