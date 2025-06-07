@@ -55,7 +55,7 @@ const CustomSection: React.FC<CustomSectionProps> = ({
           style={{
             marginBottom: "8px",
             fontWeight: "600",
-            fontSize: "2rem",
+            fontSize: "36px",
             color: !isDarkMode ? "#1c1c1e" : "#ffffff",
             textAlign: "center",
           }}
