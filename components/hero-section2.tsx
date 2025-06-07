@@ -190,23 +190,7 @@ export function HeroSection2(props: HeroSection2Props) {
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row gap-4 items-center"
               >
-                {/* <Button
-                  className="bg-[#6524EB] hover:bg-[#5a1fc0] text-white text-base md:text-lg px-6 md:px-8 py-5 md:py-6 items-center text-start"
-                  style={{ height: "77px", lineHeight: "normal" }}
-                  onClick={() => {
-                    if (primaryCta.url) window.open(primaryCta.url, "_blank");
-                  }}
-                >
-                  <div>
-                    <p>
-                      {" "}
-                      <PortableText
-                        value={primaryCta.label}
-                        components={serializers}
-                      />
-                    </p>
-                  </div>
-                </Button> */}
+            
                 <div className=" HeroSectionButton">
                   <a
                     className="flex flex-wrap justify-center items-center gap-4 inline-block p-2 rounded-[80px]"
