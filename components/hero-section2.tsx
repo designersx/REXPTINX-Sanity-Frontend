@@ -131,40 +131,6 @@ export function HeroSection2(props: HeroSection2Props) {
     };
   }, []);
 
-  // const runScript = () => {
-  //   const oldScript = document.getElementById("rex-widget-script");
-  //   if (oldScript) document.body.removeChild(oldScript);
-  //   if (scriptLoaded) {
-  //     return;
-  //   }
-
-  //   // const agentId = "agent_2ba68e97b6150ed063e24668fa";
-  //   if (window.createReviewWidget) {
-  //     window.createReviewWidget();
-  //     setScriptLoaded(true);
-  //     return;
-  //   }
-  //   const script = document.createElement("script");
-  //   script.src =
-  //     "https://683f0cc188b34b4460f08d83--mellow-vacherin-b51e16.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51"
-  //   script.async = true;
-  //   script.defer = true;
-  //   script.id = "rex-widget-script";
-  //   document.body.appendChild(script);
-
-  //   script.onload = () => {
-  //     if (window.createReviewWidget) {
-  //       window.createReviewWidget();
-  //       setScriptLoaded(true);
-  //     } else {
-  //       console.error("Widget function not available after script load");
-  //     }
-  //   };
-  //   script.onerror = () => {
-  //     console.error("Failed to load widget script");
-  //   };
-  //   document.body.appendChild(script);
-  // };
 
   const serializers = {
     marks: {
@@ -180,61 +146,11 @@ export function HeroSection2(props: HeroSection2Props) {
       ),
     },
   };
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     // Step 1: Inject the script once on initial load
-  //     const existingScript = document.getElementById("rex-widget-script");
 
-  //     if (!existingScript) {
-  //       const script = document.createElement("script");
-  //       script.src =
-  //         "https://fluffy-bavarois-03810d.netlify.app/index.js?agentId=agent_6e9cfaf22759b52c934732ee51";
-  //       script.async = true;
-  //       script.defer = true;
-  //       script.id = "rex-widget-script";
-
-  //       script.onload = () => {
-  //         console.log("REX widget script loaded");
-
-  //         // Wait until widget button & popup exist in DOM
-  //         const interval = setInterval(() => {
-  //           const widgetBtn = document.querySelector(".floating-agent");
-  //           const popup = document.querySelector(".popup");
-
-  //           if (widgetBtn) widgetBtn.style.display = "none"; // hide button
-  //           if (popup) popup.style.display = "none"; // hide popup
-
-  //           if (widgetBtn && popup) {
-  //             clearInterval(interval);
-  //           }
-  //         }, 0);
-  //       };
-
-  //       document.body.appendChild(script);
-  //     }
-  //   }
-  // }, []);
-
-  // const handleClick = () => {
-  //   if (typeof window !== "undefined") {
-  //     // Step 2: Simply unhide the preloaded widget & open popup
-  //     const widgetBtn = document.querySelector(".floating-agent");
-  //     const popup = document.querySelector(".popup");
-
-  //     if (widgetBtn && popup) {
-  //       widgetBtn.style.display = "block"; // unhide button
-  //       popup.style.display = "block"; // open popup
-  //       widgetBtn.classList.add("noFloat"); // apply float lock
-  //     } else {
-  //       console.warn("REX widget not ready yet");
-  //     }
-  //   }
-  // };
   return (
     <div>
       <div className="StartMain">
         <div>
-          {/* floating ellipses (assuming these images are static assets, so keep as is) */}
           <img src="images/Ellipse 1.png" alt="Ellipse 1" />
           <img src="images/Ellipse 2.png" alt="Ellipse 2" />
           <img src="images/Ellipse 5.png" alt="Ellipse 5" />
