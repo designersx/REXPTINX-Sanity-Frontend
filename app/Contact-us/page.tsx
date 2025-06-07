@@ -140,7 +140,7 @@ export default function ContactUs() {
         }
       );
 
-      // Show SweetAlert success message
+
       Swal.fire({
         title: "Thank you for your message!",
         text: "We'll get back to you soon.",
@@ -148,7 +148,6 @@ export default function ContactUs() {
         confirmButtonText: "OK",
       });
 
-      // Reset form data after successful submission
       setFormData({
         name: "",
         email: "",
