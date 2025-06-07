@@ -121,8 +121,8 @@ export default function ContactUs() {
       // Sending form data via Mailgun
       const formDataToSend = new FormData();
       formDataToSend.append("from", email);
-      formDataToSend.append("to", "aarti.verma@designersx.com");
-      formDataToSend.append("subject", `Contact Us: ${subject}`);
+      formDataToSend.append("to", "rexport@rexpt.in");
+      formDataToSend.append("subject", `Contact Us Enquiry: ${subject}`);
       formDataToSend.append("html", html);
       formDataToSend.append("text", text); // Fallback plain text
 
