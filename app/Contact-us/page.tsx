@@ -70,6 +70,8 @@ export default function ContactUs() {
     null
   );
   console.log(contactUsData, "contactUsData");
+
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -91,16 +93,16 @@ export default function ContactUs() {
     });
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    // Form Data to send in the API request
-    const { name, email, phone, subject, message } = formData;
+    try {
+      // Form Data to send in the API request
+      const { name, email, phone, subject, message } = formData;
 
-    // Prepare the email content
-    const html = `
+      // Prepare the email content
+      const html = `
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone}</p>
@@ -108,7 +110,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       <p><strong>Message:</strong> ${message}</p>
     `;
 
-    const text = `
+      const text = `
       Name: ${name}
       Email: ${email}
       Phone: ${phone}
@@ -116,58 +118,58 @@ const handleSubmit = async (e: React.FormEvent) => {
       Message: ${message}
     `;
 
-    // Sending form data via Mailgun
-    const formDataToSend = new FormData();
-    formDataToSend.append('from', email);
-    formDataToSend.append('to', 'rexport@rexpt.in');
-    formDataToSend.append('subject', `Contact Us: ${subject}`);
-    formDataToSend.append('html', html);
-    formDataToSend.append('text', text); // Fallback plain text
+      // Sending form data via Mailgun
+      const formDataToSend = new FormData();
+      formDataToSend.append("from", email);
+      formDataToSend.append("to", "aarti.verma@designersx.com");
+      formDataToSend.append("subject", `Contact Us: ${subject}`);
+      formDataToSend.append("html", html);
+      formDataToSend.append("text", text); // Fallback plain text
 
-    const response = await axios.post(
-      `https://api.mailgun.net/v3/rexpt.cloud/messages`,
-      formDataToSend,
-      {
-        auth: {
-          username: 'api',
-          password: "9cff9bf225c42ec2a593948c03e57d02-7c5e3295-c6ce9b48",
-        },
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+      const response = await axios.post(
+        `https://api.mailgun.net/v3/${process.env.NEXT_PUBLIC_MAILGUN_DOMAIN}/messages`,
+        formDataToSend,
+        {
+          auth: {
+            username: "api",
+            password: process.env.NEXT_PUBLIC_MAILGUN_API_KEY,
+          },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    // Show SweetAlert success message
-    Swal.fire({
-      title: "Thank you for your message!",
-      text: "We'll get back to you soon.",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
+      // Show SweetAlert success message
+      Swal.fire({
+        title: "Thank you for your message!",
+        text: "We'll get back to you soon.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
 
-    // Reset form data after successful submission
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
-  } catch (err) {
-    console.error('Error sending email:', err.response?.data || err.message);
+      // Reset form data after successful submission
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("Error sending email:", err.response?.data || err.message);
 
-    // Show SweetAlert error message
-    Swal.fire({
-      title: "Oops!",
-      text: "There was an error while sending your message. Please try again later.",
-      icon: "error",
-      confirmButtonText: "OK",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      // Show SweetAlert error message
+      Swal.fire({
+        title: "Oops!",
+        text: "There was an error while sending your message. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     client
